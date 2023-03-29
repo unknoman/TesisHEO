@@ -27,7 +27,6 @@ export class SweetalertutilService {
       icon: 'success',
       title: mensaje
     })
-
   }
 
 
