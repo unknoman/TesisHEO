@@ -6,6 +6,7 @@ import { environment } from 'src/app/enviorment';
 import { LoginService } from 'src/app/servicios/login/login.service';
 import { JwtserviceService } from 'src/app/servicios/utilidades/jwtservice.service';
 import { Token } from '@angular/compiler';
+import { decodedToken } from 'src/app/modelos/decodedToken';
 
 @Component({
   selector: 'app-login',
@@ -14,34 +15,42 @@ import { Token } from '@angular/compiler';
 })
 export class LoginComponent {
 
-  constructor(private router: Router, private alerta:SweetalertutilService, private login:LoginService, private jwtutilidades: JwtserviceService)
-  {
+  constructor(private router: Router, private alerta: SweetalertutilService, private login: LoginService, private jwtutilidades: JwtserviceService) {
 
   }
 
-  
+
   usuario = new usuario();
- ingresar(usuario: usuario)
-  {
-    
+  ingresar(usuario: usuario) {
     this.login.ingresar(usuario).subscribe(data => {
-    console.log(data);
-     localStorage.setItem('key', data.tokenJWT);
-     });
+      if (typeof data == 'object') {
+        localStorage.setItem('key', data.tokenJWT);
+        const tokenKey = localStorage.getItem('key');
+        console.log(tokenKey);
+        if (tokenKey) {
+          const objetox: decodedToken = this.jwtutilidades.decodificartoken(tokenKey);
+          if (objetox.idRol == '1') {
+            this.router.navigate(['dashboardar']);
+            this.alerta.correcto('Te logeaste como Administrador');
+          }
+          if (objetox.idRol == '2') {
+            this.router.navigate(['dashboardcr']);
+            this.alerta.correcto('Te logeaste como area de Cobranza');
+          }
+          if (objetox.idRol == '3') {
+            this.router.navigate(['dashboardrr']);
+            this.alerta.correcto('Te logeaste como Recepcion');
+          }
+        } else {
+          this.alerta.errorm('Hay un problema con el servidor');
+        }
+      } else {
+        this.alerta.errorm('Password Incorrecta');
+      }
+    });
+  }
 
-/*  const tokenxd;
-     localStorage.getItem('token') 
-     var token = this.jwtutilidades.decodificartoken(localStorage.getItem('token'))*/
-    
 
-    if (usuario.usuario1 == 'emanuel@', usuario.password == 'emanuel12' ){
-        this.router.navigate(['/']);
-        this.alerta.correcto('Te logeaste correctamente');
-        this.router.navigate(['/dashboardar'])
-    } else {
-      this.alerta.errorm('Usuario o contraseña incorrectos');
-    } 
-    console.log(localStorage.getItem('key'));
-  } 
 
-}
+  }
+

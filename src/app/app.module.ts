@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,10 @@ import { DashboardAComponent } from './componentes/dashboard-a/dashboard-a.compo
 import { DashboardCComponent } from './componentes/dashboard-c/dashboard-c.component';
 import { DashboardRComponent } from './componentes/dashboard-r/dashboard-r.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthService } from '@auth0/auth0-angular/lib/auth.service';
+import { AuthGuard, AuthModule } from '@auth0/auth0-angular';
+
+export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
 @NgModule({
   declarations: [
@@ -27,12 +31,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     DashboardAComponent,
     DashboardCComponent,
     DashboardRComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [Router],
   bootstrap: [AppComponent]
