@@ -9,20 +9,25 @@ import { AuthService } from '@auth0/auth0-angular/public-api';
   providedIn: 'root'
 })
 export class AuthguardGuard implements CanActivate {
-   rutas = ['dashboardcr', 'otra-ruta', 'otra-ruta-mas'];
+   rutasAdmin = ['dashboardar', 'otra-ruta', 'otra-ruta-mas'];
+   rutasCobranza = ['dashboardcr', 'otra-ruta', 'otra-ruta-mas'];
+   rutasRecepcion = ['dashboardrr', 'otra-ruta', 'otra-ruta-mas'];
   
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const eltoken = localStorage.getItem('key');
-    console.log(eltoken); // Agregar esta línea
+    console.log(eltoken); 
     if (eltoken) {
+      const rutaPermitidaAdmin= this.rutasAdmin.filter(ruta => state.url.includes(ruta)).length > 0;
+      const rutaPermitidaCobranza = this.rutasCobranza.filter(ruta => state.url.includes(ruta)).length > 0;
+      const rutaPermitidaRecepcion = this.rutasRecepcion.filter(ruta => state.url.includes(ruta)).length > 0;
       const decodedTokenx: decodedToken = this.tokenservice.decodificartoken(eltoken);
-      if (decodedTokenx.idRol == '1' && state.url.indexOf('dashboardar') !== -1) {
+      if (decodedTokenx.idRol == '1' && rutaPermitidaAdmin) {
         return true;
-      } else if (decodedTokenx.idRol == '2' && state.url.indexOf('dashboardcr') !== -1) {
+      } else if (decodedTokenx.idRol == '2' && rutaPermitidaCobranza) {
         return true;
-      } else if (decodedTokenx.idRol == '3' && state.url.indexOf('dashboardrr')!== -1) {
+      } else if (decodedTokenx.idRol == '3' && rutaPermitidaRecepcion) {
         return true;
       } else {
         console.log(decodedTokenx);

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from 'src/app/servicios/login/login.service';
 
 @Component({
   selector: 'app-dashboard-c',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class DashboardCComponent {
 
+  constructor(private  loginService: LoginService)
+  {
+
+  }
+
+  cerrarSesion()
+  {
+    this.loginService.cerrarSesion();
+  }
 }
