@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-tablas',
@@ -10,4 +10,15 @@ import { Component, Input } from '@angular/core';
 export class TablasComponent {
   @Input() columnas: any[] = [];
   @Input() datos: any[] = [];
+  @Input() botones: any[] = [];
+  @Output() botonClickeado = new EventEmitter<any>();
+  
+
+
+  onBotonClickeado(boton: any) {
+    this.botonClickeado.emit(boton);
+  }
+
+  
+
 }

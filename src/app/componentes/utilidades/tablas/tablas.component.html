@@ -3,11 +3,15 @@
     <thead class="thead-dark">
       <tr >
         <th *ngFor='let columna of columnas'>{{ columna.nombre }}</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor='let fila of datos'>
         <td *ngFor='let columna of columnas'>{{ fila[columna.nombre] }}</td>
+        <td>
+          <button *ngIf="fila.boton" (click)="onBotonClickeado(fila)">{{ fila.boton.texto }}</button>
+        </td>
       </tr>
     </tbody>
   </table>

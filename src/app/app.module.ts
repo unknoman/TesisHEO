@@ -19,6 +19,7 @@ import { AuthGuard, AuthModule } from '@auth0/auth0-angular';
 import { SociosComponent } from './rutas/recepcion/socios/socios.component';
 import { ProblemasTrComponent } from './rutas/recepcion/problemas-tr/problemas-tr.component';
 import { TablasComponent } from './componentes/utilidades/tablas/tablas.component';
+import { SociosTablaComponent } from './recepcion/componentes/socios-tabla/socios-tabla.component';
 
 export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
@@ -37,6 +38,7 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     SociosComponent,
     ProblemasTrComponent,
     TablasComponent,
+    SociosTablaComponent,
 
   ],
   imports: [

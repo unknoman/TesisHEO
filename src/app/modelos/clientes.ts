@@ -1,7 +1,7 @@
 
 export class clientes{
     idcliente:number = 0;
-    nombrec:string = '';
+    nombre:string = '';
     dnic:string = '';
     telefono:string = '';
     direccionc:string = '';
