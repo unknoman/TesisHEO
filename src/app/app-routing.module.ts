@@ -5,13 +5,18 @@ import { DashboardCRComponent } from './rutas/dashboard-cr/dashboard-cr.componen
 import { DashboardRRComponent } from './rutas/dashboard-rr/dashboard-rr.component';
 import { LoginrComponent } from './rutas/loginr/loginr.component';
 import { AuthguardGuard } from './guards/authguard.guard';
+import { ProblemasTrComponent } from './rutas/recepcion/problemas-tr/problemas-tr.component';
+import { SociosComponent } from './rutas/recepcion/socios/socios.component';
 
 const routes: Routes = [
     {path:'', redirectTo:'loginr', pathMatch:'full'},
     {path:'loginr', component:LoginrComponent},
     {path:'dashboardar', component:DashboardARComponent, canActivate: [AuthguardGuard]},
     {path:'dashboardcr', component:DashboardCRComponent, canActivate: [AuthguardGuard]},
-    {path:'dashboardrr', component:DashboardRRComponent, canActivate: [AuthguardGuard]}
+    {path:'dashboardrr', component:DashboardRRComponent, canActivate: [AuthguardGuard]},
+    {path:'problemastr', component:ProblemasTrComponent, canActivate: [AuthguardGuard]},
+    {path:'sociosr', component:SociosComponent, canActivate: [AuthguardGuard]}
+
   ];
 
 @NgModule({
@@ -20,4 +25,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [LoginrComponent, DashboardARComponent, DashboardCRComponent];
+export const routingComponents = [LoginrComponent, DashboardARComponent, DashboardCRComponent, ProblemasTrComponent, SociosComponent];

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/servicios/login/login.service';
 
 @Component({
   selector: 'app-dashboard-r',
@@ -6,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard-r.component.css']
 })
 export class DashboardRComponent {
+
+  constructor(private  loginService: LoginService, private router: Router)
+  {
+
+  }
+  
+
+  cerrarSesion()
+  {
+    this.loginService.cerrarSesion();
+  }
+
 
 }

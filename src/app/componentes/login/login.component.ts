@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { usuario } from 'src/app/modelos/usuario';
 import { Router } from '@angular/router';
 import { SweetalertutilService } from 'src/app/utilidades/sweetalertutil.service';
-import { environment } from 'src/app/enviorment';
+import { environment } from 'src/app/environment';
 import { LoginService } from 'src/app/servicios/login/login.service';
 import { JwtserviceService } from 'src/app/servicios/utilidades/jwtservice.service';
 import { Token } from '@angular/compiler';

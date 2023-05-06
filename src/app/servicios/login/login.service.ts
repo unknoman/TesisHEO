@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { usuario } from 'src/app/modelos/usuario';
-import { environment } from 'src/app/enviorment';
+import { environment } from 'src/app/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { tokenJWT } from 'src/app/modelos/tokenJWT';
 import { Router } from '@angular/router';

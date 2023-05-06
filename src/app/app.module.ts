@@ -16,6 +16,9 @@ import { DashboardRComponent } from './componentes/dashboard-r/dashboard-r.compo
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthService } from '@auth0/auth0-angular/lib/auth.service';
 import { AuthGuard, AuthModule } from '@auth0/auth0-angular';
+import { SociosComponent } from './rutas/recepcion/socios/socios.component';
+import { ProblemasTrComponent } from './rutas/recepcion/problemas-tr/problemas-tr.component';
+import { TablasComponent } from './componentes/utilidades/tablas/tablas.component';
 
 export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
@@ -31,7 +34,10 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     DashboardAComponent,
     DashboardCComponent,
     DashboardRComponent,
-    
+    SociosComponent,
+    ProblemasTrComponent,
+    TablasComponent,
+
   ],
   imports: [
     BrowserModule,
