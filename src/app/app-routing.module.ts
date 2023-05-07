@@ -7,6 +7,8 @@ import { LoginrComponent } from './rutas/loginr/loginr.component';
 import { AuthguardGuard } from './guards/authguard.guard';
 import { ProblemasTrComponent } from './rutas/recepcion/problemas-tr/problemas-tr.component';
 import { SociosComponent } from './rutas/recepcion/socios/socios.component';
+import { PlanesrComponent } from './rutas/cobranzas/planesr/planesr.component';
+import { TecnicosrComponent } from './rutas/cobranzas/tecnicosr/tecnicosr.component';
 
 const routes: Routes = [
     {path:'', redirectTo:'loginr', pathMatch:'full'},
@@ -15,7 +17,9 @@ const routes: Routes = [
     {path:'dashboardcr', component:DashboardCRComponent, canActivate: [AuthguardGuard]},
     {path:'dashboardrr', component:DashboardRRComponent, canActivate: [AuthguardGuard]},
     {path:'problemastr', component:ProblemasTrComponent, canActivate: [AuthguardGuard]},
-    {path:'sociosr', component:SociosComponent, canActivate: [AuthguardGuard]}
+    {path:'sociosr', component:SociosComponent, canActivate: [AuthguardGuard]},
+    {path:'planesr', component:PlanesrComponent, canActivate: [AuthguardGuard]},
+    {path:'tecnicosr', component:TecnicosrComponent, canActivate: [AuthguardGuard]}
 
   ];
 
@@ -25,4 +29,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [LoginrComponent, DashboardARComponent, DashboardCRComponent, ProblemasTrComponent, SociosComponent];
+export const routingComponents = [LoginrComponent, DashboardARComponent, DashboardCRComponent, ProblemasTrComponent, SociosComponent, PlanesrComponent, TecnicosrComponent];

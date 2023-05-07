@@ -1,2 +1,3 @@
-<app-dashboard-r></app-dashboard-r>
+<app-dashboard-r *ngIf="getUser() === 3"></app-dashboard-r>
+<app-dashboard-cr *ngIf="getUser() === 2"></app-dashboard-cr>
 <app-socios-tabla></app-socios-tabla>
