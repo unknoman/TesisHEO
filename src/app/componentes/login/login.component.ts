@@ -23,7 +23,7 @@ export class LoginComponent {
   usuario = new usuario();
   ingresar(usuario: usuario) {
     this.login.ingresar(usuario).subscribe(data => {
-      if (typeof data == 'object') {
+      if (typeof data == 'object' && data.sucess != false) {
         localStorage.setItem('key', data.tokenJWT);
         const tokenKey = localStorage.getItem('key');
         console.log(tokenKey);
@@ -44,9 +44,9 @@ export class LoginComponent {
         } else {
           this.alerta.errorm('Hay un problema con el servidor');
         }
-      } else {
-        this.alerta.errorm('Password Incorrecta');
-      }
+      } else{
+        this.alerta.errorm('Los datos ingresados son incorrectos');
+      } 
     });
   }
 
