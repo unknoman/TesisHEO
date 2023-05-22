@@ -39,4 +39,12 @@
         }
 
 
+
+        .my-custom-modal {
+          max-width: 800px;
+          width: 80%;
+        }
+
+
+        
       }

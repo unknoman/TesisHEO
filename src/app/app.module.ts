@@ -22,6 +22,8 @@ import { TablasComponent } from './componentes/utilidades/tablas/tablas.componen
 import { SociosTablaComponent } from './recepcion/componentes/socios-tabla/socios-tabla.component';
 import { PlanesrComponent } from './rutas/cobranzas/planesr/planesr.component';
 import { TecnicosrComponent } from './rutas/cobranzas/tecnicosr/tecnicosr.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
@@ -43,13 +45,14 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     SociosTablaComponent,
     PlanesrComponent,
     TecnicosrComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    TooltipModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [Router],
   bootstrap: [AppComponent]
