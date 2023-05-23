@@ -24,6 +24,7 @@ import { PlanesrComponent } from './rutas/cobranzas/planesr/planesr.component';
 import { TecnicosrComponent } from './rutas/cobranzas/tecnicosr/tecnicosr.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PlanesComponent } from './componentes/cobranza/planes/planes.component';
 
 export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
@@ -45,6 +46,7 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     SociosTablaComponent,
     PlanesrComponent,
     TecnicosrComponent,
+    PlanesComponent,
   ],
   imports: [
     BrowserModule,
