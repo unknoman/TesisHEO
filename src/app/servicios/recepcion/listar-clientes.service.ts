@@ -23,5 +23,14 @@ export class ListarClientesService {
     return this.http.get<pagos[]>(direccion);
    }
 
+
+   borrarCliente(id:number){
+    let direccion = this.url +'Clientes/ClienteBorrar';
+    direccion += `?id=${id}`;
+    return this.http.delete(direccion);
+   }
+
+
+
   constructor(private http:HttpClient) { }
 }

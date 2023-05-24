@@ -19,4 +19,22 @@ export class PlanesService {
     return this.http.get<planes[]>(direccion);
    }
    
+
+   crearPlan(plan: planes)
+   {
+    let direccion = this.url + 'planes/crearPlan'
+    return this.http.put(direccion, plan)
+   }
+
+
+
+
+   borrarPlan(id:number){
+    let direccion = this.url +'planes/borrarPlan';
+    direccion += `?id=${id}`;
+    return this.http.delete(direccion);
+   }
+
+
+   
 }

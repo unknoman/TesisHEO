@@ -2,6 +2,7 @@
 export class clientes{
     idcliente:number = 0;
     nombre:string = '';
+    apellido:string = '';
     dnic:string = '';
     telefono:string = '';
     direccionc:string = '';
