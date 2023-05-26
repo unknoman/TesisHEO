@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { SweetalertutilService } from 'src/app/utilidades/sweetalertutil.service';
 import { PlanesService } from 'src/app/servicios/cobranza/planes.service';
 import { planes } from 'src/app/modelos/planes';
+import { clientesCrearDTO } from 'src/app/modelos/clienteCrearDTO';
 
 @Component({
   selector: 'app-socios-tabla',
@@ -22,6 +23,7 @@ export class SociosTablaComponent {
   public pagosList:Array<pagos> = [];
   public  planesList2:Array<planes> = [];
   socio: clientes = new clientes();
+  socioCrear: clientesCrearDTO = new clientesCrearDTO();
   plan: planes = new planes();
   buscarPor : number = 0;
   buscarPor2 : number = 0;
@@ -29,6 +31,15 @@ export class SociosTablaComponent {
   modalRef!: BsModalRef; // Declaración de la propiedad modalRef
   @ViewChild('registrarSocio') modal: any;
   
+
+  limpiarSocioCrear()
+  {
+    this.socioCrear.nombre = "";
+    this.socioCrear.apellido = "";
+    this.socioCrear.dnic = ""
+    this.socioCrear.telefono = "";
+    this.socioCrear.direccionc = "";
+  }
   // get estado
   getEstadoClass(idEstado: number) {
     if (idEstado === 1) {
@@ -45,7 +56,18 @@ export class SociosTablaComponent {
     this.getPlanesAll();
   }
 
-  
+  crearCliente(cliente: clientesCrearDTO){
+       this.recService.crearCliente(cliente).subscribe(respuesta => {
+        if(respuesta == true)
+        {
+          this.notificacion.correcto("El cliente" + cliente.nombre + cliente.apellido + "Fue creado correctamente");
+          this.getUserAll(0, 0, "");
+          this.limpiarSocioCrear();
+        } else {
+          this.notificacion.errorm("No se pudo crear el cliente");
+        }
+       })
+  }
 
   constructor(private modalServices: BsModalService, private recService:ListarClientesService, private jwtutilidades: JwtserviceService, private modalService: BsModalService, private notificacion:SweetalertutilService, private planesService:PlanesService)
   {
@@ -142,9 +164,19 @@ getPlanesAll()
 
 
 submitForm(){
-
+ if (
+  this.socioCrear.nombre.trim() === '' ||
+  this.socioCrear.apellido.trim() === '' ||
+  this.socioCrear.dnic.trim() === '' ||
+  this.socioCrear.telefono.trim() === '' ||
+  this.socioCrear.direccionc.trim() === ''
+) {
+  this.notificacion.errorm('Verifique los campos')
+} else {
+this.crearCliente(this.socioCrear);
+this.modalRef.hide();
 }
-
+}
 
 
 crearSocioModal()

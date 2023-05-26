@@ -50,7 +50,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let socio of sociosList" [ngClass]="{'table-success': socio.idestadoc === 1 && getUser() !== 3, 'table-danger': socio.idestadoc === 2 && getUser() !== 3}">
+        <tr *ngFor="let socio of sociosList" [ngClass]="{'table-success': socio.idestadoc === 1 &&  getUser() !== 3, 'table-danger': socio.idestadoc === 2  &&  getUser() !== 3, 'table-warning': socio.idestadoc === 3 && getUser() !== 3 }">
             <td scope="row"  class="text-center">{{socio.idcliente}} </td>
             <td scope="row"  class="text-center">{{socio.nombre}} </td>
             <td scope="row"  class="text-center">{{socio.dnic}} </td>
@@ -114,23 +114,23 @@
     <form (ngSubmit)="submitForm()">
       <div class="form-group">
         <label for="servicio">Nombre:</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="socio.nombre">
+        <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="socioCrear.nombre">
       </div>
       <div class="form-group">
         <label for="bajada">Apellido:</label>
-        <input type="text" class="form-control" id="nombre" name="apellido" required [(ngModel)]="socio.apellido">
+        <input type="text" class="form-control" id="nombre" name="apellido" required [(ngModel)]="socioCrear.apellido">
       </div>
       <div class="form-group">
         <label for="subida">DNI:</label>
-        <input type="text" class="form-control" id="dni" name="dni" required [(ngModel)]="socio.dnic">
+        <input type="text" class="form-control" id="dni" name="dni" required [(ngModel)]="socioCrear.dnic">
       </div>
       <div class="form-group">
         <label for="precio">Telefono:</label>
-        <input type="number" class="form-control" id="telefono" name="telefono" required [(ngModel)]="socio.telefono">
+        <input type="text" class="form-control" id="telefono" name="telefono" required [(ngModel)]="socioCrear.telefono">
       </div>
       <div class="form-group">
         <label for="precio">Direccion:</label>
-        <input type="number" class="form-control" id="direccion" name="direccion" required [(ngModel)]="socio.direccionc">
+        <input type="text" class="form-control" id="direccion" name="direccion" required [(ngModel)]="socioCrear.direccionc">
       </div>
 
       <div class="form-group">
