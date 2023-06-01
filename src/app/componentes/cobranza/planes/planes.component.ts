@@ -54,9 +54,6 @@ export class PlanesComponent {
     ) {
       this.notificacion.errorm('Verifique los campos')
     } else {
-      // Realizar las acciones correspondientes para registrar el plan
-      // falta condicional y crear metodo de creacion
-      // Cerrar el modal, si es necesario
       this.planesService.crearPlan(this.plan).subscribe(respuesta => {
         if(respuesta == true)
         {

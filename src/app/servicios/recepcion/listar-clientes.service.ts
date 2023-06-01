@@ -39,6 +39,12 @@ export class ListarClientesService {
    }
 
 
+   
+  actualizarCliente(cliente: clientesCrearDTO){
+    let direccion = this.url +'Clientes/ClientesModificar';
+    return this.http.patch(direccion, cliente);
+   }
+
 
   constructor(private http:HttpClient) { }
 }

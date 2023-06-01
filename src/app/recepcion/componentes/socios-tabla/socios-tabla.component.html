@@ -34,7 +34,7 @@
               </select>
             </div>
       </div>
-      <div class="col-auto ml-auto">
+      <div  *ngIf="getUser() === 3" class="col-auto ml-auto">
         <button type="submit" class="btn btn-success my-auto" (click)="crearSocioModal()">Nuevo socio</button>
     </div>
     <table class="table table-hover">
@@ -52,13 +52,13 @@
       <tbody>
         <tr *ngFor="let socio of sociosList" [ngClass]="{'table-success': socio.idestadoc === 1 &&  getUser() !== 3, 'table-danger': socio.idestadoc === 2  &&  getUser() !== 3, 'table-warning': socio.idestadoc === 3 && getUser() !== 3 }">
             <td scope="row"  class="text-center">{{socio.idcliente}} </td>
-            <td scope="row"  class="text-center">{{socio.nombre}} </td>
+            <td scope="row"  class="text-center">{{socio.nombre + " "+socio.apellido}} </td>
             <td scope="row"  class="text-center">{{socio.dnic}} </td>
             <td scope="row"  class="text-center" >{{socio.telefono}} </td>
             <td scope="row" class="text-center">{{socio.direccionc}} </td>
             <td scope="row" class="text-center text-success">{{socio.servicio}} </td>
             <td scope="row" class="text-center"> <button type="button" class="btn btn-warning mr-2" *ngIf="getUser() === 2" (click)="getPagos(socio.idcliente, pagosModal)" >Ver pagos</button>
-                 <button type="button" class="btn btn-primary mr-2" *ngIf="getUser() === 2">Modificar socio</button>
+                 <button type="button" class="btn btn-primary mr-2" *ngIf="getUser() === 2" (click)="modificarSocio(socio)">Modificar socio</button>
                 <button type="button" class="btn btn-danger mr-2" (click)="borrarSocio(socio)">Eliminar</button></td>
         </tr>
       </tbody>
@@ -106,7 +106,7 @@
 <ng-template #registrarSocio>
   <div class="modal-header">
     <h4 class="modal-title">Registrar nuevo socio</h4>
-    <button type="button" class="close" aria-label="Close" > <!-- (click)="modalRef.hide()" --> 
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -133,15 +133,54 @@
         <input type="text" class="form-control" id="direccion" name="direccion" required [(ngModel)]="socioCrear.direccionc">
       </div>
 
-      <div class="form-group">
-        <label for="precio">Servicio:</label>
-        <select class="form-select">
-          <option selected>Servicio sin asignar</option>
-          <option *ngFor="let servicio of planesList2" [value]="servicio.idservicio">{{ servicio.servicio1 }}</option>
-        </select>
-      </div>
       
       <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
   </div>
 </ng-template>
+
+
+
+
+   <!-- Modal -->
+   <ng-template #modificarSocioNg>
+    <div class="modal-header">
+      <h4 class="modal-title">Modificar nuevo socio</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="submitUpdatedForm()">
+        <div class="form-group">
+          <label for="servicio">Nombre:</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="socioCrear.nombre">
+        </div>
+        <div class="form-group">
+          <label for="bajada">Apellido:</label>
+          <input type="text" class="form-control" id="nombre" name="apellido" required [(ngModel)]="socioCrear.apellido">
+        </div>
+        <div class="form-group">
+          <label for="subida">DNI:</label>
+          <input type="text" class="form-control" id="dni" name="dni" required [(ngModel)]="socioCrear.dnic">
+        </div>
+        <div class="form-group">
+          <label for="precio">Telefono:</label>
+          <input type="text" class="form-control" id="telefono" name="telefono" required [(ngModel)]="socioCrear.telefono">
+        </div>
+        <div class="form-group">
+          <label for="precio">Direccion:</label>
+          <input type="text" class="form-control" id="direccion" name="direccion" required [(ngModel)]="socioCrear.direccionc">
+        </div>
+  
+        <div *ngIf="getUser() === 2" class="form-group">
+          <label for="precio">Servicio:</label>
+          <select class="form-select" [(ngModel)]="socioCrear.idServicio" name="idServicio">
+            <option *ngFor="let servicio of planesList2" [value]="servicio.idservicio" >{{ servicio.servicio1 }}</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="btn btn-warning">Actualizar Socio</button>
+      </form>
+    </div>
+  </ng-template>

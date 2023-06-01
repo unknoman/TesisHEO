@@ -30,6 +30,7 @@ export class SociosTablaComponent {
   buscarBarra : string = "";
   modalRef!: BsModalRef; // Declaración de la propiedad modalRef
   @ViewChild('registrarSocio') modal: any;
+  @ViewChild('modificarSocioNg') modalUpdate: any;
   
 
   limpiarSocioCrear()
@@ -184,6 +185,46 @@ crearSocioModal()
   this.modalRef = this.modalService.show(this.modal);
 }
 
+
+modificarSocio(socio: clientes){
+  this.socioCrear.idcliente = socio.idcliente;
+  this.socioCrear.nombre = socio.nombre;
+  this.socioCrear.apellido = socio.apellido;
+  this.socioCrear.dnic = socio.dnic;
+  this.socioCrear.telefono = socio.telefono;
+  this.socioCrear.direccionc = socio.direccionc;
+  this.modalRef = this.modalService.show(this.modalUpdate);
+  }
+  
+  modificarSocio2(socio : clientesCrearDTO)
+  {
+    this.recService.actualizarCliente(socio).subscribe(info =>{
+      if(info == true)
+      {
+        this.notificacion.correcto("Socio actualizado correctamente")
+        this.getUserAll(0, 0, "");
+      } else {
+        this.notificacion.errorm("Hubo un error al actualizar el cliente");
+      }
+    }) 
+  }
+
+
+  submitUpdatedForm(){
+    if (
+      this.socioCrear.nombre.trim() === '' ||
+      this.socioCrear.apellido.trim() === '' ||
+      this.socioCrear.dnic.trim() === '' ||
+      this.socioCrear.telefono.trim() === '' ||
+      this.socioCrear.direccionc.trim() === '' ||
+      this.socioCrear.idServicio === 0
+    ) {
+      this.notificacion.errorm('Verifique los campos')
+    } else {
+    this.modificarSocio2(this.socioCrear)
+    this.modalRef.hide();
+    }
+  }
 
 
 }

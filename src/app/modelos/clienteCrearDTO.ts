@@ -1,11 +1,12 @@
 
 export class clientesCrearDTO{
+    idcliente:number = 0;
     nombre:string = '';
     apellido:string = '';
     dnic:string = '';
     telefono:string = '';
     direccionc:string = '';
-    idservicio:number = 0;
+    idServicio:number = 0;
 
     constructor(){
 
