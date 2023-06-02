@@ -5,6 +5,8 @@ import { clientes } from 'src/app/modelos/clientes';
 import { environment } from 'src/app/environment';
 import { pagos } from 'src/app/modelos/pagos';
 import { clientesCrearDTO } from 'src/app/modelos/clienteCrearDTO';
+import { estadoPagos } from 'src/app/modelos/estadoPagos';
+import { cambiarEstadoP } from 'src/app/modelos/cambiarEstadoP';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,16 @@ export class ListarClientesService {
     return this.http.get<pagos[]>(direccion);
    }
 
+  listarEstadoPagos(){
+    let direccion = this.url +'pagos/listarEstadoPagos';
+    return this.http.get<estadoPagos[]>(direccion);
+  }
+
+
+  actualizarPagos(pago:cambiarEstadoP){
+    let direccion = this.url +'pagos/cambiarEstadoPago';
+    return this.http.patch(direccion, pago)
+  }
 
    borrarCliente(id:number){
     let direccion = this.url +'Clientes/ClienteBorrar';

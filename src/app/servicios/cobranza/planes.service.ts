@@ -19,6 +19,10 @@ export class PlanesService {
     return this.http.get<planes[]>(direccion);
    }
    
+   actualizarPlan(plan:planes){
+    let direccion = this.url +'planes/actualizarPlan';
+    return this.http.patch(direccion, plan)
+   }
 
    crearPlan(plan: planes)
    {

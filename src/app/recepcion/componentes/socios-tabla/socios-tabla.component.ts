@@ -11,6 +11,8 @@ import { SweetalertutilService } from 'src/app/utilidades/sweetalertutil.service
 import { PlanesService } from 'src/app/servicios/cobranza/planes.service';
 import { planes } from 'src/app/modelos/planes';
 import { clientesCrearDTO } from 'src/app/modelos/clienteCrearDTO';
+import { estadoPagos } from 'src/app/modelos/estadoPagos';
+import { cambiarEstadoP } from 'src/app/modelos/cambiarEstadoP';
 
 @Component({
   selector: 'app-socios-tabla',
@@ -22,15 +24,20 @@ export class SociosTablaComponent {
   public sociosList:Array<clientes> = [];
   public pagosList:Array<pagos> = [];
   public  planesList2:Array<planes> = [];
+  public pagoEstado:Array<estadoPagos> = [];
   socio: clientes = new clientes();
   socioCrear: clientesCrearDTO = new clientesCrearDTO();
+  pagoEstadoI:cambiarEstadoP = new cambiarEstadoP();
   plan: planes = new planes();
+  factura:pagos = new pagos();
   buscarPor : number = 0;
   buscarPor2 : number = 0;
   buscarBarra : string = "";
   modalRef!: BsModalRef; // Declaración de la propiedad modalRef
   @ViewChild('registrarSocio') modal: any;
   @ViewChild('modificarSocioNg') modalUpdate: any;
+  @ViewChild('cambiarEstadoPagoModal') modalPagoestado: any;
+  @ViewChild('pagosModal') pagosModalx: any;
   
 
   limpiarSocioCrear()
@@ -55,6 +62,7 @@ export class SociosTablaComponent {
   ngOnInit(): void {
     this.getUserAll(this.buscarPor, this.buscarPor2, this.buscarBarra);
     this.getPlanesAll();
+    this.listarEstadoPagos();
   }
 
   crearCliente(cliente: clientesCrearDTO){
@@ -103,28 +111,41 @@ export class SociosTablaComponent {
    
   }
 
+
+  listarEstadoPagos()
+  {
+    this.recService.listarEstadoPagos().subscribe(informacion => {
+      this.pagoEstado = informacion;
+    })
+  }
+
   getUserAll(buscarPor : number, buscarPor2: number, buscarBarra : string)
   {
       this.recService.getUserAll(buscarPor, buscarPor2, buscarBarra).subscribe (cliente => {
         this.sociosList = cliente;
       });
   }
-
+   idPersona:number = 0;
   getPagos(id: number, template : any)
   {
       this.recService.getPagos(id).subscribe (pagos => {
         this.pagosList = pagos;
       });
-
+       this.idPersona = id;
       const config: ModalOptions = {
         class: 'modal-lg' // Tamaño grande (large)
         // Puedes agregar otras opciones de configuración si las necesitas
       };
 
-      this.modalRef = this.modalService.show(template, config);
+  this.modalRef = this.modalService.show(template, config);
   }
 
 
+getpagos2(){
+  this.recService.getPagos(this.idPersona).subscribe (pagos => {
+    this.pagosList = pagos;
+  });
+}
 
   borrarSocio(socio:clientes){
     Swal.fire({
@@ -224,6 +245,33 @@ modificarSocio(socio: clientes){
     this.modificarSocio2(this.socioCrear)
     this.modalRef.hide();
     }
+  }
+
+
+modificarPago(factura:cambiarEstadoP){
+ this.recService.actualizarPagos(factura).subscribe(info => {
+  if(info == true)
+  {
+    this.notificacion.correcto("El pago se actualizó correctamente");
+    this.modalRef.hide();
+    this.getpagos2()
+  } else {
+    this.notificacion.errorm("No se pudo actualizar el pago correctamente");
+  }
+ })
+}
+
+  submitEstadoForm(){
+    if(this.pagoEstadoI.idestado == 0){
+      this.notificacion.errorm('Verifique los campos')
+    } else {
+      this.modificarPago(this.pagoEstadoI)
+    }
+  }
+
+  cambiarEstadoPago(factura:pagos){
+    this.pagoEstadoI.idfactura = factura.idfactura;
+    this.modalRef = this.modalService.show(this.modalPagoestado);
   }
 
 

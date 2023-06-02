@@ -17,6 +17,7 @@ export class PlanesComponent {
 
   public  planesList:Array<planes> = [];
   @ViewChild('registrarPlan') modal: any;
+  @ViewChild('actualizarPlan') modalPlanUpdate: any;
   modalRef!: BsModalRef;
   
   plan: planes = new planes();
@@ -45,6 +46,8 @@ export class PlanesComponent {
   }
 
 
+
+
   submitForm() {
     if (
       this.plan.servicio1.trim() === '' ||
@@ -55,6 +58,36 @@ export class PlanesComponent {
       this.notificacion.errorm('Verifique los campos')
     } else {
       this.planesService.crearPlan(this.plan).subscribe(respuesta => {
+        if(respuesta == true)
+        {
+        this.notificacion.correcto('La operacion fue completada correctamente');
+         this.getPlanesAll()
+         this.modalRef.hide();
+        } else {
+          this.notificacion.errorm('Hubo un error');
+        }
+      })
+        
+    }
+  }
+
+  updatePlan(plan:planes)
+  {
+    this.plan = plan;
+    this.modalRef = this.modalService.show(this.modalPlanUpdate);
+  }
+
+
+  submitFormUpdate() {
+    if (
+      this.plan.servicio1.trim() === '' ||
+      this.plan.bajada.trim() === '' ||
+      this.plan.subida.trim() === '' ||
+      this.plan.precio <= 0
+    ) {
+      this.notificacion.errorm('Verifique los campos')
+    } else {
+      this.planesService.actualizarPlan(this.plan).subscribe(respuesta => {
         if(respuesta == true)
         {
         this.notificacion.correcto('La operacion fue completada correctamente');

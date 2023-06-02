@@ -25,7 +25,7 @@
             <td scope="row" class="text-center text-success">{{plan.precio}} </td>
             <td><div class="text-center">
                 <button class="btn btn-danger " (click)="borrarPlan(plan)">Eliminar</button> 
-                <button class="btn btn-warning ml-2">Modificar</button>
+                <button class="btn btn-warning ml-2" (click)="updatePlan(plan)">Modificar</button>
             </div>
         </td>
         </tr>
@@ -65,3 +65,37 @@
       </form>
     </div>
   </ng-template>
+
+
+
+  
+  <!-- Modal -->
+<ng-template #actualizarPlan>
+  <div class="modal-header">
+    <h4 class="modal-title">Actualizar Plan de Internet</h4>
+    <button type="button" class="close" aria-label="Close" > <!-- (click)="modalRef.hide()" --> 
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="submitFormUpdate()">
+      <div class="form-group">
+        <label for="servicio">Servicio:</label>
+        <input type="text" class="form-control" id="servicio" name="servicio" required [(ngModel)]="plan.servicio1">
+      </div>
+      <div class="form-group">
+        <label for="bajada">Velocidad de Bajada:</label>
+        <input type="text" class="form-control" id="bajada" name="bajada" required [(ngModel)]="plan.bajada">
+      </div>
+      <div class="form-group">
+        <label for="subida">Velocidad de Subida:</label>
+        <input type="text" class="form-control" id="subida" name="subida" required [(ngModel)]="plan.subida">
+      </div>
+      <div class="form-group">
+        <label for="precio">Precio:</label>
+        <input type="number" class="form-control" id="precio" name="precio" required [(ngModel)]="plan.precio">
+      </div>
+      <button type="submit" class="btn btn-primary">Actualizar</button>
+    </form>
+  </div>
+</ng-template>

@@ -7,6 +7,7 @@ export class pagos{
     fechapagado:Date = new Date(0, 0, 0, 0, 0, 0);
     servicio:string = '';
     preciototal:number = 0;
+    idestadop:number = 0;
     estado:string = '';
     constructor(){
 

@@ -81,8 +81,8 @@
             <th class="text-center">Servicio</th>
             <th class="text-center">Precio Total</th>
             <th class="text-center">Estado</th>
+            <th class="text-center">Accion/th>
             
-            <!-- Agrega más columnas según las propiedades de PagoDTO -->
           </tr>
         </thead>
         <tbody>
@@ -94,7 +94,8 @@
             <td scope="row"  class="text-center">{{pago.servicio}}</td>
             <td scope="row"  class="text-center">{{pago.preciototal}}</td>
             <td scope="row"  class="text-center">{{pago.estado}}</td>
-            <!-- Agrega más columnas según las propiedades de PagoDTO -->
+            <td scope="row"  class="text-center"> <button type="button" class="btn btn-warning mr-2" (click)="cambiarEstadoPago(pago)">Estado</button></td>
+
           </tr>
         </tbody>
       </table>
@@ -181,6 +182,28 @@
         </div>
         
         <button type="submit" class="btn btn-warning">Actualizar Socio</button>
+      </form>
+    </div>
+  </ng-template>
+
+
+
+  <ng-template #cambiarEstadoPagoModal>
+    <div class="modal-header">
+      <h4 class="modal-title">Cambiar Estado</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="submitEstadoForm()">
+        <div *ngIf="getUser() === 2" class="form-group">
+          <label for="precio">Estado:</label>
+          <select class="form-select" [(ngModel)]="pagoEstadoI.idestado" name="pagoEstadoI">
+            <option *ngFor="let pagoEstado of pagoEstado" [value]="pagoEstado.idestadop" >{{ pagoEstado.estadop1 }}</option>
+          </select>
+        </div>  
+        <button type="submit" class="btn btn-warning">Cambiar Estado</button>
       </form>
     </div>
   </ng-template>

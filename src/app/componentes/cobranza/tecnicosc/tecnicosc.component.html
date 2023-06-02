@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="form-row align-items-center mt-3">
+        <div class="col-auto">
+          <label class="sr-only" for="buscar">Buscar</label>
+          <input type="text" class="form-control" id="buscar" placeholder="Buscar" [(ngModel)]="buscarBarra">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary my-auto" (click)="buscarBoton()">Buscar</button>
+          </div>
+          <div class="form-check">
+            <label for="" class="my-auto"><b>Buscar por:</b></label>
+          </div>
+
+        <div class="col-auto">
+          <select class="form-control" id="filtrarPor" [(ngModel)]="buscarPor">
+            <option value="0">Ninguno</option>
+            <option value="1">Disponible</option>
+            <option value="2">Ocupados</option>
+          </select>
+          
+        </div>
+      <div  class="col-auto ml-auto mb-3">
+        <button type="submit" class="btn btn-success my-auto" (click)="nuevoTecnico()">Nuevo tecnico</button>
+    </div>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th  class="text-center">id</th>
+          <th  class="text-center">Nombre</th>
+          <th  class="text-center" >Telefono</th>
+          <th  class="text-center" >Casos Asignados</th>
+          <th  class="text-center">Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tecnico of tecnicosList">
+            <td scope="row"  class="text-center">{{tecnico.idtecnico}}</td>
+            <td scope="row"  class="text-center">{{tecnico.nombret + tecnico.apellidot}}</td>
+            <td scope="row"  class="text-center">{{tecnico.telefonot}}</td>
+            <td scope="row"  class="text-center">{{tecnico.casosnum}}</td>
+            <td scope="row" class="text-center">
+                 <button type="button" class="btn btn-primary mr-2" >Modificar tecnico</button>
+                <button type="button" class="btn btn-danger mr-2" (click)=" borrarTecnico(tecnico)">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+    <!-- Modal -->
+<ng-template #registrarTecnico>
+    <div class="modal-header">
+      <h4 class="modal-title">Registrar nuevo tecnico</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="submitForm()">
+        <div class="form-group">
+          <label for="servicio">Nombre:</label>
+          <input type="text" class="form-control" id="nombret" name="nombret" required [(ngModel)]="tecnicoNuevo.nombret">
+        </div>
+        <div class="form-group">
+          <label for="bajada">Apellido:</label>
+          <input type="text" class="form-control" id="apellidot" name="apellidot" required [(ngModel)]="tecnicoNuevo.apellidot">
+        </div>
+        <div class="form-group">
+          <label for="subida">Telefono:</label>
+          <input type="text" class="form-control" id="telefonot" name="telefonot" required [(ngModel)]="tecnicoNuevo.telefonot">
+        </div>
+  
+        
+        <button type="submit" class="btn btn-primary">Registrar</button>
+      </form>
+    </div>
+  </ng-template>
+  
