@@ -35,7 +35,7 @@
       <tbody>
         <tr *ngFor="let tecnico of tecnicosList">
             <td scope="row"  class="text-center">{{tecnico.idtecnico}}</td>
-            <td scope="row"  class="text-center">{{tecnico.nombret + tecnico.apellidot}}</td>
+            <td scope="row"  class="text-center">{{tecnico.nombret + ' ' +tecnico.apellidot}}</td>
             <td scope="row"  class="text-center">{{tecnico.telefonot}}</td>
             <td scope="row"  class="text-center">{{tecnico.casosnum}}</td>
             <td scope="row" class="text-center">
@@ -75,4 +75,5 @@
       </form>
     </div>
   </ng-template>
+  
   

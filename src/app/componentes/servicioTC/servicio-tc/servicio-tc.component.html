@@ -1,0 +1,145 @@
+
+<div class="container">
+    <div class="form-row align-items-center mt-3">
+      <div class="col-auto ml-auto mb-3">
+        <button type="submit" class="btn btn-success my-auto" (click)="crearCasoModal()">Nuevo Caso</button>
+    </div>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th  class="text-center">Id</th>
+          <th  class="text-center">DNI</th>
+          <th  class="text-center">Fecha de inicio</th>
+          <th  class="text-center">Descripcion</th>
+          <th  class="text-center" >Asociado</th>
+          <th  class="text-center" >Tecnico</th>
+          <th  class="text-center" >Tipo</th>
+          <th  class="text-center">Accion</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="getUser() == 3">
+        <tr *ngFor="let casosT of casos">
+               <ng-container *ngIf="casosT.idtiposerviciot == 1">
+          <td scope="row"  class="text-center">{{casosT.idproblemat}} </td>
+            <td scope="row"  class="text-center">{{casosT.dnic}} </td>
+            <td scope="row"  class="text-center">{{casosT.fechainicio}} </td>
+            <td scope="row"  class="text-center">{{casosT.descripcionserviciot}} </td>
+            <td scope="row"  class="text-center">{{casosT.clienteN + ' ' +casosT.clienteA}} </td>
+            <td scope="row"  class="text-center" >{{casosT.tecnico}} </td>
+            <td scope="row"  class="text-center" ><h4 class="incidente">Incidente</h4></td>
+            <td><div class="text-center">
+                <button class="btn btn-danger ">Eliminar</button> 
+                <button class="btn btn-warning ml-2" (click)="updatearCaso(casosT)">Ver/Modificar</button>
+            </div>
+        </td>
+                 </ng-container>
+        </tr>
+      </tbody>
+      <tbody *ngIf="getUser() == 2">
+        <tr *ngFor="let casosT of casos">
+               <ng-container *ngIf="casosT.idtiposerviciot == 2">
+          <td scope="row"  class="text-center">{{casosT.idproblemat}} </td>
+            <td scope="row"  class="text-center">{{casosT.dnic}} </td>
+            <td scope="row"  class="text-center">{{casosT.fechainicio}} </td>
+            <td scope="row"  class="text-center">{{casosT.descripcionserviciot}}</td>
+            <td scope="row"  class="text-center">{{casosT.clienteN + ' ' + casosT.clienteA}} </td>
+            <td scope="row"  class="text-center" >{{casosT.tecnico}} </td>
+            <td scope="row"  class="text-center">Instalacion</td>
+            <td><div class="text-center">
+                <button class="btn btn-danger ">Eliminar</button> 
+                <button class="btn btn-warning ml-2" (click)="updatearCaso(casosT)">Ver/Modificar</button>
+            </div>
+        </td>
+                 </ng-container>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+
+     <!-- Modal -->
+<ng-template #registrarServicioT>
+  <div class="modal-header">
+    <h4 class="modal-title">Registrar nuevo caso</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="submitForm()">
+      <div class="form-group">
+        <label for="servicio">Descripcion:</label>
+        <input type="text" class="form-control" id="descripcion" name="descripcion" required [(ngModel)]="CasosServicio.descripcionserviciot">
+      </div>
+      <div class="form-group">
+        <label for="tecnico">Tecnico:</label>
+        <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico">
+          <option  *ngFor="let tecnico of tecnicoList" [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="subida">Cliente:</label>
+        <select class="form-select" [(ngModel)]="CasosServicio.idcliente" name="cliente">
+          <option  *ngFor="let cliente of socios" [value]="cliente.idcliente" >{{ cliente.nombre + ' ' + cliente.apellido + ' ' + cliente.dnic}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="TipoServicio">Tipo Servicio:</label>
+        <select class="form-select" [(ngModel)]="CasosServicio.idtiposerviciot" name="servicioTecnico">
+          <option disabled [selected]="true" [value]="1">Incidente</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="TipoServicio">Estado:</label>
+        <select class="form-select" [(ngModel)]="CasosServicio.idestadoservicio" name="estado">
+          <option [value]="1">Pendiente</option>
+          <option [value]="1">Solucionado</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" >Registrar</button>
+    </form>
+  </div>
+</ng-template>
+
+
+
+     <!-- Modal -->
+     <ng-template #actualizarServicioT>
+      <div class="modal-header">
+        <h4 class="modal-title">Actualizar caso</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="submitUpdate()">
+          <div class="form-group">
+            <label for="servicio">Descripcion:</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" required [(ngModel)]="CasosServicio.descripcionserviciot">
+          </div>
+          <div class="form-group">
+            <label for="tecnico">Tecnico:</label>
+            <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico">
+              <option  *ngFor="let tecnico of tecnicoList" [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="TipoServicio">Tipo Servicio:</label>
+            <select class="form-select" [(ngModel)]="CasosServicio.idtiposerviciot" name="servicioTecnico">
+              <option disabled [selected]="true" [value]="1">Incidente</option>
+            </select>
+          </div>
+    
+          <div class="form-group">
+            <label for="TipoServicio">Estado:</label>
+            <select class="form-select" [(ngModel)]="CasosServicio.idestadoservicio" name="estado">
+              <option [value]="1">Pendiente</option>
+              <option [value]="1">Solucionado</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+        </form>
+      </div>
+    </ng-template>

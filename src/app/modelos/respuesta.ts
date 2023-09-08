@@ -1,4 +1,5 @@
 export class respuesta{
-status :string = '';
 
+estadoRespuesta : boolean = false;
+mensajeRespuesta : string = '';
 }

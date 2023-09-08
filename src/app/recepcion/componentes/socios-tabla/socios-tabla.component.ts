@@ -69,7 +69,7 @@ export class SociosTablaComponent {
        this.recService.crearCliente(cliente).subscribe(respuesta => {
         if(respuesta == true)
         {
-          this.notificacion.correcto("El cliente" + cliente.nombre + cliente.apellido + "Fue creado correctamente");
+          this.notificacion.correcto("El cliente " + cliente.nombre +' ' + cliente.apellido + " Fue creado correctamente");
           this.getUserAll(0, 0, "");
           this.limpiarSocioCrear();
         } else {
@@ -146,11 +146,25 @@ getpagos2(){
     this.pagosList = pagos;
   });
 }
+estadoVar : string = '';
 
+ checkEstado(estado : number)
+ {
+ if(estado == 1)
+ {
+  return  this.estadoVar = 'Pagos pendiente';
+ } else if (estado == 2)
+ {
+  return this.estadoVar = 'Al dia';
+ } else 
+ {
+ return this.estadoVar = 'Pagos vencidos';
+ }
+ }
   borrarSocio(socio:clientes){
     Swal.fire({
       title: 'Eliminar Socio',
-      text: '¿Deseas borrar el socio ' + socio.nombre + ' DNI: ' + socio.dnic + '?',
+      html: '¿Deseas borrar el socio ' + '<br>' +socio.nombre + ' '+socio.apellido + '<br> DNI: ' + socio.dnic + ' <br> Telefono: ' +socio.telefono+  '<br>Servicio: ' + socio.servicio + '<br>Estado: ' + this.checkEstado(socio.idestadoc) +'?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si',
@@ -230,7 +244,6 @@ modificarSocio(socio: clientes){
     }) 
   }
 
-
   submitUpdatedForm(){
     if (
       this.socioCrear.nombre.trim() === '' ||
@@ -255,6 +268,7 @@ modificarPago(factura:cambiarEstadoP){
     this.notificacion.correcto("El pago se actualizó correctamente");
     this.modalRef.hide();
     this.getpagos2()
+    this.getUserAll(this.buscarPor, this.buscarPor2, this.buscarBarra);
   } else {
     this.notificacion.errorm("No se pudo actualizar el pago correctamente");
   }

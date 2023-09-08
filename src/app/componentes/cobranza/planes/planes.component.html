@@ -25,7 +25,7 @@
             <td scope="row" class="text-center text-success">{{plan.precio}} </td>
             <td><div class="text-center">
                 <button class="btn btn-danger " (click)="borrarPlan(plan)">Eliminar</button> 
-                <button class="btn btn-warning ml-2" (click)="updatePlan(plan)">Modificar</button>
+                <button class="btn btn-warning ml-2" (click)="updatePlan(plan)">Ver/Modificar</button>
             </div>
         </td>
         </tr>
@@ -33,13 +33,11 @@
     </table>
   </div>
 
-
-
   <!-- Modal -->
 <ng-template #registrarPlan>
     <div class="modal-header">
       <h4 class="modal-title">Registrar Plan de Internet</h4>
-      <button type="button" class="close" aria-label="Close" > <!-- (click)="modalRef.hide()" --> 
+      <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -73,7 +71,7 @@
 <ng-template #actualizarPlan>
   <div class="modal-header">
     <h4 class="modal-title">Actualizar Plan de Internet</h4>
-    <button type="button" class="close" aria-label="Close" > <!-- (click)="modalRef.hide()" --> 
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
       <span aria-hidden="true">&times;</span>
     </button>
   </div>

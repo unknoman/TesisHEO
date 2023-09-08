@@ -26,6 +26,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PlanesComponent } from './componentes/cobranza/planes/planes.component';
 import { TecnicoscComponent } from './componentes/cobranza/tecnicosc/tecnicosc.component';
+import { ServicioTCComponent } from './componentes/servicioTC/servicio-tc/servicio-tc.component';
 
 export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
@@ -49,6 +50,7 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     TecnicosrComponent,
     PlanesComponent,
     TecnicoscComponent,
+    ServicioTCComponent,
   ],
   imports: [
     BrowserModule,
