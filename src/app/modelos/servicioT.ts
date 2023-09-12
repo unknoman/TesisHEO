@@ -7,6 +7,7 @@ export class servicioT{
     clienteN:string = "";
     clienteA:string = "";
     dnic:string = "";
+    direccion:string = "";
     idtecnico:number = 0;
     tecnico: string = "";
 

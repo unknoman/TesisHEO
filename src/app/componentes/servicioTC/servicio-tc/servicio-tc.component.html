@@ -12,6 +12,7 @@
           <th  class="text-center">Fecha de inicio</th>
           <th  class="text-center">Descripcion</th>
           <th  class="text-center" >Asociado</th>
+          <th  class="text-center" >Direccion</th>
           <th  class="text-center" >Tecnico</th>
           <th  class="text-center" >Tipo</th>
           <th  class="text-center">Accion</th>
@@ -24,11 +25,11 @@
             <td scope="row"  class="text-center">{{casosT.dnic}} </td>
             <td scope="row"  class="text-center">{{casosT.fechainicio}} </td>
             <td scope="row"  class="text-center">{{casosT.descripcionserviciot}} </td>
-            <td scope="row"  class="text-center">{{casosT.clienteN + ' ' +casosT.clienteA}} </td>
+            <td scope="row"  class="text-center"><h6>{{casosT.clienteN + ' ' +casosT.clienteA}}</h6></td>
+            <td scope="row"  class="text-center" >{{casosT.direccion}} </td>
             <td scope="row"  class="text-center" >{{casosT.tecnico}} </td>
             <td scope="row"  class="text-center" ><h4 class="incidente">Incidente</h4></td>
             <td><div class="text-center">
-                <button class="btn btn-danger ">Eliminar</button> 
                 <button class="btn btn-warning ml-2" (click)="updatearCaso(casosT)">Ver/Modificar</button>
             </div>
         </td>
@@ -136,7 +137,7 @@
             <label for="TipoServicio">Estado:</label>
             <select class="form-select" [(ngModel)]="CasosServicio.idestadoservicio" name="estado">
               <option [value]="1">Pendiente</option>
-              <option [value]="1">Solucionado</option>
+              <option [value]="2">Solucionado</option>
             </select>
           </div>
           <button type="submit" class="btn btn-primary">Actualizar</button>
