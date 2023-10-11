@@ -27,6 +27,11 @@ export class TecnicosService {
     return this.http.get<tecnico[]>(direccion);
    }
 
+   getTecnicosDisponibles():Observable<tecnico[]>{
+    let direccion = this.url +'tecnico/listarTecnicoDisponible';
+    console.log(direccion)
+    return this.http.get<tecnico[]>(direccion);
+   }
 
    registrarTecnico(tecnico:tecnico){
     let direccion = this.url +'tecnico/crearTecnico';

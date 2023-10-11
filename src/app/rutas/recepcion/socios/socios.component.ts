@@ -12,6 +12,11 @@ import { JwtserviceService } from 'src/app/servicios/utilidades/jwtservice.servi
 })
 export class SociosComponent {
 
+  constructor(private jwtutilidades:JwtserviceService)
+{
+
+}
+
 
   getUser()
   {
@@ -30,13 +35,7 @@ export class SociosComponent {
   }
 
 
-  ngOnInit(): void {
-  }
 
 
-constructor(private jwtutilidades:JwtserviceService)
-{
-
-}
 
 }

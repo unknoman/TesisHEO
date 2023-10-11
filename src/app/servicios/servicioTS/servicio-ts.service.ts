@@ -17,8 +17,8 @@ export class ServicioTSService {
   
 
 
-  getCasosST(){
-    let direccion = this.url +'api/ServicioT/listarServicioT';
+  getCasosST(estado : number){
+    let direccion = this.url +'api/ServicioT/listarServicioT/' + '?estado=' + estado;
     return this.http.get<servicioT[]>(direccion);
    }
 
@@ -31,4 +31,6 @@ export class ServicioTSService {
       let direccion = this.url +'api/ServicioT/actualizarCaso';
       return this.http.patch<respuesta>(direccion, caso);
     }
+
+    
 }

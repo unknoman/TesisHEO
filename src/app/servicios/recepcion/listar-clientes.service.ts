@@ -58,5 +58,13 @@ export class ListarClientesService {
    }
 
 
+
+   getUserAllSimple(instalado : number):Observable<clientes[]>{
+    let direccion = this.url +'Clientes/ClienteInstalarSimple';
+    direccion += `?estadoInstalado=${instalado}`;
+    return this.http.get<clientes[]>(direccion);
+   }
+
+
   constructor(private http:HttpClient) { }
 }

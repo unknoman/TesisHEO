@@ -13,6 +13,8 @@ import { JwtserviceService } from 'src/app/servicios/utilidades/jwtservice.servi
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SweetalertutilService } from 'src/app/utilidades/sweetalertutil.service';
 import { respuesta } from 'src/app/modelos/respuesta';
+import { waitForAsync } from '@angular/core/testing';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-servicio-tc',
@@ -30,14 +32,14 @@ export class ServicioTCComponent {
 
  public tecnicoList:Array<tecnico> = [];
  public socios:Array<clientes> = [];
-
+ public sociosInstalados:Array<clientes> = [];
+ public sociosNoInstalados:Array<clientes> = [];
+public estadoST : number = 1;
 constructor(private notificaciones:SweetalertutilService, private clientes:ListarClientesService,private tecnicos:TecnicosService, private servicioTS :ServicioTSService, private jwtutilidades:JwtserviceService, private modalServices: BsModalService){
 
 }
 ngOnInit(): void {
-  this.getServicioT();
-  this.getTecnico();
-  this.getClientes();
+this.updatearTodo();
   if(this.getUser() == 3)
   {
     this.CasosServicio.idtiposerviciot = 1;
@@ -49,12 +51,22 @@ ngOnInit(): void {
   }
 }
 
-getServicioT(){
-this.servicioTS.getCasosST().subscribe(casosGet => {
+updatearTodo(){
+  this.getServicioT(this.estadoST);
+  this.getTecnico();
+  this.getClientes();
+  this.getClientesInstalado();
+  this.getClientesNoInstalado();
+}
+getServicioT(estado : number){
+this.servicioTS.getCasosST(estado).subscribe(casosGet => {
   this.casos = casosGet;
 } )
 }
 
+buscarBoton(){
+this.getServicioT(this.estadoST);
+}
 getUser()
 {
   const tokenKey = localStorage.getItem('key');
@@ -71,13 +83,14 @@ getUser()
   return 1
 }
 
+
 crearCasoModal()
 {
   this.modalRef = this.modalServices.show(this.modal);
 }
 
 getTecnico(){
-  this.tecnicos.getTecnicosAll().subscribe(tecnicosGeted =>{
+  this.tecnicos.getTecnicosDisponibles().subscribe(tecnicosGeted =>{
     this.tecnicoList = tecnicosGeted;
   })
 }
@@ -86,6 +99,18 @@ getClientes(){
 this.clientes.getUserAll().subscribe(clientes => {
 this.socios = clientes;
 })
+}
+
+getClientesInstalado(){
+  this.clientes.getUserAllSimple(1).subscribe(socios => {
+    this.sociosInstalados = socios;
+  } )
+}
+
+getClientesNoInstalado(){
+  this.clientes.getUserAllSimple(0).subscribe(socios => {
+    this.sociosNoInstalados = socios;
+  } )
 }
 
 updatearCaso(caso : servicioT){
@@ -103,19 +128,26 @@ this.modalRef = this.modalServices.show(this.modalUpdatex);
 submitUpdate(){
   this.servicioTS.updateServicioTecnico(this.CasosServicio).subscribe(respuestax => {
     if(respuestax.estadoRespuesta == true)
+    {
       this.notificaciones.correcto(respuestax.mensajeRespuesta);
+      this.updatearTodo();
+    }
      else
+     {
     this.notificaciones.errorm(respuestax.mensajeRespuesta);
-  });
+     }
+  }); 
+  this.servicioTS.updateServicioTecnico(this.CasosServicio)
+  console.log(this.CasosServicio);
 }
 
 
 submitForm() {
-  
   this.servicioTS.sendCaso(this.CasosServicio).subscribe(respuesta1 => {
     if(respuesta1.estadoRespuesta == true){
       this.notificaciones.correcto(respuesta1.mensajeRespuesta);
-      this.getServicioT();
+      this.getServicioT(this.estadoST);
+      this.updatearTodo();
       this.modalRef.hide();
     } else {
       this.notificaciones.errorm(respuesta1.mensajeRespuesta);
