@@ -1,0 +1,92 @@
+
+<div class="container">
+    <div class="form-row align-items-center mt-3">
+      <div class="col-auto ml-auto mb-3">
+        <button type="submit" class="btn btn-success my-auto" (click)="this.nuevoUsuario()">Nuevo Usuario</button>
+    </div>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th  class="text-center">Id</th>
+          <th  class="text-center">Usuario</th>
+          <th  class="text-center" >Password</th>
+          <th  class="text-center" >Rol</th>
+          <th  class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuariosList">
+            <td scope="row"  class="text-center">{{usuario.idusuario}} </td>
+            <td scope="row"  class="text-center">{{usuario.usuario1}} </td>
+            <td scope="row"  class="text-center">{{usuario.password}} </td>
+            <td scope="row"  class="text-center" >{{usuario.idrolNavigation.rol1}} </td>
+            <td scope="row" class="text-center text-success">
+                <button class="btn btn-warning" (click)="modificarUsuariom(usuario)">Editar</button>
+                <button class="btn btn-danger" (click)="borrarUsuario(usuario)">Eliminar</button>
+            </td>
+            <td><div class="text-center">
+            </div>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+  
+  <!-- Modal -->
+<ng-template #registrarUsuario>
+    <div class="modal-header">
+      <h4 class="modal-title">Registrar Usuario</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="submitForm()">
+        <div class="form-group">
+          <label for="servicio">Usuario:</label>
+          <input type="text" class="form-control" id="servicio" name="servicio" required [(ngModel)]="usuarioCrear1.usuario1">
+        </div>
+        <div class="form-group">
+          <label for="bajada">Password:</label>
+          <input type="password" class="form-control" id="bajada" name="bajada" required [(ngModel)]="usuarioCrear1.password">
+        </div>
+        <div class="form-group">
+        <label for="bajada">Rol:</label>
+        <select class="form-control" id="roles" name="roles" [(ngModel)]="usuarioCrear1.idrol">
+            <option *ngFor="let rol of roles" [value]="rol.idrol">{{ rol.rol1 }}</option>
+          </select>
+</div>
+   <button type="submit" class="btn btn-primary">Registrar</button>
+      </form>
+    </div>
+  </ng-template>
+
+
+   
+  <!-- Modal -->
+<ng-template #modificarUsuario>
+    <div class="modal-header">
+      <h4 class="modal-title">Registrar Usuario</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="submitFormModificar()">
+        <div class="form-group">
+          <label for="bajada">Password:</label>
+          <input type="password" class="form-control" id="modificarUsuario" name="musuario" required [(ngModel)]="usuarioModificar1.password">
+        </div>
+        <div class="form-group">
+        <label for="bajada">Rol:</label>
+        <select class="form-control" id="roles2" name="roles2" [(ngModel)]="usuarioModificar1.idrol">
+            <option *ngFor="let rol of roles" [value]="rol.idrol">{{ rol.rol1 }}</option>
+          </select>
+</div>
+   <button type="submit" class="btn btn-primary">Modificar</button>
+      </form>
+    </div>
+  </ng-template>

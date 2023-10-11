@@ -1,7 +1,7 @@
 
 export class Rol{
-    Idrol:number = 0;
-    Rol1:string = "";
+    idrol:number = 0;
+    rol1:string = "";
 }
 
 

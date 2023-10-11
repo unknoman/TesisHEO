@@ -1,6 +1,6 @@
 export class usuarioCrear {
 
     idrol:number = 0;
-    usuarioDto: string = "";
-    passwordDto: string = "";
+    usuario1: string = "";
+    password: string = "";
 }
