@@ -9,7 +9,7 @@ import { AuthService } from '@auth0/auth0-angular/public-api';
   providedIn: 'root'
 })
 export class AuthguardGuard implements CanActivate {
-   rutasAdmin = ['dashboardar', 'otra-ruta', 'otra-ruta-mas'];
+   rutasAdmin = ['dashboardar', 'usuariosr', 'otra-ruta-mas'];
    rutasCobranza = ['dashboardcr', 'sociosr', 'tecnicosr', 'planesr', 'problemastr'];
    rutasRecepcion = ['dashboardrr', 'problemastr', 'sociosr'];
   

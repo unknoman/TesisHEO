@@ -27,6 +27,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { PlanesComponent } from './componentes/cobranza/planes/planes.component';
 import { TecnicoscComponent } from './componentes/cobranza/tecnicosc/tecnicosc.component';
 import { ServicioTCComponent } from './componentes/servicioTC/servicio-tc/servicio-tc.component';
+import { UsuariosComponent } from './rutas/usuarios/usuarios/usuarios.component';
 
 export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
@@ -51,6 +52,7 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     PlanesComponent,
     TecnicoscComponent,
     ServicioTCComponent,
+    UsuariosComponent,
   ],
   imports: [
     BrowserModule,

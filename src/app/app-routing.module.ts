@@ -9,6 +9,7 @@ import { ProblemasTrComponent } from './rutas/recepcion/problemas-tr/problemas-t
 import { SociosComponent } from './rutas/recepcion/socios/socios.component';
 import { PlanesrComponent } from './rutas/cobranzas/planesr/planesr.component';
 import { TecnicosrComponent } from './rutas/cobranzas/tecnicosr/tecnicosr.component';
+import { UsuariosComponent } from './rutas/usuarios/usuarios/usuarios.component';
 
 const routes: Routes = [
     {path:'', redirectTo:'loginr', pathMatch:'full'},
@@ -19,7 +20,8 @@ const routes: Routes = [
     {path:'problemastr', component:ProblemasTrComponent, canActivate: [AuthguardGuard]},
     {path:'sociosr', component:SociosComponent, canActivate: [AuthguardGuard]},
     {path:'planesr', component:PlanesrComponent, canActivate: [AuthguardGuard]},
-    {path:'tecnicosr', component:TecnicosrComponent, canActivate: [AuthguardGuard]}
+    {path:'tecnicosr', component:TecnicosrComponent, canActivate: [AuthguardGuard]},
+    {path:'usuariosr', component:UsuariosComponent, canActivate: [AuthguardGuard]}
 
   ];
 
