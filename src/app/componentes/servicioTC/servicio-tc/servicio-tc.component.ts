@@ -15,6 +15,8 @@ import { SweetalertutilService } from 'src/app/utilidades/sweetalertutil.service
 import { respuesta } from 'src/app/modelos/respuesta';
 import { waitForAsync } from '@angular/core/testing';
 import { delay } from 'rxjs';
+import Swal from 'sweetalert2';
+import { usuarioO } from 'src/app/modelos/usuarioO';
 
 @Component({
   selector: 'app-servicio-tc',
@@ -62,6 +64,37 @@ getServicioT(estado : number){
 this.servicioTS.getCasosST(estado).subscribe(casosGet => {
   this.casos = casosGet;
 } )
+}
+
+
+
+
+
+eliminarCaso(caso :servicioT, tipo : number){
+  Swal.fire({
+    title: 'Eliminar Tecnico',
+    text: '¿Deseas borrar el caso ' + caso.descripcionserviciot + '?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Si',
+    cancelButtonText: 'Cancelar'
+    
+  }).then((result) => {
+    if (result.isConfirmed) {
+         this.servicioTS.deleteServicioT(caso.idproblemat, tipo).subscribe(mensaje => {
+        if(mensaje == true)
+        {
+          this.notificaciones.correcto("Se elimino correctamente el caso");
+          this.updatearTodo();
+        } else 
+        {
+          this.notificaciones.errorm("El caso no existe, recarga la pagina!");
+        }
+         })
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      Swal.close();
+    } 
+  });
 }
 
 buscarBoton(){

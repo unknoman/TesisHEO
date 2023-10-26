@@ -15,7 +15,11 @@ export class ServicioTSService {
 
   private url = environment.apiUrl;
   
-
+deleteServicioT(id : number, tipo : number = 0)
+{
+let direccion = this.url + 'api/ServicioT/eliminarCaso?id=' + id +'&tipo=' + tipo;
+return this.http.delete<boolean>(direccion);
+}
 
   getCasosST(estado : number){
     let direccion = this.url +'api/ServicioT/listarServicioT/' + '?estado=' + estado;

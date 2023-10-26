@@ -34,7 +34,7 @@
         </tr>
       </thead>
       <tbody *ngIf="getUser() == 3">
-        <tr *ngFor="let casosT of casos">
+        <tr *ngFor="let casosT of casos" [ngClass]="{'table-success': casosT.idestadoservicio == 2, 'table-warning': casosT.idestadoservicio === 1}">
                <ng-container *ngIf="casosT.idtiposerviciot == 1">
           <td scope="row"  class="text-center">{{casosT.idproblemat}} </td>
             <td scope="row"  class="text-center">{{casosT.dnic}} </td>
@@ -45,6 +45,7 @@
             <td scope="row"  class="text-center" >{{casosT.tecnico}} </td>
             <td scope="row"  class="text-center" ><h4 class="incidente">Incidente</h4></td>
             <td><div class="text-center">
+              <button class="btn btn-danger " (click)="eliminarCaso(casosT, 0)">Eliminar</button> 
                 <button class="btn btn-warning ml-2" (click)="updatearCaso(casosT)">Ver/Modificar</button>
             </div>
         </td>
@@ -52,7 +53,7 @@
         </tr>
       </tbody>
       <tbody *ngIf="getUser() == 2">
-        <tr *ngFor="let casosT of casos">
+        <tr *ngFor="let casosT of casos" [ngClass]="{'table-success': casosT.idestadoservicio == 2, 'table-warning': casosT.idestadoservicio === 1}">
                <ng-container *ngIf="casosT.idtiposerviciot == 2">
           <td scope="row"  class="text-center">{{casosT.idproblemat}} </td>
             <td scope="row"  class="text-center">{{casosT.dnic}} </td>
@@ -63,16 +64,18 @@
             <td scope="row"  class="text-center" >{{casosT.tecnico}} </td>
             <td scope="row"  class="text-center"> <h4 ngClass="instalacionx">Instalación</h4></td>
             <td><div class="text-center">
-                <button class="btn btn-danger ">Eliminar</button> 
+                <button class="btn btn-danger " (click)="eliminarCaso(casosT, 1)">Eliminar</button> 
                 <button class="btn btn-warning ml-2" (click)="updatearCaso(casosT)">Ver/Modificar</button>
             </div>
         </td>
-                 </ng-container>
+        </ng-container>
         </tr>
       </tbody>
 
     </table>
   </div>
+
+
 
 
      <!-- Modal -->
@@ -92,6 +95,7 @@
       <div class="form-group">
         <label for="tecnico">Tecnico:</label>
         <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico">
+          <option [value]="0">Sin Asignar</option>
           <option  *ngFor="let tecnico of tecnicoList" [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot}}</option>
         </select>
       </div>
@@ -156,6 +160,7 @@
           <div class="form-group">
             <label>Tecnico:</label>
             <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico">
+              <option  [value]="0">Sin Asignar</option>
               <option  *ngFor="let tecnico of tecnicoList" [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot}}</option>
             </select>
           </div>

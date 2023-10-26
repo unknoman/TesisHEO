@@ -78,7 +78,7 @@ crearTecnico(tecnico:tecnico){
            this.notificacion.correcto("El tecnico " + tecnico.nombret + " se borró correctamente");
            this.buscarMetodo(this.buscarPor, this.buscarBarra);
           } else {
-           this.notificacion.errorm("el socio tiene pagos pendientes por abonar");
+           this.notificacion.errorm("Ocurrio un error y no se puede borrar");
           }
        })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
