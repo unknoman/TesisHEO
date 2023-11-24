@@ -72,7 +72,7 @@ this.servicioTS.getCasosST(estado).subscribe(casosGet => {
 
 eliminarCaso(caso :servicioT, tipo : number){
   Swal.fire({
-    title: 'Eliminar Tecnico',
+    title: 'Eliminar Servicio Tecnico',
     text: '¿Deseas borrar el caso ' + caso.descripcionserviciot + '?',
     icon: 'warning',
     showCancelButton: true,
