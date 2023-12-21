@@ -39,7 +39,7 @@
             <td scope="row"  class="text-center">{{tecnico.telefonot}}</td>
             <td scope="row"  class="text-center">{{tecnico.casosnum}}</td>
             <td scope="row" class="text-center">
-                 <button type="button" class="btn btn-primary mr-2" >Modificar tecnico</button>
+                 <button type="button" class="btn btn-primary mr-2" (click)="modificarTecnicoModal(tecnico)">Modificar tecnico</button>
                 <button type="button" class="btn btn-danger mr-2" (click)=" borrarTecnico(tecnico)">Eliminar</button></td>
         </tr>
       </tbody>
@@ -77,3 +77,33 @@
   </ng-template>
   
   
+
+
+      <!-- Modal -->
+<ng-template #modificarTecnico>
+  <div class="modal-header">
+    <h4 class="modal-title">Modificar tecnico</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="submitFormUpdate()">
+      <div class="form-group">
+        <label for="servicio">Nombre:</label>
+        <input type="text" class="form-control" id="nombret" name="nombret" required [(ngModel)]="tecnicoDTO.nombret">
+      </div>
+      <div class="form-group">
+        <label for="bajada">Apellido:</label>
+        <input type="text" class="form-control" id="apellidot" name="apellidot" required [(ngModel)]="tecnicoDTO.apellidot">
+      </div>
+      <div class="form-group">
+        <label for="subida">Telefono:</label>
+        <input type="text" class="form-control" id="telefonot" name="telefonot" required [(ngModel)]="tecnicoDTO.telefonot">
+      </div>
+
+      
+      <button type="submit" class="btn btn-primary">Modificar</button>
+    </form>
+  </div>
+</ng-template>

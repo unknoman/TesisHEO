@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { tecnico } from 'src/app/modelos/tecnico';
+import { tecnicoUpdateDTO } from 'src/app/modelos/tecnicoUpdateDTO';
 import { TecnicosService } from 'src/app/servicios/cobranza/tecnicos.service';
 import { SweetalertutilService } from 'src/app/utilidades/sweetalertutil.service';
 import Swal from 'sweetalert2';
@@ -13,10 +14,12 @@ import Swal from 'sweetalert2';
 export class TecnicoscComponent {
   modalRef!: BsModalRef; // Declaración de la propiedad modalRef
   @ViewChild('registrarTecnico') modalTecnico: any;
+  @ViewChild('modificarTecnico') modalTecnicoUpdate : any;
 
   buscarPor : number = 0;
   buscarBarra : string = "";
   tecnicoNuevo = new tecnico();
+  tecnicoDTO = new tecnicoUpdateDTO();
   public tecnicosList:Array<tecnico> = [];
 
   
@@ -29,8 +32,17 @@ export class TecnicoscComponent {
   }
 
   nuevoTecnico(){
-   this.modalServices.show(this.modalTecnico);
+    this.modalRef = this.modalServices.show(this.modalTecnico);
   }
+
+
+  modificarTecnicoModal(tecnico : tecnico){
+    this.tecnicoDTO.id = tecnico.idtecnico;
+    this.tecnicoDTO.nombret = tecnico.nombret;
+    this.tecnicoDTO.apellidot = tecnico.apellidot;
+    this.tecnicoDTO.telefonot = tecnico.telefonot;
+    this.modalRef = this.modalServices.show(this.modalTecnicoUpdate);
+   }
 
 crearTecnico(tecnico:tecnico){
   this.tecnicos.registrarTecnico(tecnico).subscribe(info => {
@@ -42,6 +54,27 @@ crearTecnico(tecnico:tecnico){
       this.notificacion.errorm("Hubo un error y no se pudo crear el tecnico");
     }
   })
+}
+
+modificarTecnico(Tecnico : tecnico)
+{
+  if(Tecnico.nombret == null || Tecnico.apellidot  == null|| Tecnico.telefonot == null)
+  {
+    this.notificacion.errorm("Verifica todos los campos");
+  } else 
+  {
+    this.tecnicos.modificarTecnico(this.tecnicoDTO).subscribe(info => {
+      if(info == true)
+      {
+        this.notificacion.correcto("El tecnico se modificó correctamente");
+        this.buscarMetodo(this.buscarPor, this.buscarBarra);
+        this.modalRef.hide();
+      } else
+      {
+        this.notificacion.errorm("Hubo un error, verifica todos los campos");
+      }
+    });
+  }
 }
   submitForm(){
     if (
@@ -56,6 +89,10 @@ crearTecnico(tecnico:tecnico){
     this.modalRef.hide();
   }
 
+  submitFormUpdate(){
+      this.modificarTecnico(this.tecnicoNuevo);
+  }
+  
   buscarMetodo(buscarpor:number, buscarbar:string){
       this.tecnicos.getTecnicosAll(buscarpor, buscarbar).subscribe(info => {
         this.tecnicosList = info;

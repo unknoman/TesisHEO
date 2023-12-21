@@ -1,7 +1,7 @@
 
 export class tecnico{
     idtecnico:number = 0;
-   idestado:number = 0;
+    idestado:number = 0;
     nombret:string = '';
     apellidot:string = '';
     estado:string = '';

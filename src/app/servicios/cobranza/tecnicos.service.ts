@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/app/environment';
 import { planes } from 'src/app/modelos/planes';
 import { tecnico } from 'src/app/modelos/tecnico';
+import { tecnicoUpdateDTO } from 'src/app/modelos/tecnicoUpdateDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,11 @@ export class TecnicosService {
     let direccion = this.url +'tecnico/eliminarTecnico';
     direccion += `?id=${id}`;
     return this.http.delete(direccion);
+   }
+
+
+   modificarTecnico(tecnico:tecnicoUpdateDTO){
+    let direccion = this.url +'tecnico/modificarTecnico';
+    return this.http.patch(direccion, tecnico)
    }
 }
