@@ -46,7 +46,7 @@
             <td scope="row"  class="text-center" ><h4 class="incidente">Incidente</h4></td>
             <td><div class="text-center">
               <button class="btn btn-danger " (click)="eliminarCaso(casosT, 0)">Eliminar</button> 
-                <button class="btn btn-warning ml-2" (click)="updatearCaso(casosT)">Ver/Modificar</button>
+                <button class="btn btn-warning ml-2" (click)="updatearCaso(casosT)" *ngIf="casosT.idestadoservicio == 1">Ver/Modificar</button>
             </div>
         </td>
                  </ng-container>
@@ -64,8 +64,8 @@
             <td scope="row"  class="text-center" >{{casosT.tecnico}} </td>
             <td scope="row"  class="text-center"> <h4 ngClass="instalacionx">Instalación</h4></td>
             <td><div class="text-center">
-                <button class="btn btn-danger " (click)="eliminarCaso(casosT, 1)">Eliminar</button> 
-                <button class="btn btn-warning ml-2" (click)="updatearCaso(casosT)">Ver/Modificar</button>
+                <button class="btn btn-danger "(click)="eliminarCaso(casosT, 1)">Eliminar</button> 
+                <button class="btn btn-warning ml-2"(click)="updatearCaso(casosT)">Ver/Modificar</button>
             </div>
         </td>
         </ng-container>
@@ -95,7 +95,6 @@
       <div class="form-group">
         <label for="tecnico">Tecnico:</label>
         <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico">
-          <option [value]="0">Sin Asignar</option>
           <option  *ngFor="let tecnico of tecnicoList" [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot}}</option>
         </select>
       </div>
@@ -158,8 +157,10 @@
           <div class="form-group">
             <label>Tecnico:</label>
             <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico">
-              <option  [value]="0">Sin Asignar</option>
-              <option  *ngFor="let tecnico of tecnicoList" [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot}}</option>
+              <ng-container *ngFor="let tecnico of tecnicoList">
+                <option  [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot }}</option>
+              </ng-container>
+            
             </select>
           </div>
           <div class="form-group">

@@ -1,10 +1,64 @@
     /* Estilos para la tabla */
-    table {
-        margin: 20px 0;
-        font-size: 0.9rem;
-        font-family: sans-serif;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-      }
+    .facturaOculta table {
+      margin: 20px 0;
+      font-size: 0.9rem;
+      font-family: sans-serif;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+
+    .facturaOculta body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+  }
+
+  .invoice {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+  }
+
+
+  .facturaOculta header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .info {
+    margin-bottom: 20px;
+  }
+
+  .info p {
+    margin: 5px 0;
+  }
+
+  .facturaOculta table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+
+  .facturaOculta table th {
+    background-color: #000000;
+    color: #fff;
+  }
+
+  .facturaOculta footer {
+    margin-top: 20px;
+    text-align: right;
+  }
+
+  .total {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+  }
   
       /* Estilos para hacer la tabla responsive */
       @media screen and (max-width: 600px) {
@@ -48,3 +102,5 @@
 
         
       }
+
+      

@@ -68,6 +68,7 @@
 
 
   <ng-template #pagosModal>
+
     <div class="modal-header">
       <h4 class="modal-title">Lista de Pagos</h4>
     </div>
@@ -82,26 +83,29 @@
             <th class="text-center">Servicio</th>
             <th class="text-center">Precio Total</th>
             <th class="text-center">Estado</th>
-            <th class="text-center">Accion</th>
-            
+            <th class="text-center">Acción</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let pago of pagosList">
-            <td scope="row"  class="text-center">{{pago.idfactura}}</td>
-            <td scope="row"  class="text-center">{{pago.fecha}}</td>
-            <td scope="row"  class="text-center">{{pago.fechavencimiento}}</td>
-            <td scope="row"  class="text-center"> {{pago.fechapagado}}</td>
-            <td scope="row"  class="text-center">{{pago.servicio}}</td>
-            <td scope="row"  class="text-center">{{pago.preciototal}}</td>
-            <td scope="row"  class="text-center">{{pago.estado}}</td>
-            <td scope="row"  class="text-center"> <button type="button" class="btn btn-warning mr-2" (click)="cambiarEstadoPago(pago)">Estado</button></td>
-
+            <td scope="row" class="text-center">{{pago.idfactura}}</td>
+            <td scope="row" class="text-center">{{pago.fecha}}</td>
+            <td scope="row" class="text-center">{{pago.fechavencimiento}}</td>
+            <td scope="row" class="text-center">{{pago.fechapagado}}</td>
+            <td scope="row" class="text-center">{{pago.servicio}}</td>
+            <td scope="row" class="text-center">{{pago.preciototal}}</td>
+            <td scope="row" class="text-center">{{pago.estado}}</td>
+            <td scope="row" class="text-center">
+              <button type="button" class="btn btn-warning mr-2" (click)="cambiarEstadoPago(pago)">Estado</button>
+              <button type="button" class="btn btn-danger mr-2" (click)="descargarFactura(pago)">Descargar</button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </ng-template>
+
+
 
 
    <!-- Modal -->
@@ -177,6 +181,7 @@
   
         <div *ngIf="getUser() === 2" class="form-group">
           <label for="precio">Servicio:</label>
+
           <select class="form-select" [(ngModel)]="socioCrear.idServicio" name="idServicio">
             <option *ngFor="let servicio of planesList2" [value]="servicio.idservicio" >{{ servicio.servicio1 }}</option>
           </select>
@@ -208,3 +213,36 @@
       </form>
     </div>
   </ng-template>
+
+  <div #facturadescargar class="facturaOculta" style="visibility: hidden;">
+    <div class="header">
+      <h2>Factura</h2>
+    </div>
+    <div class="info">
+      <p><strong>Fecha:</strong> {{FacturaDescargarP?.fecha | date:'yyyy-MM-dd'}}</p>
+      <p><strong>Fecha de Vencimiento:</strong> {{FacturaDescargarP?.fechavencimiento | date:'yyyy-MM-dd'}}</p>
+      <p><strong>Fecha de Pagado:</strong> {{FacturaDescargarP?.fechapagado | date:'yyyy-MM-dd'}}</p>
+      <p><strong>ID de Factura:</strong> {{FacturaDescargarP?.idfactura }}</p>
+      <p><strong>Nombre:</strong> Juan Perez</p>
+      <p><strong>DNI:</strong> 12345678</p>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{FacturaDescargarP?.servicio}}</td>
+          <td>{{FacturaDescargarP?.estado}}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="footer">
+      <p class="total"><strong>Total:</strong> ${{FacturaDescargarP?.preciototal}}</p>
+    </div>
+  </div>

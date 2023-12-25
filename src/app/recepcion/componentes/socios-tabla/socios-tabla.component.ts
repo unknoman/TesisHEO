@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { clientes } from 'src/app/modelos/clientes';
 import { decodedToken } from 'src/app/modelos/decodedToken';
 import { ListarClientesService } from 'src/app/servicios/recepcion/listar-clientes.service';
@@ -13,6 +13,9 @@ import { planes } from 'src/app/modelos/planes';
 import { clientesCrearDTO } from 'src/app/modelos/clienteCrearDTO';
 import { estadoPagos } from 'src/app/modelos/estadoPagos';
 import { cambiarEstadoP } from 'src/app/modelos/cambiarEstadoP';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import { waitForAsync } from '@angular/core/testing';
 
 @Component({
   selector: 'app-socios-tabla',
@@ -33,13 +36,17 @@ export class SociosTablaComponent {
   buscarPor : number = 0;
   buscarPor2 : number = 0;
   buscarBarra : string = "";
+  facturaN : number = 0;
   modalRef!: BsModalRef; // Declaraci√≥n de la propiedad modalRef
   @ViewChild('registrarSocio') modal: any;
   @ViewChild('modificarSocioNg') modalUpdate: any;
   @ViewChild('cambiarEstadoPagoModal') modalPagoestado: any;
   @ViewChild('pagosModal') pagosModalx: any;
-  
+  @ViewChild('facturadescargar', { static: false }) facturadescargar!: ElementRef;
+  @ViewChild('invoice') modalInvoice: any;
 
+
+    
   limpiarSocioCrear()
   {
     this.socioCrear.nombre = "";
@@ -78,11 +85,49 @@ export class SociosTablaComponent {
        })
   }
 
-  constructor(private modalServices: BsModalService, private recService:ListarClientesService, private jwtutilidades: JwtserviceService, private modalService: BsModalService, private notificacion:SweetalertutilService, private planesService:PlanesService)
-  {
+  FacturaDescargarP?: pagos;
 
+  constructor(private renderer: Renderer2, private modalServices: BsModalService, private recService:ListarClientesService, private jwtutilidades: JwtserviceService, private modalService: BsModalService, private notificacion:SweetalertutilService, private planesService:PlanesService)
+  {
   }
- 
+
+  verEstado() {
+      this.modalRef = this.modalService.show(this.modalInvoice);
+  }
+
+
+  setearFactura(pago: pagos): Promise<void> {
+    return new Promise<void>((resolve) => {
+      this.FacturaDescargarP = pago;
+      resolve();  // Resuelve la promesa despuÈs de setear la factura
+    });
+  }
+
+ async descargarFactura(pago : pagos) {
+  this.setearFactura(pago);
+  await new Promise(resolve => setTimeout(resolve, 500)); 
+    console.log(pago);
+      const element = this.facturadescargar.nativeElement;
+      if (this.facturadescargar) {
+        this.facturadescargar.nativeElement.style.visibility = 'visible';
+      }
+      html2canvas(element).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+       const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save('factura.pdf');
+        this.facturadescargar.nativeElement.style.visibility = 'hidden';
+     setTimeout(() => {
+          URL.revokeObjectURL(imgData);
+        }, 3000);
+     });
+      
+  }
+
+
   getUser()
   {
     const tokenKey = localStorage.getItem('key');
@@ -190,6 +235,8 @@ estadoVar : string = '';
 }
 
 
+
+
   
 getPlanesAll()
 {
@@ -288,5 +335,5 @@ modificarPago(factura:cambiarEstadoP){
     this.modalRef = this.modalService.show(this.modalPagoestado);
   }
 
-
+  
 }
