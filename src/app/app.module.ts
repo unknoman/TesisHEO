@@ -29,6 +29,7 @@ import { TecnicoscComponent } from './componentes/cobranza/tecnicosc/tecnicosc.c
 import { ServicioTCComponent } from './componentes/servicioTC/servicio-tc/servicio-tc.component';
 import { UsuariosComponent } from './rutas/usuarios/usuarios/usuarios.component';
 import { UsuarioscomponenteComponent } from './componentes/usuarioscomponente/usuarioscomponente.component';
+import { EstadisticasCcComponent } from './rutas/estadisticas-cc/estadisticas-cc.component';
 
 export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
@@ -55,6 +56,7 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     ServicioTCComponent,
     UsuariosComponent,
     UsuarioscomponenteComponent,
+    EstadisticasCcComponent,
   ],
   imports: [
     BrowserModule,

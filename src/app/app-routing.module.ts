@@ -10,6 +10,7 @@ import { SociosComponent } from './rutas/recepcion/socios/socios.component';
 import { PlanesrComponent } from './rutas/cobranzas/planesr/planesr.component';
 import { TecnicosrComponent } from './rutas/cobranzas/tecnicosr/tecnicosr.component';
 import { UsuariosComponent } from './rutas/usuarios/usuarios/usuarios.component';
+import { EstadisticasCcComponent } from './rutas/estadisticas-cc/estadisticas-cc.component';
 
 const routes: Routes = [
     {path:'', redirectTo:'loginr', pathMatch:'full'},
@@ -21,8 +22,8 @@ const routes: Routes = [
     {path:'sociosr', component:SociosComponent, canActivate: [AuthguardGuard]},
     {path:'planesr', component:PlanesrComponent, canActivate: [AuthguardGuard]},
     {path:'tecnicosr', component:TecnicosrComponent, canActivate: [AuthguardGuard]},
-    {path:'usuariosr', component:UsuariosComponent, canActivate: [AuthguardGuard]}
-
+    {path:'usuariosr', component:UsuariosComponent, canActivate: [AuthguardGuard]},
+    {path:'estadisticasc', component:EstadisticasCcComponent, canActivate: [AuthguardGuard]}
   ];
 
 @NgModule({

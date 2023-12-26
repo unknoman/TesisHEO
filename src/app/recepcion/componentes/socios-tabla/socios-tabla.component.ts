@@ -38,6 +38,7 @@ export class SociosTablaComponent {
   buscarBarra : string = "";
   facturaN : number = 0;
   modalRef!: BsModalRef; // Declaración de la propiedad modalRef
+  clienteGet: clientes = new clientes();
   @ViewChild('registrarSocio') modal: any;
   @ViewChild('modificarSocioNg') modalUpdate: any;
   @ViewChild('cambiarEstadoPagoModal') modalPagoestado: any;
@@ -171,12 +172,14 @@ export class SociosTablaComponent {
       });
   }
    idPersona:number = 0;
-  getPagos(id: number, template : any)
+
+  getPagos(id: number, template : any, persona : clientes)
   {
       this.recService.getPagos(id).subscribe (pagos => {
         this.pagosList = pagos;
       });
        this.idPersona = id;
+       this.clienteGet = persona;
       const config: ModalOptions = {
         class: 'modal-lg' // Tamaño grande (large)
         // Puedes agregar otras opciones de configuración si las necesitas
