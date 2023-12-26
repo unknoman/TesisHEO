@@ -26,6 +26,12 @@ return this.http.delete<boolean>(direccion);
     return this.http.get<servicioT[]>(direccion);
    }
 
+   getCasosSTR(estado : number)
+   {
+    let direccion = this.url +'api/ServicioT/listarServicioTR/' + '?estado=' + estado;
+    return this.http.get<servicioT[]>(direccion);
+   }
+
     sendCaso(caso : servicioTCrear){
       let direccion = this.url +'api/ServicioT/registrarCaso';
       return this.http.put<respuesta>(direccion, caso);

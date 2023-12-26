@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estadísticas</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-gap: 20px;
+    }
+
+    .chart-container {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+    }
+
+    .chart-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .datepicker-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .datepicker-container input {
+      padding: 10px;
+      margin-right: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .apply-button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="datepicker-container">
+        <h4>Desde:</h4>
+      <input type="date" id="fromDate" placeholder="Desde">
+      <h4>Hasta:</h4>
+      <input type="date" id="toDate" placeholder="Hasta">
+      <button class="apply-button">Aplicar</button>
+    </div>
+
+    <div class="grid-container">
+      <div class="chart-container">
+        <div class="chart-title">3 Tecnico con mas casos asignados</div>
+        <!-- Aquí puedes agregar el código para tu gráfico de torta -->
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">3 Plan mas adquiridos</div>
+        <!-- Aquí puedes agregar el código para tu segundo gráfico de torta -->
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Estadística 3</div>
+        <!-- Aquí puedes agregar el código para tu tercer gráfico de torta -->
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-title">Estadística 4</div>
+        <!-- Aquí puedes agregar el código para tu cuarto gráfico de torta -->
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

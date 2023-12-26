@@ -16,10 +16,12 @@ import { cambiarEstadoP } from 'src/app/modelos/cambiarEstadoP';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { waitForAsync } from '@angular/core/testing';
+import { PaginationService } from 'ngx-pagination';
 
 @Component({
   selector: 'app-socios-tabla',
   templateUrl: './socios-tabla.component.html',
+  providers: [PaginationService],
   styleUrls: ['./socios-tabla.component.css']
 })
 export class SociosTablaComponent {
@@ -34,6 +36,8 @@ export class SociosTablaComponent {
   plan: planes = new planes();
   factura:pagos = new pagos();
   buscarPor : number = 0;
+  paginaActual : number = 1;
+  paginaActualS : number = 1;
   buscarPor2 : number = 0;
   buscarBarra : string = "";
   facturaN : number = 0;

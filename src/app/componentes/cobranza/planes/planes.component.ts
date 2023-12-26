@@ -21,7 +21,7 @@ export class PlanesComponent {
   modalRef!: BsModalRef;
   
   plan: planes = new planes();
-
+  paginaActual : number = 1;
   
 
   ngOnInit(): void {
@@ -34,8 +34,8 @@ export class PlanesComponent {
 
   getPlanesAll()
   {
-     this.planesService.getPlanesAll().subscribe(planes => {
-      this.planesList = planes;
+     this.planesService.getPlanesAll().subscribe(planesLista => {
+      this.planesList = planesLista;
      })
   }
 
@@ -73,7 +73,11 @@ export class PlanesComponent {
 
   updatePlan(plan:planes)
   {
-    this.plan = plan;
+    this.plan.servicio1 = plan.servicio1;
+    this.plan.idservicio = plan.idservicio;
+    this.plan.bajada = plan.bajada;
+    this.plan.subida = plan.subida;
+    this.plan.precio = plan.precio;
     this.modalRef = this.modalService.show(this.modalPlanUpdate);
   }
 

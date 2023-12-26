@@ -31,7 +31,7 @@ export class ServicioTCComponent {
 
   public CasosServicio: servicioTCrear = new servicioTCrear();
   casosActualizarx: servicioT = new servicioT();
-
+public paginaActual:number = 1;
  public tecnicoList:Array<tecnico> = [];
  public socios:Array<clientes> = [];
  public sociosInstalados:Array<clientes> = [];
@@ -61,9 +61,18 @@ updatearTodo(){
   this.getClientesNoInstalado();
 }
 getServicioT(estado : number){
-this.servicioTS.getCasosST(estado).subscribe(casosGet => {
-  this.casos = casosGet;
-} )
+  if(this.getUser() == 2)
+  {
+    this.servicioTS.getCasosST(estado).subscribe(casosGet => {
+      this.casos = casosGet;
+    } )
+  } else 
+  {
+    this.servicioTS.getCasosSTR(estado).subscribe(casosGet => {
+      this.casos = casosGet;
+    } )
+  }
+
 }
 
 

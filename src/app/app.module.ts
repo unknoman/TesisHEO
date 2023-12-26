@@ -30,6 +30,8 @@ import { ServicioTCComponent } from './componentes/servicioTC/servicio-tc/servic
 import { UsuariosComponent } from './rutas/usuarios/usuarios/usuarios.component';
 import { UsuarioscomponenteComponent } from './componentes/usuarioscomponente/usuarioscomponente.component';
 import { EstadisticasCcComponent } from './rutas/estadisticas-cc/estadisticas-cc.component';
+import { EstadisticascomComponent } from './componentes/estadisticascom/estadisticascom.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
@@ -57,12 +59,14 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     UsuariosComponent,
     UsuarioscomponenteComponent,
     EstadisticasCcComponent,
+    EstadisticascomComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule, // Asegúrate de incluir esta línea
     TooltipModule.forRoot(),
     ModalModule.forRoot()
   ],

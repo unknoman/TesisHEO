@@ -15,7 +15,7 @@ export class TecnicoscComponent {
   modalRef!: BsModalRef; // Declaración de la propiedad modalRef
   @ViewChild('registrarTecnico') modalTecnico: any;
   @ViewChild('modificarTecnico') modalTecnicoUpdate : any;
-
+  paginaActual: number = 1;
   buscarPor : number = 0;
   buscarBarra : string = "";
   tecnicoNuevo = new tecnico();

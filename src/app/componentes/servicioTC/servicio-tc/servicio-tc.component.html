@@ -34,7 +34,7 @@
         </tr>
       </thead>
       <tbody *ngIf="getUser() == 3">
-        <tr *ngFor="let casosT of casos" [ngClass]="{'table-success': casosT.idestadoservicio == 2, 'table-warning': casosT.idestadoservicio === 1}">
+        <tr *ngFor="let casosT of casos | paginate: { itemsPerPage: 5, currentPage: paginaActual}" [ngClass]="{'table-success': casosT.idestadoservicio == 2, 'table-warning': casosT.idestadoservicio === 1}">
                <ng-container *ngIf="casosT.idtiposerviciot == 1">
           <td scope="row"  class="text-center">{{casosT.idproblemat}} </td>
             <td scope="row"  class="text-center">{{casosT.dnic}} </td>
@@ -53,7 +53,7 @@
         </tr>
       </tbody>
       <tbody *ngIf="getUser() == 2">
-        <tr *ngFor="let casosT of casos" [ngClass]="{'table-success': casosT.idestadoservicio == 2, 'table-warning': casosT.idestadoservicio === 1}">
+        <tr *ngFor="let casosT of casos | paginate: { itemsPerPage: 5, currentPage: paginaActual}" [ngClass]="{'table-success': casosT.idestadoservicio == 2, 'table-warning': casosT.idestadoservicio === 1}">
                <ng-container *ngIf="casosT.idtiposerviciot == 2">
           <td scope="row"  class="text-center">{{casosT.idproblemat}} </td>
             <td scope="row"  class="text-center">{{casosT.dnic}} </td>
@@ -73,6 +73,7 @@
       </tbody>
 
     </table>
+    <pagination-controls (pageChange)="paginaActual = $event" previousLabel="Anterior"nextLabel="Siguiente"></pagination-controls>
   </div>
 
 

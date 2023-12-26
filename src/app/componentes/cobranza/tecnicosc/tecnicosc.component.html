@@ -33,7 +33,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let tecnico of tecnicosList">
+        <tr *ngFor="let tecnico of tecnicosList | paginate: { itemsPerPage: 10, currentPage: paginaActual }">
             <td scope="row"  class="text-center">{{tecnico.idtecnico}}</td>
             <td scope="row"  class="text-center">{{tecnico.nombret + ' ' +tecnico.apellidot}}</td>
             <td scope="row"  class="text-center">{{tecnico.telefonot}}</td>
@@ -44,6 +44,7 @@
         </tr>
       </tbody>
     </table>
+    <pagination-controls (pageChange)="paginaActual = $event"></pagination-controls>
   </div>
 
 

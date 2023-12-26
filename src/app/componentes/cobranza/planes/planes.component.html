@@ -17,20 +17,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let plan of planesList">
-            <td scope="row"  class="text-center">{{plan.idservicio}} </td>
-            <td scope="row"  class="text-center">{{plan.servicio1}} </td>
-            <td scope="row"  class="text-center">{{plan.bajada}} </td>
-            <td scope="row"  class="text-center" >{{plan.subida}} </td>
-            <td scope="row" class="text-center text-success">{{plan.precio}} </td>
+        <tr *ngFor="let planX of planesList | paginate: { itemsPerPage: 10, currentPage: paginaActual }">
+            <td scope="row"  class="text-center">{{planX.idservicio}} </td>
+            <td scope="row"  class="text-center">{{planX.servicio1}} </td>
+            <td scope="row"  class="text-center">{{planX.bajada}} </td>
+            <td scope="row"  class="text-center" >{{planX.subida}} </td>
+            <td scope="row" class="text-center text-success">{{planX.precio}} </td>
             <td><div class="text-center">
-                <button class="btn btn-danger " (click)="borrarPlan(plan)">Eliminar</button> 
-                <button class="btn btn-warning ml-2" (click)="updatePlan(plan)">Ver/Modificar</button>
+                <button class="btn btn-danger " (click)="borrarPlan(planX)">Eliminar</button> 
+                <button class="btn btn-warning ml-2" (click)="updatePlan(planX)">Ver/Modificar</button>
             </div>
         </td>
         </tr>
       </tbody>
     </table>
+    <pagination-controls (pageChange)="paginaActual = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
   </div>
 
   <!-- Modal -->
@@ -79,19 +80,19 @@
     <form (ngSubmit)="submitFormUpdate()">
       <div class="form-group">
         <label for="servicio">Servicio:</label>
-        <input type="text" class="form-control" id="servicio" name="servicio" required [(ngModel)]="plan.servicio1">
+        <input type="text" class="form-control" id="servicioU" name="servicio1" required [(ngModel)]="plan.servicio1">
       </div>
       <div class="form-group">
         <label for="bajada">Velocidad de Bajada:</label>
-        <input type="text" class="form-control" id="bajada" name="bajada" required [(ngModel)]="plan.bajada">
+        <input type="text" class="form-control" id="bajadaU" name="bajada" required [(ngModel)]="plan.bajada">
       </div>
       <div class="form-group">
         <label for="subida">Velocidad de Subida:</label>
-        <input type="text" class="form-control" id="subida" name="subida" required [(ngModel)]="plan.subida">
+        <input type="text" class="form-control" id="subidaU" name="subida" required [(ngModel)]="plan.subida">
       </div>
       <div class="form-group">
         <label for="precio">Precio:</label>
-        <input type="number" class="form-control" id="precio" name="precio" required [(ngModel)]="plan.precio">
+        <input type="number" class="form-control" id="precioU" name="precio" required [(ngModel)]="plan.precio">
       </div>
       <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>

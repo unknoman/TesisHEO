@@ -51,7 +51,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let socio of sociosList" [ngClass]="{'table-success': socio.idestadoc === 1 &&  getUser() !== 3, 'table-danger': socio.idestadoc === 2  &&  getUser() !== 3, 'table-warning': socio.idestadoc === 3 && getUser() !== 3 }">
+        <tr *ngFor="let socio of sociosList | paginate: { itemsPerPage: 5, currentPage: paginaActualS,  id: 'uno'}" [ngClass]="{'table-success': socio.idestadoc === 1 &&  getUser() !== 3, 'table-danger': socio.idestadoc === 2  &&  getUser() !== 3, 'table-warning': socio.idestadoc === 3 && getUser() !== 3 }">
             <td scope="row"  class="text-center">{{socio.idcliente}} </td>
             <td scope="row"  class="text-center">{{socio.nombre + " "+socio.apellido}} </td>
             <td scope="row"  class="text-center">{{socio.dnic}} </td>
@@ -64,6 +64,8 @@
         </tr>
       </tbody>
     </table>
+      <pagination-controls (pageChange)="paginaActualS = $event" id="uno"  previousLabel="Anterior" nextLabel="Siguiente" ></pagination-controls>
+
   </div>
 
 
@@ -83,11 +85,11 @@
             <th class="text-center">Servicio</th>
             <th class="text-center">Precio Total</th>
             <th class="text-center">Estado</th>
-            <th class="text-center">Acción</th>
+            <th class="text-center">Acci&oacute;n</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let pago of pagosList">
+          <tr *ngFor="let pago of pagosList | paginate: { itemsPerPage: 5, currentPage: paginaActual, id: 'dos'}">
             <td scope="row" class="text-center">{{pago.idfactura}}</td>
             <td scope="row" class="text-center">{{pago.fecha}}</td>
             <td scope="row" class="text-center">{{pago.fechavencimiento}}</td>
@@ -102,6 +104,7 @@
           </tr>
         </tbody>
       </table>
+      <pagination-controls id="instanciaOne" id="dos" (pageChange)="paginaActual = $event" previousLabel="Anterior"nextLabel="Siguiente"></pagination-controls>
     </div>
   </ng-template>
 
