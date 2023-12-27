@@ -70,26 +70,29 @@
   <div class="container">
     <div class="datepicker-container">
         <h4>Desde:</h4>
-      <input type="date" id="fromDate" placeholder="Desde">
+      <input type="date" id="fromDate" placeholder="Desde" [(ngModel)]="fechaDesde">
       <h4>Hasta:</h4>
-      <input type="date" id="toDate" placeholder="Hasta">
-      <button class="apply-button">Aplicar</button>
+      <input type="date" id="toDate" placeholder="Hasta" [(ngModel)]="fechaHasta">
+      <button class="apply-button" (click)="aplicar()" >Aplicar</button>
     </div>
 
     <div class="grid-container">
       <div class="chart-container">
-        <div class="chart-title">3 Tecnico con mas casos asignados</div>
-        <ngx-charts-bar-vertical
-        [results]="datosBarras"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showXAxisLabel]="true"
-        [showYAxisLabel]="true"
-        xAxisLabel="Tecnicos"
-        yAxisLabel="Casos Asignados"
-      >
-      </ngx-charts-bar-vertical>
+        <div class="chart-title">Planes mas adquiridos</div>
+        
+        <div *ngIf="showChart">
+          <ngx-charts-bar-vertical class="chart"
+            [results]="estadisticaList"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Planes"
+            yAxisLabel="Clientes">
+          </ngx-charts-bar-vertical>
+        </div>
+
         <!-- Aquí puedes agregar el código para tu gráfico de torta -->
       </div>
      

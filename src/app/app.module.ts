@@ -33,6 +33,7 @@ import { EstadisticasCcComponent } from './rutas/estadisticas-cc/estadisticas-cc
 import { EstadisticascomComponent } from './componentes/estadisticascom/estadisticascom.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxChartsModule } from '@javierbaromorales/ngx-charts-v2';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
@@ -71,6 +72,7 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     NgxPaginationModule, // Asegúrate de incluir esta línea
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
+    
   ],
   providers: [Router],
   bootstrap: [AppComponent]
