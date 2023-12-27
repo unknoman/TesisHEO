@@ -32,6 +32,7 @@ import { UsuarioscomponenteComponent } from './componentes/usuarioscomponente/us
 import { EstadisticasCcComponent } from './rutas/estadisticas-cc/estadisticas-cc.component';
 import { EstadisticascomComponent } from './componentes/estadisticascom/estadisticascom.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxChartsModule } from '@javierbaromorales/ngx-charts-v2';
 
 export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
@@ -66,6 +67,7 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgxChartsModule,
     NgxPaginationModule, // Asegúrate de incluir esta línea
     TooltipModule.forRoot(),
     ModalModule.forRoot(),

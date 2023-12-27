@@ -79,23 +79,20 @@
     <div class="grid-container">
       <div class="chart-container">
         <div class="chart-title">3 Tecnico con mas casos asignados</div>
+        <ngx-charts-bar-vertical
+        [results]="datosBarras"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Tecnicos"
+        yAxisLabel="Casos Asignados"
+      >
+      </ngx-charts-bar-vertical>
         <!-- Aquí puedes agregar el código para tu gráfico de torta -->
       </div>
-
-      <div class="chart-container">
-        <div class="chart-title">3 Plan mas adquiridos</div>
-        <!-- Aquí puedes agregar el código para tu segundo gráfico de torta -->
-      </div>
-
-      <div class="chart-container">
-        <div class="chart-title">Estadística 3</div>
-        <!-- Aquí puedes agregar el código para tu tercer gráfico de torta -->
-      </div>
-
-      <div class="chart-container">
-        <div class="chart-title">Estadística 4</div>
-        <!-- Aquí puedes agregar el código para tu cuarto gráfico de torta -->
-      </div>
+     
     </div>
   </div>
 

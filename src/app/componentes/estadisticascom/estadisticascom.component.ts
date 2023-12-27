@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class EstadisticascomComponent {
 
+  datosBarras = [
+    {
+      "name": "Categoría 1",
+      "value": 120
+    },
+    {
+      "name": "Categoría 2",
+      "value": 200
+    },
+    // ... más datos
+  ];
+
+
 }
