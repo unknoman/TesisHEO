@@ -219,12 +219,13 @@
 
   <div #facturadescargar class="facturaOculta" style="visibility: hidden;">
     <div class="header">
-      <h2>Factura</h2>
+      <h2>Factura Cooperativa Electrica de Berrotar&aacute;n</h2>
     </div>
     <div class="info">
-      <p><strong>Fecha:</strong> {{FacturaDescargarP?.fecha | date:'yyyy-MM-dd'}}</p>
-      <p><strong>Fecha de Vencimiento:</strong> {{FacturaDescargarP?.fechavencimiento | date:'yyyy-MM-dd'}}</p>
-      <p><strong>Fecha de Pagado:</strong> {{FacturaDescargarP?.fechapagado | date:'yyyy-MM-dd'}}</p>
+      <p><strong>Servicio:</strong> Internet</p>
+      <p><strong>Fecha:</strong> {{FacturaDescargarP?.fecha | date:'dd-MM-yyyy'}}</p>
+      <p><strong>Fecha de Vencimiento:</strong> {{FacturaDescargarP?.fechavencimiento | date:'dd-MM-yyyy'}}</p>
+      <p><strong>Fecha de Pagado:</strong> {{FacturaDescargarP?.fechapagado | date:'dd-MM-yyyy'}}</p>
       <p><strong>ID de Factura:</strong> {{FacturaDescargarP?.idfactura }}</p>
       <p><strong>Nombre:</strong> {{clienteGet.nombre}}</p>
       <p><strong>Apellido:</strong> {{clienteGet.apellido}}</p>

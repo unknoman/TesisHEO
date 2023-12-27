@@ -68,7 +68,7 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     HttpClientModule,
     NgxPaginationModule, // Asegúrate de incluir esta línea
     TooltipModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
   ],
   providers: [Router],
   bootstrap: [AppComponent]
