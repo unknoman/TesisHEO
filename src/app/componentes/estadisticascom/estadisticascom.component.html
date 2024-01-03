@@ -4,84 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Estadísticas</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      grid-gap: 20px;
-    }
-
-    .chart-container {
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      position: relative;
-    }
-
-    .chart-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .datepicker-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .datepicker-container input {
-      padding: 10px;
-      margin-right: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-
-    .apply-button {
-      padding: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
-
+<div class="container">
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" [(ngModel)]="StatsRadio" value="1" (change)="aplicar()">
+    <label class="form-check-label" for="inlineRadio1">Estadistica Planes</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"  [(ngModel)]="StatsRadio"  value="2" (change)="limpiarArray()">
+    <label class="form-check-label" for="inlineRadio2" >Estadistica Tecnicos</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" [(ngModel)]="StatsRadio"  value="3">
+    <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+  </div>
+</div>
   <div class="container">
-    <div class="datepicker-container">
-        <h4>Desde:</h4>
-      <input type="date" id="fromDate" placeholder="Desde" [(ngModel)]="fechaDesde">
-      <h4>Hasta:</h4>
-      <input type="date" id="toDate" placeholder="Hasta" [(ngModel)]="fechaHasta">
-      <button class="apply-button" (click)="aplicar()" >Aplicar</button>
-    </div>
+
+    <ng-container *ngIf="StatsRadio == 1">
 
     <div class="grid-container">
       <div class="chart-container">
-        <div class="chart-title">Planes mas adquiridos</div>
+        <div class="chart-title">Estadistica Planes</div>
         
         <div *ngIf="showChart">
           <ngx-charts-bar-vertical class="chart"
+             
             [results]="estadisticaList"
             [xAxis]="true"
             [yAxis]="true"
@@ -89,15 +38,66 @@
             [showXAxisLabel]="true"
             [showYAxisLabel]="true"
             xAxisLabel="Planes"
-            yAxisLabel="Clientes">
-          </ngx-charts-bar-vertical>
-        </div>
+            yAxisLabel="Clientes"
+            [animations]="false"
+            >
 
-        <!-- Aquí puedes agregar el código para tu gráfico de torta -->
+          </ngx-charts-bar-vertical>
+    
+        </div>
       </div>
      
     </div>
+  </ng-container>
+ 
+
+  <ng-container *ngIf="StatsRadio == 2">
+    <div class="datepicker-container">
+      <h4>Desde:</h4>
+    <input type="date" id="fromDate" placeholder="Desde" [(ngModel)]="fechaDesde">
+    <h4>Hasta:</h4>
+    <input type="date" id="toDate" placeholder="Hasta" [(ngModel)]="fechaHasta">
+    <button class="apply-button" (click)="aplicarET()" >Aplicar</button>
   </div>
+
+  <div class="grid-container">
+    <div class="chart-container">
+      <div class="chart-title">Estadistica Tecnicos</div>
+      
+      <div *ngIf="showChartT">
+        <ngx-charts-bar-vertical class="chart"
+             
+        [results]="estadisticaList"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Planes"
+        yAxisLabel="Clientes"
+        [animations]="false"
+        >
+
+      </ngx-charts-bar-vertical>
+      <!---  
+      <ngx-charts-pie-chart         [results]="estadisticaList"
+      [legend]="true"
+      xAxisLabel="Planes"
+      yAxisLabel="Clientes"
+      [animations]="false">
+ 
+      </ngx-charts-pie-chart>
+  -->
+      </div>
+
+    </div>
+   
+  </div>
+</ng-container>
+
+
+  </div>
+
 
 </body>
 </html>
