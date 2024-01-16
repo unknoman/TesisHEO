@@ -24,5 +24,9 @@ export class EstadisticasserviceService {
    }
 
 
+   getEstadoEstadistica(Desde:string, Hasta:string):Observable<estadisticasDTO[]>{
+    let direccion = this.url +'estadisticas/obtenerEstadisticaDatos?fechaDesde=' + Desde + "&fechaHasta="+ Hasta;
+    return this.http.get<estadisticasDTO[]>(direccion);
+   }
 
 }

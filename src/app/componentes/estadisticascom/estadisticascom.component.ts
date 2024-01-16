@@ -43,6 +43,13 @@ export class EstadisticascomComponent {
   }
 
   
+  getEstadosEstadistica(fechaDesde : string, fechaHasta : string){
+    this.estadisticaList = [];
+    this.estadisticas.getEstadoEstadistica(fechaDesde, fechaHasta).subscribe(info => {
+      this.estadisticaList = info;
+    })
+  }
+
 
    aplicar(){
     this.fechaDesdeF = moment(this.fechaDesde).format('MM/DD/yyyy');
@@ -70,6 +77,22 @@ export class EstadisticascomComponent {
    // this.getPlanesMayorAdquirido(this.fechaDesdeF, this.fechaHastaF); 
     //this.showChart = false;
     this.getTecnicosEstadistica(this.fechaDesdeF, this.fechaHastaF);
+    this.showChartT = false;
+    // Mostrar el gráfico después de un pequeño retraso (puedes ajustar según sea necesario)
+    setTimeout(() => {
+      this.showChartT = true;
+    }, 100);
+    console.log(this.estadisticaList);
+   }
+
+
+   aplicarESE(){
+    this.fechaDesdeF = moment(this.fechaDesde).format('MM/DD/yyyy');
+    this.fechaHastaF = moment(this.fechaHasta).format('MM/DD/yyyy');
+    
+   // this.getPlanesMayorAdquirido(this.fechaDesdeF, this.fechaHastaF); 
+    //this.showChart = false;
+    this.getEstadosEstadistica(this.fechaDesdeF, this.fechaHastaF);
     this.showChartT = false;
     // Mostrar el gráfico después de un pequeño retraso (puedes ajustar según sea necesario)
     setTimeout(() => {

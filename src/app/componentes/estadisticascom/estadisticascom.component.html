@@ -16,8 +16,8 @@
     <label class="form-check-label" for="inlineRadio2" >Estadistica Tecnicos</label>
   </div>
   <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" [(ngModel)]="StatsRadio"  value="3">
-    <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" [(ngModel)]="StatsRadio"  value="3" (change)="limpiarArray()">
+    <label class="form-check-label" for="inlineRadio3">Estado de pagos</label>
   </div>
 </div>
   <div class="container">
@@ -73,8 +73,8 @@
         [legend]="true"
         [showXAxisLabel]="true"
         [showYAxisLabel]="true"
-        xAxisLabel="Planes"
-        yAxisLabel="Clientes"
+        xAxisLabel="Tecnico"
+        yAxisLabel="Casos Asignados"
         [animations]="false"
         >
 
@@ -88,6 +88,38 @@
  
       </ngx-charts-pie-chart>
   -->
+      </div>
+
+    </div>
+   
+  </div>
+</ng-container>
+
+
+
+ <ng-container *ngIf="StatsRadio == 3">
+    <div class="datepicker-container">
+      <h4>Desde:</h4>
+    <input type="date" id="fromDate" placeholder="Desde" [(ngModel)]="fechaDesde">
+    <h4>Hasta:</h4>
+    <input type="date" id="toDate" placeholder="Hasta" [(ngModel)]="fechaHasta">
+    <button class="apply-button" (click)="aplicarESE()" >Aplicar</button>
+  </div>
+
+  <div class="grid-container">
+    <div class="chart-container">
+      <div class="chart-title">Estadistica Pagos</div>
+      
+      <div *ngIf="showChartT">
+
+      <ngx-charts-pie-chart         [results]="estadisticaList"
+      [legend]="true"
+      xAxisLabel="Planes"
+      yAxisLabel="Clientes"
+      [animations]="false">
+ 
+      </ngx-charts-pie-chart>
+
       </div>
 
     </div>
