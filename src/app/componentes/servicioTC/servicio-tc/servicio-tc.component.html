@@ -88,55 +88,76 @@
     </button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="submitForm()">
+    <form (ngSubmit)="submitForm()" [formGroup]="servicioTF">
       <div class="form-group">
         <label for="descripcion">Descripcion:</label>
-        <input type="text" class="form-control" id="descripcion" name="descripcion" required [(ngModel)]="CasosServicio.descripcionserviciot">
+        <input type="text" class="form-control" id="descripcion" name="descripcion" formControlName="fdescripcion" [(ngModel)]="CasosServicio.descripcionserviciot">
       </div>
+      <div [hidden]="servicioTF.get('fdescripcion')?.valid || servicioTF.get('fdescripcion')?.pristine">  
+        <span class="text-danger" *ngIf="servicioTF.get('fdescripcion')?.errors?.['required']"> 
+          Campo requerido
+        </span>
+        </div>
+        <div [hidden]="servicioTF.get('fdescripcion')?.valid || servicioTF.get('fdescripcion')?.pristine">  
+          <span class="text-danger" *ngIf="servicioTF.get('fdescripcion')?.errors?.['required']"> 
+            minimo 3 caracteres
+          </span>
+          </div>
       <div class="form-group">
         <label for="tecnico">Tecnico:</label>
         <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico">
           <option  *ngFor="let tecnico of tecnicoList" [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot}}</option>
         </select>
       </div>
+      
       <div class="form-group">
         <label for="subida">Cliente:</label>
         <ng-container *ngIf="getUser() == 2">
-          <select class="form-select" [(ngModel)]="CasosServicio.idcliente" name="cliente">
+          <select class="form-select" [(ngModel)]="CasosServicio.idcliente" name="cliente" formControlName="fcliente">
             <option  *ngFor="let cliente of sociosNoInstalados" [value]="cliente.idcliente" >{{ cliente.nombre + ' ' + cliente.apellido + ' ' + cliente.dnic}}</option>
           </select>
         </ng-container>
 
         <ng-container *ngIf="getUser() == 3">
-          <select class="form-select" [(ngModel)]="CasosServicio.idcliente" name="cliente">
+          <select class="form-select" [(ngModel)]="CasosServicio.idcliente" name="cliente" formControlName="fcliente">
             <option  *ngFor="let cliente of sociosInstalados" [value]="cliente.idcliente" >{{ cliente.nombre + ' ' + cliente.apellido + ' ' + cliente.dnic}}</option>
           </select>
           </ng-container>
       </div>
-      <div class="form-group">
-        <label for="TipoServicio">Tipo Servicio:</label>
+      <div [hidden]="servicioTF.get('fcliente')?.valid">  
+        <span class="text-danger" *ngIf="servicioTF.get('fcliente')?.errors?.['min']"> 
+          Selecciona un cliente
+        </span>
+        </div>
+     <div class="form-group">
+        <label >Tipo Servicio:</label>
         <ng-container *ngIf="getUser() == 3">
-          <select class="form-select" [(ngModel)]="CasosServicio.idtiposerviciot" name="servicioTecnico">
-            <option disabled [selected]="true" [value]="1">Incidente</option>
+          <select class="form-select" [(ngModel)]="CasosServicio.idtiposerviciot" name="servicioTecnico" formControlName="ftipo">
+            <option  [value]="1">Incidente</option>
           </select>
         </ng-container>
 
         <ng-container *ngIf="getUser() == 2">
-          <select class="form-select" [(ngModel)]="CasosServicio.idtiposerviciot" name="servicioTecnico">
-            <option disabled [selected]="true" [value]="2">Instalación</option>
+          <select class="form-select" [(ngModel)]="CasosServicio.idtiposerviciot" name="servicioTecnico" formControlName="ftipo">
+            <option [value]="2">Instalación</option>
           </select>
         </ng-container>
 
-      </div>
+      </div> 
 
       <div class="form-group">
         <label for="TipoServicio">Estado:</label>
-        <select class="form-select" [(ngModel)]="CasosServicio.idestadoservicio" name="estado">
+        <select class="form-select"  [(ngModel)]="CasosServicio.idestadoservicio" name="estado" formControlName="festado">
           <option [value]="1">Pendiente</option>
           <option [value]="2">Solucionado</option>
         </select>
+        <div [hidden]="servicioTF.get('festado')?.valid">  
+          <span class="text-danger" *ngIf="servicioTF.get('festado')?.errors?.['min']"> 
+            Selecciona un estado
+          </span>
+          </div>
       </div>
-      <button type="submit" class="btn btn-primary" >Registrar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="servicioTF.invalid">Registrar</button>
     </form>
   </div>
 </ng-template>
@@ -168,10 +189,10 @@
             <label>Tipo Servicio:</label>
             <select class="form-select" [(ngModel)]="CasosServicio.idtiposerviciot" name="servicioTecnico">
               <ng-container *ngIf="getUser() == 2">
-                <option disabled [selected]="true" [value]="2">Instalación</option>
+                <option [selected]="true" [value]="2">Instalación</option>
               </ng-container>
               <ng-container *ngIf="getUser() == 3">
-                <option disabled [selected]="true" [value]="1">Incidente</option>
+                <option [selected]="true" [value]="1">Incidente</option>
               </ng-container>
             </select>
           </div>

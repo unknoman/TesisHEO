@@ -43,58 +43,105 @@
       </button>
     </div>
     <div class="modal-body">
-      <form (ngSubmit)="submitForm()">
+      <form (ngSubmit)="submitForm()" [formGroup]="servicioControl">
         <div class="form-group">
           <label for="servicio">Servicio:</label>
-          <input type="text" class="form-control" id="servicio" name="servicio" required [(ngModel)]="plan.servicio1">
+          <input type="text" formControlName="servicio" class="form-control" id="servicio"  [(ngModel)]="plan.servicio1" maxlength="50">
+        </div>
+        <div [hidden]="servicioControl.get('servicio')?.valid || servicioControl.get('servicio')?.pristine"> 
+          <span class="alert alert-danger" *ngIf="servicioControl.get('servicio')?.errors?.['minlength']"> 
+            Minimo 3 caracteres
+          </span>
+          <span class="alert alert-danger" *ngIf="servicioControl.get('servicio')?.errors?.['required']"> 
+            Campo requerido
+          </span>
         </div>
         <div class="form-group">
           <label for="bajada">Velocidad de Bajada:</label>
-          <input type="text" class="form-control" id="bajada" name="bajada" required [(ngModel)]="plan.bajada">
+          <input type="text"formControlName="fbajada"  class="form-control" id="bajada" name="bajada" required [(ngModel)]="plan.bajada" maxlength="50">
+        </div>
+        <div [hidden]="servicioControl.get('fbajada')?.valid || servicioControl.get('fbajada')?.pristine"> 
+          <span class="alert alert-danger" *ngIf="servicioControl.get('fbajada')?.errors?.['required']"> 
+            Campo requerido
+          </span>
         </div>
         <div class="form-group">
           <label for="subida">Velocidad de Subida:</label>
-          <input type="text" class="form-control" id="subida" name="subida" required [(ngModel)]="plan.subida">
+          <input type="text" formControlName="fsubida" class="form-control" id="subida" name="subida" required [(ngModel)]="plan.subida" maxlength="50">
+        </div>
+        <div [hidden]="servicioControl.get('fsubida')?.valid || servicioControl.get('fsubida')?.pristine"> 
+          <span class="alert alert-danger" *ngIf="servicioControl.get('fsubida')?.errors?.['required']"> 
+            Campo requerido
+          </span>
         </div>
         <div class="form-group">
           <label for="precio">Precio:</label>
-          <input type="number" class="form-control" id="precio" name="precio" required [(ngModel)]="plan.precio">
+          <input type="number" formControlName="fprecio" class="form-control" id="precio" name="precio" required [(ngModel)]="plan.precio" maxlength="50">
         </div>
-        <button type="submit" class="btn btn-primary">Registrar</button>
+        <div [hidden]="servicioControl.get('fprecio')?.valid || servicioControl.get('fprecio')?.pristine" maxlength="50">  
+          <span class="alert alert-danger" *ngIf="servicioControl.get('fprecio')?.errors?.['required']"> 
+            Campo requerido
+          </span>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="servicioControl.invalid">Registrar</button>
       </form>
     </div>
   </ng-template>
 
 
 
-  
-  <!-- Modal -->
+    <!-- Modal -->
 <ng-template #actualizarPlan>
   <div class="modal-header">
-    <h4 class="modal-title">Actualizar Plan de Internet</h4>
+    <h4 class="modal-title">Registrar Plan de Internet</h4>
     <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="submitFormUpdate()">
+    <form (ngSubmit)="submitFormUpdate()" [formGroup]="servicioControl">
       <div class="form-group">
         <label for="servicio">Servicio:</label>
-        <input type="text" class="form-control" id="servicioU" name="servicio1" required [(ngModel)]="plan.servicio1">
+        <input type="text" formControlName="servicio" class="form-control" id="servicio"  [(ngModel)]="plan.servicio1" maxlength="50">
+      </div>
+      <div [hidden]="servicioControl.get('servicio')?.valid || servicioControl.get('servicio')?.pristine"> 
+        <span class="alert alert-danger" *ngIf="servicioControl.get('servicio')?.errors?.['minlength']"> 
+          Minimo 3 caracteres
+        </span>
+        <span class="alert alert-danger" *ngIf="servicioControl.get('servicio')?.errors?.['required']"> 
+          Campo requerido
+        </span>
       </div>
       <div class="form-group">
         <label for="bajada">Velocidad de Bajada:</label>
-        <input type="text" class="form-control" id="bajadaU" name="bajada" required [(ngModel)]="plan.bajada">
+        <input type="text"formControlName="fbajada"  class="form-control" id="bajada" name="bajada" required [(ngModel)]="plan.bajada" maxlength="50">
+      </div>
+      <div [hidden]="servicioControl.get('fbajada')?.valid || servicioControl.get('fbajada')?.pristine"> 
+        <span class="alert alert-danger" *ngIf="servicioControl.get('fbajada')?.errors?.['required']"> 
+          Campo requerido
+        </span>
       </div>
       <div class="form-group">
         <label for="subida">Velocidad de Subida:</label>
-        <input type="text" class="form-control" id="subidaU" name="subida" required [(ngModel)]="plan.subida">
+        <input type="text" formControlName="fsubida" class="form-control" id="subida" name="subida" required [(ngModel)]="plan.subida" maxlength="50">
+      </div>
+      <div [hidden]="servicioControl.get('fsubida')?.valid || servicioControl.get('fsubida')?.pristine"> 
+        <span class="alert alert-danger" *ngIf="servicioControl.get('fsubida')?.errors?.['required']"> 
+          Campo requerido
+        </span>
       </div>
       <div class="form-group">
         <label for="precio">Precio:</label>
-        <input type="number" class="form-control" id="precioU" name="precio" required [(ngModel)]="plan.precio">
+        <input type="number" formControlName="fprecio" class="form-control" id="precio" name="precio" required [(ngModel)]="plan.precio" maxlength="50">
       </div>
-      <button type="submit" class="btn btn-primary">Actualizar</button>
+      <div [hidden]="servicioControl.get('fprecio')?.valid || servicioControl.get('fprecio')?.pristine" maxlength="50">  
+        <span class="alert alert-danger" *ngIf="servicioControl.get('fprecio')?.errors?.['required']"> 
+          Campo requerido
+        </span>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="servicioControl.invalid">Registrar</button>
     </form>
   </div>
 </ng-template>
+
+  

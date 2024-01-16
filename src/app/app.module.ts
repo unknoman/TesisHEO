@@ -6,7 +6,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { LoginrComponent } from './rutas/loginr/loginr.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardARComponent } from './rutas/dashboard-ar/dashboard-ar.component';
 import { DashboardCRComponent } from './rutas/dashboard-cr/dashboard-cr.component';
 import { DashboardRRComponent } from './rutas/dashboard-rr/dashboard-rr.component';
@@ -34,6 +34,7 @@ import { EstadisticascomComponent } from './componentes/estadisticascom/estadist
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxChartsModule } from '@javierbaromorales/ngx-charts-v2';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { OnlynumbersDirective } from './directivas/onlynumbers.directive';
 
 export const AUTH0_CLIENT = new InjectionToken('auth0.client');
 
@@ -62,17 +63,20 @@ export const AUTH0_CLIENT = new InjectionToken('auth0.client');
     UsuarioscomponenteComponent,
     EstadisticasCcComponent,
     EstadisticascomComponent,
+    OnlynumbersDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     NgxChartsModule,
     NoopAnimationsModule,
     NgxPaginationModule, // Asegúrate de incluir esta línea
     TooltipModule.forRoot(),
     ModalModule.forRoot(),    
+    
     
   ],
   providers: [Router],

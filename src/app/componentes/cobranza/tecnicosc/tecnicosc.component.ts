@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { tecnico } from 'src/app/modelos/tecnico';
 import { tecnicoUpdateDTO } from 'src/app/modelos/tecnicoUpdateDTO';
@@ -22,6 +23,14 @@ export class TecnicoscComponent {
   tecnicoDTO = new tecnicoUpdateDTO();
   public tecnicosList:Array<tecnico> = [];
 
+
+  // form tecnico
+  formTecnico = new FormGroup({
+    'fnombre': new FormControl('', [Validators.minLength(3), Validators.required]),
+    'fapellido': new FormControl('', [Validators.minLength(3), Validators.required]),
+    'ftelefono' : new FormControl('', [Validators.pattern(/^[0-9]+$/), Validators.minLength(3), Validators.required,
+    ]),
+  })
   
   constructor(private tecnicos:TecnicosService, private modalServices: BsModalService, private notificacion:SweetalertutilService){
  this.buscarMetodo(this.buscarPor, this.buscarBarra);

@@ -17,6 +17,7 @@ import { waitForAsync } from '@angular/core/testing';
 import { delay } from 'rxjs';
 import Swal from 'sweetalert2';
 import { usuarioO } from 'src/app/modelos/usuarioO';
+import { FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-servicio-tc',
@@ -37,11 +38,24 @@ public paginaActual:number = 1;
  public sociosInstalados:Array<clientes> = [];
  public sociosNoInstalados:Array<clientes> = [];
 public estadoST : number = 1;
+
+
+//--------------
+servicioTF = new FormGroup({
+  'fdescripcion': new FormControl(this.CasosServicio.descripcionserviciot, [Validators.minLength(3), Validators.required]),
+  'fcliente': new FormControl('', [Validators.required, Validators.min(1)]),
+ 'ftipo': new FormControl('', [Validators.required, Validators.min(1)]),
+  'festado': new FormControl('', [Validators.required, Validators.min(1)]),
+})
+
+
+
+//----------
 constructor(private notificaciones:SweetalertutilService, private clientes:ListarClientesService,private tecnicos:TecnicosService, private servicioTS :ServicioTSService, private jwtutilidades:JwtserviceService, private modalServices: BsModalService){
 
 }
 ngOnInit(): void {
-this.updatearTodo();
+  this.updatearTodo();
   if(this.getUser() == 3)
   {
     this.CasosServicio.idtiposerviciot = 1;
@@ -60,6 +74,15 @@ updatearTodo(){
   this.getClientesInstalado();
   this.getClientesNoInstalado();
 }
+
+clearModel(){
+this.CasosServicio.descripcionserviciot = '';
+this.CasosServicio.idtecnico = 0;
+this.CasosServicio.idcliente = 0;
+this.CasosServicio.idestadoservicio = 0;
+}
+
+
 getServicioT(estado : number){
   if(this.getUser() == 2)
   {
@@ -72,12 +95,7 @@ getServicioT(estado : number){
       this.casos = casosGet;
     } )
   }
-
 }
-
-
-
-
 
 eliminarCaso(caso :servicioT, tipo : number){
   Swal.fire({
@@ -99,7 +117,7 @@ eliminarCaso(caso :servicioT, tipo : number){
         {
           this.notificaciones.errorm("El caso no existe, recarga la pagina!");
         }
-         })
+      })
     } else if (result.dismiss === Swal.DismissReason.cancel) {
       Swal.close();
     } 
@@ -129,6 +147,7 @@ getUser()
 crearCasoModal()
 {
   this.modalRef = this.modalServices.show(this.modal);
+  
 }
 
 getTecnico(){
@@ -185,12 +204,14 @@ submitUpdate(){
 
 
 submitForm() {
+  console.log(this.CasosServicio);
   this.servicioTS.sendCaso(this.CasosServicio).subscribe(respuesta1 => {
     if(respuesta1.estadoRespuesta == true){
       this.notificaciones.correcto(respuesta1.mensajeRespuesta);
       this.getServicioT(this.estadoST);
       this.updatearTodo();
       this.modalRef.hide();
+      this.clearModel();
     } else {
       this.notificaciones.errorm(respuesta1.mensajeRespuesta);
     }

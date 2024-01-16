@@ -1,11 +1,13 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EMPTY, catchError, throwError } from 'rxjs';
 import { planes } from 'src/app/modelos/planes';
 import { PlanesService } from 'src/app/servicios/cobranza/planes.service';
 import { JwtserviceService } from 'src/app/servicios/utilidades/jwtservice.service';
 import { SweetalertutilService } from 'src/app/utilidades/sweetalertutil.service';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -22,14 +24,26 @@ export class PlanesComponent {
   
   plan: planes = new planes();
   paginaActual : number = 1;
-  
 
+
+// validators
+  servicioControl = new FormGroup({
+    'servicio': new FormControl('', [Validators.minLength(3), Validators.required]),
+    'fsubida': new FormControl('', [Validators.minLength(1), Validators.required]),
+    'fbajada': new FormControl('', [Validators.minLength(1), Validators.required]),
+    'fprecio': new FormControl('', [Validators.min(1)])
+       
+  })
+
+  //-------------
   ngOnInit(): void {
     this.getPlanesAll();
+
   }
 
 
-  constructor(private planesService:PlanesService, private modalService: BsModalService, private notificacion:SweetalertutilService){
+  constructor(private planesService:PlanesService, private modalService: BsModalService, private notificacion:SweetalertutilService, private fb: FormBuilder){
+
   }
 
   getPlanesAll()
@@ -53,9 +67,10 @@ export class PlanesComponent {
       this.plan.servicio1.trim() === '' ||
       this.plan.bajada.trim() === '' ||
       this.plan.subida.trim() === '' ||
-      this.plan.precio <= 0
+      this.plan.precio <= 0 
     ) {
       this.notificacion.errorm('Verifique los campos')
+      console.log(this.plan)
     } else {
       this.planesService.crearPlan(this.plan).subscribe(respuesta => {
         if(respuesta == true)
