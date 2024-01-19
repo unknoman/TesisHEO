@@ -31,7 +31,7 @@ export class PlanesComponent {
     'servicio': new FormControl('', [Validators.minLength(3), Validators.required]),
     'fsubida': new FormControl('', [Validators.minLength(1), Validators.required]),
     'fbajada': new FormControl('', [Validators.minLength(1), Validators.required]),
-    'fprecio': new FormControl('', [Validators.min(1)])
+    'fprecio': new FormControl('', [Validators.min(1), Validators.max(99999999)])
        
   })
 

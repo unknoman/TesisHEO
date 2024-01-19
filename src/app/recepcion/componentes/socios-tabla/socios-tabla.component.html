@@ -121,29 +121,95 @@
   </div>
   <div class="modal-body">
     <form (ngSubmit)="submitForm()">
+      <div ngModelGroup = 'validarSocio' #validarSocio = 'ngModelGroup'>
       <div class="form-group">
         <label for="servicio">Nombre:</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="socioCrear.nombre">
+        <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="socioCrear.nombre" minlength="3" maxlength="30" #nombre = 'ngModel' pattern="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$">
+      </div>
+      <div [hidden]="nombre.valid ||nombre.pristine">  
+        <span class="text-danger" *ngIf="nombre.errors?.['required']"> 
+          Campo requerido
+        </span>
+      </div>
+      <div [hidden]="nombre.valid ||nombre.pristine">  
+        <span class="text-danger" *ngIf="nombre.errors?.['minlength']"> 
+         Minimo 3 caracteres
+        </span>
+      </div>
+      <div [hidden]="nombre.valid ||nombre.pristine">  
+        <span class="text-danger" *ngIf="nombre.errors?.['pattern']"> 
+         Solo se permiten letras
+        </span>
       </div>
       <div class="form-group">
         <label for="bajada">Apellido:</label>
-        <input type="text" class="form-control" id="nombre" name="apellido" required [(ngModel)]="socioCrear.apellido">
+        <input type="text" class="form-control" id="nombre" name="apellido" required [(ngModel)]="socioCrear.apellido" minlength="3" maxlength="30" pattern="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$"  #password = 'ngModel'>
+      </div>
+      <div [hidden]="password.valid ||password.pristine">  
+        <span class="text-danger" *ngIf="password.errors?.['required']"> 
+          Campo requerido
+        </span>
+      </div>
+      <div [hidden]="password.valid ||password.pristine">  
+        <span class="text-danger" *ngIf="password.errors?.['minlength']"> 
+         Minimo 3 caracteres
+        </span>
+      </div>
+      <div [hidden]="password.valid ||password.pristine">  
+        <span class="text-danger" *ngIf="password.errors?.['pattern']"> 
+         Solo se permiten letras
+        </span>
       </div>
       <div class="form-group">
         <label for="subida">DNI:</label>
-        <input type="text" class="form-control" id="dni" name="dni" required [(ngModel)]="socioCrear.dnic">
+        <input type="text" class="form-control" id="dni" name="dni" required [(ngModel)]="socioCrear.dnic" minlength="8" maxlength="10" pattern="^[0-9]+$" #dni = 'ngModel'>
+      </div>
+      <div [hidden]="dni.valid ||dni.pristine">  
+        <span class="text-danger" *ngIf="dni.errors?.['pattern']"> 
+         Ingresa un dni valido
+        </span>
+      </div>
+      <div [hidden]="dni.valid ||dni.pristine">  
+        <span class="text-danger" *ngIf="dni.errors?.['required']"> 
+         Este campos es requerido
+        </span>
+      </div>
+      <div [hidden]="dni.valid ||dni.pristine">  
+        <span class="text-danger" *ngIf="dni.errors?.['minlength']"> 
+         Minimo 8 caracteres
+        </span>
       </div>
       <div class="form-group">
         <label for="precio">Telefono:</label>
-        <input type="text" class="form-control" id="telefono" name="telefono" required [(ngModel)]="socioCrear.telefono">
+        <input type="text" class="form-control" id="telefono" name="telefono" required [(ngModel)]="socioCrear.telefono" minlength="10" maxlength="11" pattern="^[0-9]+$" #telefono = 'ngModel'>
+      </div>
+      <div [hidden]="telefono.valid ||telefono.pristine">  
+        <span class="text-danger" *ngIf="telefono.errors?.['pattern']"> 
+         Ingresa telefono valido
+        </span>
+      </div>
+      <div [hidden]="telefono.valid ||telefono.pristine">  
+        <span class="text-danger" *ngIf="telefono.errors?.['required']"> 
+         Este campos es requerido
+        </span>
+      </div>
+      <div [hidden]="telefono.valid ||telefono.pristine">  
+        <span class="text-danger" *ngIf="telefono.errors?.['minlength']"> 
+         Minimo 10 caracteres
+        </span>
       </div>
       <div class="form-group">
         <label for="precio">Direccion:</label>
-        <input type="text" class="form-control" id="direccion" name="direccion" required [(ngModel)]="socioCrear.direccionc">
+        <input type="text" class="form-control" id="direccion" name="direccion" required [(ngModel)]="socioCrear.direccionc" minlength="3" maxlength="50" #direccion= 'ngModel'>
       </div>
-
+      <div [hidden]="direccion.valid ||direccion.pristine">  
+        <span class="text-danger" *ngIf="direccion.errors?.['minlength']"> 
+         Minimo 3 caracteres
+        </span>
+      </div>
       
-      <button type="submit" class="btn btn-primary">Registrar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="validarSocio.invalid">Registrar</button>
+    </div>
     </form>
   </div>
 </ng-template>
@@ -161,27 +227,92 @@
     </div>
     <div class="modal-body">
       <form (ngSubmit)="submitUpdatedForm()">
-        <div class="form-group">
-          <label for="servicio">Nombre:</label>
-          <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="socioCrear.nombre">
-        </div>
-        <div class="form-group">
-          <label for="bajada">Apellido:</label>
-          <input type="text" class="form-control" id="nombre" name="apellido" required [(ngModel)]="socioCrear.apellido">
-        </div>
-        <div class="form-group">
-          <label for="subida">DNI:</label>
-          <input type="text" class="form-control" id="dni" name="dni" required [(ngModel)]="socioCrear.dnic">
-        </div>
-        <div class="form-group">
-          <label for="precio">Telefono:</label>
-          <input type="text" class="form-control" id="telefono" name="telefono" required [(ngModel)]="socioCrear.telefono">
-        </div>
-        <div class="form-group">
-          <label for="precio">Direccion:</label>
-          <input type="text" class="form-control" id="direccion" name="direccion" required [(ngModel)]="socioCrear.direccionc">
-        </div>
-  
+        <div ngModelGroup = 'validarSocioM' #validarSocioM = 'ngModelGroup'>
+          <div class="form-group">
+            <label for="servicio">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="socioCrear.nombre" minlength="3" maxlength="30" #nombre = 'ngModel' pattern="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$">
+          </div>
+          <div [hidden]="nombre.valid ||nombre.pristine">  
+            <span class="text-danger" *ngIf="nombre.errors?.['required']"> 
+              Campo requerido
+            </span>
+          </div>
+          <div [hidden]="nombre.valid ||nombre.pristine">  
+            <span class="text-danger" *ngIf="nombre.errors?.['minlength']"> 
+             Minimo 3 caracteres
+            </span>
+          </div>
+          <div [hidden]="nombre.valid ||nombre.pristine">  
+            <span class="text-danger" *ngIf="nombre.errors?.['pattern']"> 
+             Solo se permiten letras
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="bajada">Apellido:</label>
+            <input type="text" class="form-control" id="nombre" name="apellido" required [(ngModel)]="socioCrear.apellido" minlength="3" maxlength="30" pattern="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$"  #password = 'ngModel'>
+          </div>
+          <div [hidden]="password.valid ||password.pristine">  
+            <span class="text-danger" *ngIf="password.errors?.['required']"> 
+              Campo requerido
+            </span>
+          </div>
+          <div [hidden]="password.valid ||password.pristine">  
+            <span class="text-danger" *ngIf="password.errors?.['minlength']"> 
+             Minimo 3 caracteres
+            </span>
+          </div>
+          <div [hidden]="password.valid ||password.pristine">  
+            <span class="text-danger" *ngIf="password.errors?.['pattern']"> 
+             Solo se permiten letras
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="subida">DNI:</label>
+            <input type="text" class="form-control" id="dni" name="dni" required [(ngModel)]="socioCrear.dnic" minlength="8" maxlength="10" pattern="^[0-9]+$" #dni = 'ngModel'>
+          </div>
+          <div [hidden]="dni.valid ||dni.pristine">  
+            <span class="text-danger" *ngIf="dni.errors?.['pattern']"> 
+             Ingresa un dni valido
+            </span>
+          </div>
+          <div [hidden]="dni.valid ||dni.pristine">  
+            <span class="text-danger" *ngIf="dni.errors?.['required']"> 
+             Este campos es requerido
+            </span>
+          </div>
+          <div [hidden]="dni.valid ||dni.pristine">  
+            <span class="text-danger" *ngIf="dni.errors?.['minlength']"> 
+             Minimo 8 caracteres
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="precio">Telefono:</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" required [(ngModel)]="socioCrear.telefono" minlength="10" maxlength="11" pattern="^[0-9]+$" #telefono = 'ngModel'>
+          </div>
+          <div [hidden]="telefono.valid ||telefono.pristine">  
+            <span class="text-danger" *ngIf="telefono.errors?.['pattern']"> 
+             Ingresa telefono valido
+            </span>
+          </div>
+          <div [hidden]="telefono.valid ||telefono.pristine">  
+            <span class="text-danger" *ngIf="telefono.errors?.['required']"> 
+             Este campos es requerido
+            </span>
+          </div>
+          <div [hidden]="telefono.valid ||telefono.pristine">  
+            <span class="text-danger" *ngIf="telefono.errors?.['minlength']"> 
+             Minimo 10 caracteres
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="precio">Direccion:</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" required [(ngModel)]="socioCrear.direccionc" minlength="3" maxlength="30" #direccion= 'ngModel'>
+          </div>
+          <div [hidden]="direccion.valid ||direccion.pristine">  
+            <span class="text-danger" *ngIf="direccion.errors?.['minlength']"> 
+             Minimo 3 caracteres
+            </span>
+          </div>
         <div *ngIf="getUser() === 2" class="form-group">
           <label for="precio">Servicio:</label>
 
@@ -190,7 +321,8 @@
           </select>
         </div>
         
-        <button type="submit" class="btn btn-warning">Actualizar Socio</button>
+        <button type="submit" class="btn btn-warning" [disabled]="validarSocioM.invalid">Actualizar Socio</button>
+      </div>
       </form>
     </div>
   </ng-template>

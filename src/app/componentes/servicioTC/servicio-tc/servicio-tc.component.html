@@ -91,7 +91,7 @@
     <form (ngSubmit)="submitForm()" [formGroup]="servicioTF">
       <div class="form-group">
         <label for="descripcion">Descripcion:</label>
-        <input type="text" class="form-control" id="descripcion" name="descripcion" formControlName="fdescripcion" [(ngModel)]="CasosServicio.descripcionserviciot">
+        <input type="text" class="form-control" id="descripcion" name="descripcion" formControlName="fdescripcion" [(ngModel)]="CasosServicio.descripcionserviciot" maxlength="50">
       </div>
       <div [hidden]="servicioTF.get('fdescripcion')?.valid || servicioTF.get('fdescripcion')?.pristine">  
         <span class="text-danger" *ngIf="servicioTF.get('fdescripcion')?.errors?.['required']"> 
@@ -164,6 +164,7 @@
 
      <!-- Modal -->
      <ng-template #actualizarServicioT>
+
       <div class="modal-header">
         <h4 class="modal-title">Actualizar caso</h4>
         <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
@@ -172,18 +173,29 @@
       </div>
       <div class="modal-body">
         <form (ngSubmit)="submitUpdate()">
-          <div class="form-group">
+          <div class="form-group" ngModelGroup="casosServicio" #casosServicio = "ngModelGroup">
             <label>Descripcion:</label>
-            <input type="text" class="form-control" id="descripcion" name="descripcion" required [(ngModel)]="CasosServicio.descripcionserviciot">
+            <input type="text" class="form-control" id="descripcion" name="descripcion" required [(ngModel)]="CasosServicio.descripcionserviciot" #descripcion = "ngModel" minlength="3" maxlength="50">
           </div>
+          <div [hidden]="descripcion.valid || descripcion.pristine">  
+            <span class="text-danger" *ngIf="descripcion.errors?.['required']"> 
+              Campo requerido
+            </span>
+            </div>
+            <div [hidden]="descripcion.valid || descripcion.pristine">  
+              <span class="text-danger" *ngIf="descripcion.errors?.['minlength']"> 
+                Minimo 3 caracteres
+              </span>
+            </div>
           <div class="form-group">
             <label>Tecnico:</label>
-            <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico">
+            <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico" #tecnico = "ngModel" pattern="^[1-9]\d*$">
               <ng-container *ngFor="let tecnico of tecnicoList">
                 <option  [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot }}</option>
               </ng-container>
             
             </select>
+
           </div>
           <div class="form-group">
             <label>Tipo Servicio:</label>
@@ -210,7 +222,7 @@
               
             </select>
           </div>
-          <button type="submit" class="btn btn-primary">Actualizar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="casosServicio.invalid">Actualizar</button>
         </form>
       </div>
     </ng-template>

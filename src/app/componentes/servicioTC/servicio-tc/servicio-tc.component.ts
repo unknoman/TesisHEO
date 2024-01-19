@@ -43,9 +43,9 @@ public estadoST : number = 1;
 //--------------
 servicioTF = new FormGroup({
   'fdescripcion': new FormControl(this.CasosServicio.descripcionserviciot, [Validators.minLength(3), Validators.required]),
-  'fcliente': new FormControl('', [Validators.required, Validators.min(1)]),
- 'ftipo': new FormControl('', [Validators.required, Validators.min(1)]),
-  'festado': new FormControl('', [Validators.required, Validators.min(1)]),
+  'fcliente': new FormControl('', [Validators.min(1)]),
+  'ftipo': new FormControl('', [Validators.min(1)]),
+  'festado': new FormControl('', [Validators.min(1)]),
 })
 
 
@@ -65,6 +65,8 @@ ngOnInit(): void {
     this.CasosServicio.idtiposerviciot = 2;
     this.CasosServicio.fechainicio = new Date();
   }
+
+  
 }
 
 updatearTodo(){
@@ -174,12 +176,15 @@ getClientesNoInstalado(){
   } )
 }
 
-updatearCaso(caso : servicioT){
-this.CasosServicio.idcaso = caso.idproblemat;
-this.CasosServicio.descripcionserviciot = caso.descripcionserviciot;
-this.CasosServicio.idestadoservicio = caso.idestadoservicio;
-this.CasosServicio.idtecnico = caso.idtecnico; 
-this.modalRef = this.modalServices.show(this.modalUpdatex);
+updatearCaso(caso: servicioT) {
+  
+  this.CasosServicio.idcaso = caso.idproblemat;
+  this.CasosServicio.descripcionserviciot = caso.descripcionserviciot;
+  this.CasosServicio.idestadoservicio = caso.idestadoservicio;
+  this.CasosServicio.idcliente = caso.idcliente;
+  this.CasosServicio.idtecnico = caso.idtecnico;
+
+  this.modalRef = this.modalServices.show(this.modalUpdatex);
 }
 
 
@@ -199,7 +204,7 @@ submitUpdate(){
      }
   }); 
   this.servicioTS.updateServicioTecnico(this.CasosServicio)
-  console.log(this.CasosServicio);
+  this.modalRef.hide();
 }
 
 

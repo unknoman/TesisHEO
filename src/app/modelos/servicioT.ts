@@ -9,6 +9,7 @@ export class servicioT{
     dnic:string = "";
     direccion:string = "";
     idtecnico:number = 0;
+    idcliente:number = 0;
     tecnico: string = "";
 
     constructor(){
