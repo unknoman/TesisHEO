@@ -68,45 +68,50 @@
 
   </div>
 
-
   <ng-template #pagosModal>
-
-    <div class="modal-header">
-      <h4 class="modal-title">Lista de Pagos</h4>
-    </div>
-    <div class="modal-body">
-      <table class="table table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th class="text-center">ID Factura</th>
-            <th class="text-center">Fecha</th>
-            <th class="text-center">Fecha Vencimiento</th>
-            <th class="text-center">Pagado</th>
-            <th class="text-center">Servicio</th>
-            <th class="text-center">Precio Total</th>
-            <th class="text-center">Estado</th>
-            <th class="text-center">Acci&oacute;n</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let pago of pagosList | paginate: { itemsPerPage: 5, currentPage: paginaActual, id: 'dos'}">
-            <td scope="row" class="text-center">{{pago.idfactura}}</td>
-            <td scope="row" class="text-center">{{pago.fecha}}</td>
-            <td scope="row" class="text-center">{{pago.fechavencimiento}}</td>
-            <td scope="row" class="text-center">{{pago.fechapagado}}</td>
-            <td scope="row" class="text-center">{{pago.servicio}}</td>
-            <td scope="row" class="text-center">{{pago.preciototal}}</td>
-            <td scope="row" class="text-center">{{pago.estado}}</td>
-            <td scope="row" class="text-center">
-              <button type="button" class="btn btn-warning mr-2" (click)="cambiarEstadoPago(pago)">Estado</button>
-              <button type="button" class="btn btn-danger mr-2" (click)="descargarFactura(pago)">Descargar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <pagination-controls id="instanciaOne" id="dos" (pageChange)="paginaActual = $event" previousLabel="Anterior"nextLabel="Siguiente"></pagination-controls>
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Lista de Pagos</h4>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th class="text-center">ID Factura</th>
+                  <th class="text-center">Fecha</th>
+                  <th class="text-center">Fecha Vencimiento</th>
+                  <th class="text-center d-none d-sm-table-cell">Pagado</th>
+                  <th class="text-center">Servicio</th>
+                  <th class="text-center">Precio Total</th>
+                  <th class="text-center">Estado</th>
+                  <th class="text-center">Acci&oacute;n</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pago of pagosList | paginate: { itemsPerPage: 5, currentPage: paginaActual, id: 'dos'}">
+                  <td scope="row" class="text-center">{{pago.idfactura}}</td>
+                  <td scope="row" class="text-center">{{pago.fecha | date:'dd/MM/yyyy'}}</td>
+                  <td scope="row" class="text-center">{{pago.fechavencimiento | date:'dd/MM/yyyy'}}</td>
+                  <td scope="row" class="text-center d-none d-sm-table-cell">{{pago.fechapagado | date:'dd/MM/yyyy'}}</td>
+                  <td scope="row" class="text-center">{{pago.servicio}}</td>
+                  <td scope="row" class="text-center">{{pago.preciototal}}</td>
+                  <td scope="row" class="text-center">{{pago.estado}}</td>
+                  <td scope="row" class="text-center">
+                    <button type="button" class="btn btn-warning mr-2" (click)="cambiarEstadoPago(pago)">Estado</button>
+                    <button type="button" class="btn btn-danger mr-2" (click)="descargarFactura(pago)">Descargar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls id="instanciaOne" id="dos" (pageChange)="paginaActual = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+        </div>
+      </div>
     </div>
   </ng-template>
+  
 
 
 
@@ -355,9 +360,9 @@
     </div>
     <div class="info">
       <p><strong>Servicio:</strong> Internet</p>
-      <p><strong>Fecha:</strong> {{FacturaDescargarP?.fecha | date:'dd-MM-yyyy'}}</p>
-      <p><strong>Fecha de Vencimiento:</strong> {{FacturaDescargarP?.fechavencimiento | date:'dd-MM-yyyy'}}</p>
-      <p><strong>Fecha de Pagado:</strong> {{FacturaDescargarP?.fechapagado | date:'dd-MM-yyyy'}}</p>
+      <p><strong>Fecha:</strong> {{FacturaDescargarP?.fecha | date:'dd/MM/yyyy'}}</p>
+      <p><strong>Fecha de Vencimiento:</strong> {{FacturaDescargarP?.fechavencimiento | date:'dd/MM/yyyy'}}</p>
+      <p><strong>Fecha de Pagado:</strong> {{FacturaDescargarP?.fechapagado | date:'dd/MM/yyyy'}}</p>
       <p><strong>ID de Factura:</strong> {{FacturaDescargarP?.idfactura }}</p>
       <p><strong>Nombre:</strong> {{clienteGet.nombre}}</p>
       <p><strong>Apellido:</strong> {{clienteGet.apellido}}</p>

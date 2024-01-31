@@ -18,6 +18,7 @@ import { delay } from 'rxjs';
 import Swal from 'sweetalert2';
 import { usuarioO } from 'src/app/modelos/usuarioO';
 import { FormControl, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-servicio-tc',
@@ -89,14 +90,24 @@ getServicioT(estado : number){
   if(this.getUser() == 2)
   {
     this.servicioTS.getCasosST(estado).subscribe(casosGet => {
-      this.casos = casosGet;
+      this.casos = this.formatDates(casosGet);
     } )
   } else 
   {
     this.servicioTS.getCasosSTR(estado).subscribe(casosGet => {
-      this.casos = casosGet;
+      this.casos = this.formatDates(casosGet);
     } )
   }
+}
+
+private formatDates(casos: any[]): any[] {
+  return casos.map(caso => {
+    // Suponiendo que caso.fechainicio es una cadena de fecha válida
+    caso.fechainicio = moment(caso.fechainicio).format('DD/MM/yyyy');
+    // Puedes agregar más campos de fecha si es necesario
+
+    return caso;
+  });
 }
 
 eliminarCaso(caso :servicioT, tipo : number){

@@ -17,6 +17,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { waitForAsync } from '@angular/core/testing';
 import { PaginationService } from 'ngx-pagination';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-socios-tabla',
@@ -104,7 +105,7 @@ export class SociosTablaComponent {
   setearFactura(pago: pagos): Promise<void> {
     return new Promise<void>((resolve) => {
       this.FacturaDescargarP = pago;
-      resolve();  // Resuelve la promesa después de setear la factura
+      resolve();  // Resuelve la promesa despuï¿½s de setear la factura
     });
   }
 
@@ -180,7 +181,7 @@ export class SociosTablaComponent {
   getPagos(id: number, template : any, persona : clientes)
   {
       this.recService.getPagos(id).subscribe (pagos => {
-        this.pagosList = pagos;
+        this.pagosList = pagos
       });
        this.idPersona = id;
        this.clienteGet = persona;
@@ -195,9 +196,11 @@ export class SociosTablaComponent {
 
 getpagos2(){
   this.recService.getPagos(this.idPersona).subscribe (pagos => {
-    this.pagosList = pagos;
+    this.pagosList = pagos
   });
 }
+
+
 estadoVar : string = '';
 
  checkEstado(estado : number)
@@ -342,5 +345,8 @@ modificarPago(factura:cambiarEstadoP){
     this.modalRef = this.modalService.show(this.modalPagoestado);
   }
 
+
+
+  
   
 }
