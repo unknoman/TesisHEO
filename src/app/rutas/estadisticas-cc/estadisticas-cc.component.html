@@ -1,2 +1,3 @@
-<app-dashboard-c></app-dashboard-c>
+<app-dashboard-c *ngIf="getUser() == 2"></app-dashboard-c>
+<app-dashboard-r *ngIf="getUser() == 3"></app-dashboard-r>
 <app-estadisticascom></app-estadisticascom>

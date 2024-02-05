@@ -29,4 +29,9 @@ export class EstadisticasserviceService {
     return this.http.get<estadisticasDTO[]>(direccion);
    }
 
+   getTecnicosCasosR(Desde:string, Hasta:string):Observable<estadisticasDTO[]>{
+    let direccion = this.url +'estadisticas/obtenerdatosTecnicosR?fechaDesde=' + Desde + "&fechaHasta="+ Hasta;
+    return this.http.get<estadisticasDTO[]>(direccion);
+   }
+
 }

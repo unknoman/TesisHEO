@@ -285,6 +285,7 @@ modificarSocio(socio: clientes){
   this.socioCrear.dnic = socio.dnic;
   this.socioCrear.telefono = socio.telefono;
   this.socioCrear.direccionc = socio.direccionc;
+  this.socioCrear.idServicio = socio.idservicio;
   this.modalRef = this.modalService.show(this.modalUpdate);
   }
   

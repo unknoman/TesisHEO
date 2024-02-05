@@ -4,6 +4,8 @@ import { EstadisticasserviceService } from 'src/app/servicios/estadisticasservic
 import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { NgxChartsModule } from '@javierbaromorales/ngx-charts-v2';
+import { decodedToken } from 'src/app/modelos/decodedToken';
+import { JwtserviceService } from 'src/app/servicios/utilidades/jwtservice.service';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class EstadisticascomComponent {
   showChart = true;
   showChartT = true;
   ShowDatePicker = false;
-  constructor(private estadisticas : EstadisticasserviceService){
+  constructor(private estadisticas : EstadisticasserviceService, private jwtutilidades:JwtserviceService){
       this.getPlanesMayorAdquirido(this.fechaDesdeF, this.fechaHastaF);
       this.getTecnicosEstadistica(this.fechaDesdeF, this.fechaHastaF);
   }
@@ -51,6 +53,13 @@ export class EstadisticascomComponent {
   }
 
 
+  getTecnicosEstadisticaR(fechaDesde : string, fechaHasta : string){
+    this.estadisticaList = [];
+    this.estadisticas.getTecnicosCasosR(fechaDesde, fechaHasta).subscribe(info => {
+      this.estadisticaList = info;
+    })
+  }
+
    aplicar(){
     this.fechaDesdeF = moment(this.fechaDesde).format('MM/DD/yyyy');
     this.fechaHastaF = moment(this.fechaHasta).format('MM/DD/yyyy');
@@ -76,7 +85,8 @@ export class EstadisticascomComponent {
     
    // this.getPlanesMayorAdquirido(this.fechaDesdeF, this.fechaHastaF); 
     //this.showChart = false;
-    this.getTecnicosEstadistica(this.fechaDesdeF, this.fechaHastaF);
+
+      this.getTecnicosEstadistica(this.fechaDesdeF, this.fechaHastaF);
     this.showChartT = false;
     // Mostrar el gráfico después de un pequeño retraso (puedes ajustar según sea necesario)
     setTimeout(() => {
@@ -84,6 +94,25 @@ export class EstadisticascomComponent {
     }, 100);
     console.log(this.estadisticaList);
    }
+
+
+
+   aplicarETR(){
+    this.fechaDesdeF = moment(this.fechaDesde).format('MM/DD/yyyy');
+    this.fechaHastaF = moment(this.fechaHasta).format('MM/DD/yyyy');
+    
+   // this.getPlanesMayorAdquirido(this.fechaDesdeF, this.fechaHastaF); 
+    //this.showChart = false;
+
+      this.getTecnicosEstadisticaR(this.fechaDesdeF, this.fechaHastaF);
+    this.showChartT = false;
+    // Mostrar el gráfico después de un pequeño retraso (puedes ajustar según sea necesario)
+    setTimeout(() => {
+      this.showChartT = true;
+    }, 100);
+    console.log(this.estadisticaList);
+   }
+
 
 
    aplicarESE(){
@@ -101,6 +130,22 @@ export class EstadisticascomComponent {
     console.log(this.estadisticaList);
    }
 
+
+   getUser()
+   {
+     const tokenKey = localStorage.getItem('key');
+     if(tokenKey)
+     {
+       const objetox: decodedToken = this.jwtutilidades.decodificartoken(tokenKey);  
+       if(objetox.idRol == '2')
+       return 2
+       else if (objetox.idRol == '3')
+       return 3 
+       else
+       return 1
+     }
+     return 1
+   }
 
 
   datosBarras = [

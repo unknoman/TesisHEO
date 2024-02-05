@@ -106,6 +106,7 @@
       <div class="form-group">
         <label for="tecnico">Tecnico:</label>
         <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico">
+          <option [value]="0">Sin Asignar</option>
           <option  *ngFor="let tecnico of tecnicoList" [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot}}</option>
         </select>
       </div>
@@ -191,6 +192,7 @@
             <label>Tecnico:</label>
             <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico" #tecnico = "ngModel" pattern="^[1-9]\d*$">
               <ng-container *ngFor="let tecnico of tecnicoList">
+                <option [value]="0">Sin Asignar</option>
                 <option  [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot }}</option>
               </ng-container>
             

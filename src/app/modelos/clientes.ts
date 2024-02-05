@@ -9,6 +9,7 @@ export class clientes{
     pagopendiente:number = 0;
     idestadoc:number = 0;
     estadoCliente:string = '';
+    idservicio :number = 0;
     servicio :string = '';
 
     constructor(){

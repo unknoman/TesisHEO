@@ -6,6 +6,7 @@
   <title>Estadísticas</title>
 </head>
 <body>
+  <ng-container *ngIf="getUser() == 2">
 <div class="container">
   <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" [(ngModel)]="StatsRadio" value="1" (change)="aplicar()">
@@ -129,7 +130,44 @@
 
 
   </div>
+</ng-container>
 
 
+
+<ng-container *ngIf="getUser() == 3">
+    <div class="container">
+  
+      <div class="datepicker-container">
+        <h4>Desde:</h4>
+      <input type="date" id="fromDate" placeholder="Desde" [(ngModel)]="fechaDesde">
+      <h4>Hasta:</h4>
+      <input type="date" id="toDate" placeholder="Hasta" [(ngModel)]="fechaHasta">
+      <button class="apply-button" (click)="aplicarETR()" >Aplicar</button>
+    </div>
+  
+    <div class="grid-container">
+      <div class="chart-container">
+        <div class="chart-title">Estadistica casos asignados a tecnicos</div>
+        
+        <div *ngIf="showChartT">
+  
+  
+   <ngx-charts-bar-vertical
+   [results]="estadisticaList"
+   [legend]="true"
+   xAxisLabel="Planes"
+   yAxisLabel="Clientes"
+   [animations]="false"
+   >
+   
+ </ngx-charts-bar-vertical>
+  
+        </div>
+  
+      </div>
+     
+    </div>
+  </div>
+  </ng-container>
 </body>
 </html>

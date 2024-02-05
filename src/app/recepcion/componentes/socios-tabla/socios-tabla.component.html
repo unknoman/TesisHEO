@@ -320,7 +320,6 @@
           </div>
         <div *ngIf="getUser() === 2" class="form-group">
           <label for="precio">Servicio:</label>
-
           <select class="form-select" [(ngModel)]="socioCrear.idServicio" name="idServicio">
             <option *ngFor="let servicio of planesList2" [value]="servicio.idservicio" >{{ servicio.servicio1 }}</option>
           </select>
