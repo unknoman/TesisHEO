@@ -73,7 +73,9 @@ export class SociosTablaComponent {
   }
   
   ngOnInit(): void {
-    this.getUserAll(this.buscarPor, this.buscarPor2, this.buscarBarra);
+      this.getUserAll(this.buscarPor, this.buscarPor2, this.buscarBarra);
+    
+    
     this.getPlanesAll();
     this.listarEstadoPagos();
   }
@@ -172,9 +174,18 @@ export class SociosTablaComponent {
 
   getUserAll(buscarPor : number, buscarPor2: number, buscarBarra : string)
   {
+    if(this.getUser() == 2)
+    {
       this.recService.getUserAll(buscarPor, buscarPor2, buscarBarra).subscribe (cliente => {
         this.sociosList = cliente;
       });
+    } else
+    {
+      this.recService.getUserAllR(buscarPor, buscarPor2, buscarBarra).subscribe (cliente => {
+        this.sociosList = cliente;
+      });
+    }
+
   }
    idPersona:number = 0;
 

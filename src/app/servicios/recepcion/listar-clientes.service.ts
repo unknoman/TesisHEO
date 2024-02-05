@@ -27,6 +27,13 @@ export class ListarClientesService {
     return this.http.get<clientes[]>(direccion);
    }
 
+   getUserAllR(buscarPor : number = 0, buscarPor2: number = 0, buscarBarra : string = ""):Observable<clientes[]>{
+    let direccion = this.url +'Clientes/ClientesListR';
+    direccion += `?numero=${buscarPor}&numero2=${buscarPor2}&dato=${buscarBarra}`;
+    return this.http.get<clientes[]>(direccion);
+   }
+   
+
    getPagos(id:number){
     let direccion = this.url +'pagos/pagosList';
     direccion += `?id=${id}`;
