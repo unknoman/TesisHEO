@@ -110,8 +110,8 @@ modificarTecnico(Tecnico : tecnico)
 
   borrarTecnico(tecnico:tecnico){
     Swal.fire({
-      title: 'Eliminar Tecnico',
-      text: '¿Deseas borrar el Tecnico ' + tecnico.nombret + '?',
+      title: 'Eliminar Técnico',
+      text: '¿Deseas borrar el Técnico ' + tecnico.nombret + '?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si',

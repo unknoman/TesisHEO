@@ -112,7 +112,7 @@ private formatDates(casos: any[]): any[] {
 
 eliminarCaso(caso :servicioT, tipo : number){
   Swal.fire({
-    title: 'Eliminar Servicio Tecnico',
+    title: 'Eliminar Servicio Técnico',
     text: '¿Deseas borrar el caso ' + caso.descripcionserviciot + '?',
     icon: 'warning',
     showCancelButton: true,

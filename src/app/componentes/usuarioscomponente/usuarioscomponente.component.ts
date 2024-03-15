@@ -110,7 +110,7 @@ this.actualizarTodo();
   
   borrarUsuario(usuario : usuarioO){
     Swal.fire({
-      title: 'Eliminar Tecnico',
+      title: 'Eliminar Usuario',
       text: '¿Deseas borrar el usuario ' + usuario.usuario1 + '?',
       icon: 'warning',
       showCancelButton: true,
