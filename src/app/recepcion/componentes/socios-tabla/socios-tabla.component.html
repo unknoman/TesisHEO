@@ -129,7 +129,7 @@
       <div ngModelGroup = 'validarSocio' #validarSocio = 'ngModelGroup'>
       <div class="form-group">
         <label for="servicio">Nombre:</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="socioCrear.nombre" minlength="3" maxlength="30" #nombre = 'ngModel' pattern="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+$">
+        <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="socioCrear.nombre" minlength="3" maxlength="30" #nombre = 'ngModel' pattern="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$">
       </div>
       <div [hidden]="nombre.valid ||nombre.pristine">  
         <span class="text-danger" *ngIf="nombre.errors?.['required']"> 

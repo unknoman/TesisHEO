@@ -124,7 +124,7 @@ modificarTecnico(Tecnico : tecnico)
            this.notificacion.correcto("El tecnico " + tecnico.nombret + " se borró correctamente");
            this.buscarMetodo(this.buscarPor, this.buscarBarra);
           } else {
-           this.notificacion.errorm("Ocurrio un error y no se puede borrar");
+           this.notificacion.errorm("El tecnico tiene casos asignados en estado pendiente");
           }
        })
       } else if (result.dismiss === Swal.DismissReason.cancel) {

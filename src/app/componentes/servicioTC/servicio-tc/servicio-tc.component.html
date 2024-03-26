@@ -80,92 +80,78 @@
 
 
      <!-- Modal -->
-<ng-template #registrarServicioT>
-  <div class="modal-header">
-    <h4 class="modal-title">Registrar nuevo caso</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form (ngSubmit)="submitForm()" [formGroup]="servicioTF">
-      <div class="form-group">
-        <label for="descripcion">Descripcion:</label>
-        <input type="text" class="form-control" id="descripcion" name="descripcion" formControlName="fdescripcion" [(ngModel)]="CasosServicio.descripcionserviciot" maxlength="50">
+     <ng-template #registrarServicioT>
+      <div class="modal-header">
+        <h4 class="modal-title">Registrar nuevo caso</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div [hidden]="servicioTF.get('fdescripcion')?.valid || servicioTF.get('fdescripcion')?.pristine">  
-        <span class="text-danger" *ngIf="servicioTF.get('fdescripcion')?.errors?.['required']"> 
-          Campo requerido
-        </span>
-        </div>
-        <div [hidden]="servicioTF.get('fdescripcion')?.valid || servicioTF.get('fdescripcion')?.pristine">  
-          <span class="text-danger" *ngIf="servicioTF.get('fdescripcion')?.errors?.['required']"> 
-            minimo 3 caracteres
-          </span>
+      <div class="modal-body">
+        <form (ngSubmit)="submitForm()">
+          <div ngModelGroup='registrarServicio' #registrarServicioT='ngModelGroup'> 
+            <div class="form-group">
+              <label for="descripcion">Descripción:</label>
+              <input type="text" class="form-control" id="descripcion" name="descripcion" required [(ngModel)]="CasosServicio.descripcionserviciot" #modificardescripcion='ngModel' maxlength="50" minlength="3">
+              <div *ngIf="!modificardescripcion.valid && (modificardescripcion.touched || modificardescripcion.dirty)" class="text-danger">
+                <span *ngIf="modificardescripcion.errors?.['required']">Campo requerido</span>
+                <span *ngIf="modificardescripcion.errors?.['minlength']">Mínimo 3 caracteres</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="tecnico">Técnico:</label>
+              <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico">
+                <option [value]="0">Sin Asignar</option>
+                <option *ngFor="let tecnico of tecnicoList" [value]="tecnico.idtecnico">{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="cliente">Cliente:</label>
+              <ng-container *ngIf="getUser() == 2">
+                <select class="form-select" [(ngModel)]="CasosServicio.idcliente" name="cliente">
+                  <option *ngFor="let cliente of sociosNoInstalados" [value]="cliente.idcliente">{{ cliente.nombre + ' ' + cliente.apellido + ' ' + cliente.dnic }}</option>
+                </select>
+              </ng-container>
+              <ng-container *ngIf="getUser() == 3">
+                <select class="form-select" [(ngModel)]="CasosServicio.idcliente" name="cliente">
+                  <option *ngFor="let cliente of sociosInstalados" [value]="cliente.idcliente">{{ cliente.nombre + ' ' + cliente.apellido + ' ' + cliente.dnic }}</option>
+                </select>
+              </ng-container>
+              <div *ngIf="!CasosServicio.idcliente && (CasosServicio.idcliente !== 0) && (registrarServicioT.dirty || registrarServicioT.touched)" class="text-danger">
+                Selecciona un cliente
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="tipoServicio">Tipo de Servicio:</label>
+              <ng-container *ngIf="getUser() == 3">
+                <select class="form-select" [(ngModel)]="CasosServicio.idtiposerviciot" name="tipoServicio">
+                  <option [value]="1">Incidente</option>
+                </select>
+              </ng-container>
+              <ng-container *ngIf="getUser() == 2">
+                <select class="form-select" [(ngModel)]="CasosServicio.idtiposerviciot" name="tipoServicio">
+                  <option [value]="2">Instalación</option>
+                </select>
+              </ng-container>
+            </div>
+            <div class="form-group">
+              <label for="estado">Estado:</label>
+              <select class="form-select" [(ngModel)]="CasosServicio.idestadoservicio" name="estado">
+                <option [value]="1">Pendiente</option>
+                <option [value]="2">Solucionado</option>
+              </select>
+              <div *ngIf="!CasosServicio.idestadoservicio && (CasosServicio.idestadoservicio !== 0) && (registrarServicioT.dirty || registrarServicioT.touched)" class="text-danger">
+                Selecciona un estado
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!registrarServicioT.valid">Registrar</button>
           </div>
-      <div class="form-group">
-        <label for="tecnico">Tecnico:</label>
-        <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico">
-          <option [value]="0">Sin Asignar</option>
-          <option  *ngFor="let tecnico of tecnicoList" [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot}}</option>
-        </select>
+        </form>
       </div>
-      
-      <div class="form-group">
-        <label for="subida">Cliente:</label>
-        <ng-container *ngIf="getUser() == 2">
-          <select class="form-select" [(ngModel)]="CasosServicio.idcliente" name="cliente" formControlName="fcliente">
-            <option  *ngFor="let cliente of sociosNoInstalados" [value]="cliente.idcliente" >{{ cliente.nombre + ' ' + cliente.apellido + ' ' + cliente.dnic}}</option>
-          </select>
-        </ng-container>
+    </ng-template> 
+    
 
-        <ng-container *ngIf="getUser() == 3">
-          <select class="form-select" [(ngModel)]="CasosServicio.idcliente" name="cliente" formControlName="fcliente">
-            <option  *ngFor="let cliente of sociosInstalados" [value]="cliente.idcliente" >{{ cliente.nombre + ' ' + cliente.apellido + ' ' + cliente.dnic}}</option>
-          </select>
-          </ng-container>
-      </div>
-      <div [hidden]="servicioTF.get('fcliente')?.valid">  
-        <span class="text-danger" *ngIf="servicioTF.get('fcliente')?.errors?.['min']"> 
-          Selecciona un cliente
-        </span>
-        </div>
-     <div class="form-group">
-        <label >Tipo Servicio:</label>
-        <ng-container *ngIf="getUser() == 3">
-          <select class="form-select" [(ngModel)]="CasosServicio.idtiposerviciot" name="servicioTecnico" formControlName="ftipo">
-            <option  [value]="1">Incidente</option>
-          </select>
-        </ng-container>
-
-        <ng-container *ngIf="getUser() == 2">
-          <select class="form-select" [(ngModel)]="CasosServicio.idtiposerviciot" name="servicioTecnico" formControlName="ftipo">
-            <option [value]="2">Instalación</option>
-          </select>
-        </ng-container>
-
-      </div> 
-
-      <div class="form-group">
-        <label for="TipoServicio">Estado:</label>
-        <select class="form-select"  [(ngModel)]="CasosServicio.idestadoservicio" name="estado" formControlName="festado">
-          <option [value]="1">Pendiente</option>
-          <option [value]="2">Solucionado</option>
-        </select>
-        <div [hidden]="servicioTF.get('festado')?.valid">  
-          <span class="text-danger" *ngIf="servicioTF.get('festado')?.errors?.['min']"> 
-            Selecciona un estado
-          </span>
-          </div>
-      </div>
-      <button type="submit" class="btn btn-primary" [disabled]="servicioTF.invalid">Registrar</button>
-    </form>
-  </div>
-</ng-template>
-
-     <!-- Modal -->
-     <ng-template #actualizarServicioT>
-
+    <ng-template #actualizarServicioT>
       <div class="modal-header">
         <h4 class="modal-title">Actualizar caso</h4>
         <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
@@ -174,30 +160,22 @@
       </div>
       <div class="modal-body">
         <form (ngSubmit)="submitUpdate()">
-          <div class="form-group" ngModelGroup="casosServicio" #casosServicio = "ngModelGroup">
-            <label>Descripcion:</label>
-            <input type="text" class="form-control" id="descripcion" name="descripcion" required [(ngModel)]="CasosServicio.descripcionserviciot" #descripcion = "ngModel" minlength="3" maxlength="50">
-          </div>
-          <div [hidden]="descripcion.valid || descripcion.pristine">  
-            <span class="text-danger" *ngIf="descripcion.errors?.['required']"> 
-              Campo requerido
-            </span>
-            </div>
-            <div [hidden]="descripcion.valid || descripcion.pristine">  
-              <span class="text-danger" *ngIf="descripcion.errors?.['minlength']"> 
-                Minimo 3 caracteres
-              </span>
-            </div>
           <div class="form-group">
-            <label>Tecnico:</label>
-            <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico" #tecnico = "ngModel" pattern="^[1-9]\d*$">
+            <label>Descripción:</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" required [(ngModel)]="CasosServicio.descripcionserviciot" #descripcion="ngModel" minlength="3" maxlength="50">
+            <div *ngIf="!descripcion.valid && (descripcion.touched || descripcion.dirty)" class="text-danger">
+              <span *ngIf="descripcion.errors?.['required']">Campo requerido</span>
+              <span *ngIf="descripcion.errors?.['minlength']">Mínimo 3 caracteres</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Técnico:</label>
+            <select class="form-select" [(ngModel)]="CasosServicio.idtecnico" name="tecnico" #tecnico="ngModel" >
               <option [value]="0">Sin Asignar</option>
-              <ng-container *ngFor="let tecnico of tecnicoList">          
-                <option  [value]="tecnico.idtecnico" >{{ tecnico.idtecnico + ' ' + tecnico.nombret + ' ' + tecnico.apellidot }}</option>
+              <ng-container *ngFor="let tecnicoItem of tecnicoList">          
+                <option [value]="tecnicoItem.idtecnico">{{ tecnicoItem.idtecnico + ' ' + tecnicoItem.nombret + ' ' + tecnicoItem.apellidot }}</option>
               </ng-container>
-            
             </select>
-
           </div>
           <div class="form-group">
             <label>Tipo Servicio:</label>
@@ -210,21 +188,19 @@
               </ng-container>
             </select>
           </div>
-    
           <div class="form-group">
-            <label >Estado:</label>
+            <label>Estado:</label>
             <select class="form-select" [(ngModel)]="CasosServicio.idestadoservicio" name="estado">
               <option [value]="1">Pendiente</option>
               <ng-container *ngIf="getUser() == 2">
                 <option [value]="2">Instalado</option>
               </ng-container>
-            <ng-container  *ngIf="getUser() == 3">
-              <option [value]="2">Solucionado</option>
-            </ng-container>
-              
+              <ng-container *ngIf="getUser() == 3">
+                <option [value]="2">Solucionado</option>
+              </ng-container>
             </select>
           </div>
-          <button type="submit" class="btn btn-primary" [disabled]="casosServicio.invalid">Actualizar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!descripcion.valid || !tecnico.valid">Actualizar</button>
         </form>
       </div>
     </ng-template>

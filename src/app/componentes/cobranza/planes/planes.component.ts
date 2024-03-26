@@ -23,6 +23,7 @@ export class PlanesComponent {
   modalRef!: BsModalRef;
   
   plan: planes = new planes();
+  planCrear: planes = new planes();
   paginaActual : number = 1;
 
 
@@ -64,15 +65,15 @@ export class PlanesComponent {
 
   submitForm() {
     if (
-      this.plan.servicio1.trim() === '' ||
-      this.plan.bajada.trim() === '' ||
-      this.plan.subida.trim() === '' ||
-      this.plan.precio <= 0 
+      this.planCrear.servicio1.trim() === '' ||
+      this.planCrear.bajada.trim() === '' ||
+      this.planCrear.subida.trim() === '' ||
+      this.planCrear.precio <= 0 
     ) {
       this.notificacion.errorm('Verifique los campos')
       console.log(this.plan)
     } else {
-      this.planesService.crearPlan(this.plan).subscribe(respuesta => {
+      this.planesService.crearPlan(this.planCrear).subscribe(respuesta => {
         if(respuesta == true)
         {
         this.notificacion.correcto('La operacion fue completada correctamente');
@@ -97,6 +98,7 @@ export class PlanesComponent {
   }
 
 
+
   submitFormUpdate() {
     if (
       this.plan.servicio1.trim() === '' ||
@@ -112,6 +114,7 @@ export class PlanesComponent {
         this.notificacion.correcto('La operacion fue completada correctamente');
          this.getPlanesAll()
          this.modalRef.hide();
+
         } else {
           this.notificacion.errorm('Hubo un error');
         }
