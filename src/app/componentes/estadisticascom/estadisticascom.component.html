@@ -7,14 +7,16 @@
 </head>
 <body>
   <ng-container *ngIf="getUser() == 2">
+    
 <div class="container">
+  <h4 class="h4x">Estadísticas</h4>
   <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" [(ngModel)]="StatsRadio" value="1" (change)="aplicar()">
-    <label class="form-check-label" for="inlineRadio1">Estadistica Planes</label>
+    <label class="form-check-label" for="inlineRadio1">Estadística Planes</label>
   </div>
   <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"  [(ngModel)]="StatsRadio"  value="2" (change)="limpiarArray()">
-    <label class="form-check-label" for="inlineRadio2" >Estadistica Tecnicos</label>
+    <label class="form-check-label" for="inlineRadio2" >Estadística servicio técnico instalación</label>
   </div>
   <div class="form-check form-check-inline">
     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" [(ngModel)]="StatsRadio"  value="3" (change)="limpiarArray()">
@@ -27,7 +29,7 @@
 
     <div class="grid-container">
       <div class="chart-container">
-        <div class="chart-title">Estadistica Planes</div>
+        <div class="chart-title">Estadística Planes</div>
         
         <div *ngIf="showChart">
           <ngx-charts-bar-vertical class="chart"
@@ -63,7 +65,7 @@
 
   <div class="grid-container">
     <div class="chart-container">
-      <div class="chart-title">Estadistica Tecnicos</div>
+      <div class="chart-title">Estadística Técnicos</div>
       
       <div *ngIf="showChartT">
         <ngx-charts-bar-vertical class="chart"
@@ -109,7 +111,7 @@
 
   <div class="grid-container">
     <div class="chart-container">
-      <div class="chart-title">Estadistica Pagos</div>
+      <div class="chart-title">Estadística Pagos</div>
       
       <div *ngIf="showChartT">
 
@@ -136,7 +138,7 @@
 
 <ng-container *ngIf="getUser() == 3">
     <div class="container">
-  
+  <h4 class="h4x">Estadísticas</h4>
       <div class="datepicker-container">
         <h4>Desde:</h4>
       <input type="date" id="fromDate" placeholder="Desde" [(ngModel)]="fechaDesde">
@@ -147,7 +149,7 @@
   
     <div class="grid-container">
       <div class="chart-container">
-        <div class="chart-title">Estadistica casos asignados a tecnicos</div>
+        <div class="chart-title">Estadística casos asignados a técnicos</div>
         
         <div *ngIf="showChartT">
   

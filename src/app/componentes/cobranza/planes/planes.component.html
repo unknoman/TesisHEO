@@ -1,6 +1,7 @@
 
 
 <div class="container">
+  <h4 class="h4x">Planes</h4>
     <div class="form-row align-items-center mt-3">
       <div class="col-auto ml-auto mb-3">
         <button type="submit" class="btn btn-success my-auto" (click)="nuevoPlan()">Nuevo plan</button>
@@ -50,7 +51,7 @@
           </div>
           <div [hidden]="servicio.valid || servicio.pristine">  
             <span class="text-danger" *ngIf="servicio.errors?.['minlength']"> 
-              Minimo 3 caracteres
+              Mínimo 3 caracteres
             </span>
             <span class="text-danger" *ngIf="servicio.errors?.['required']"> 
               Campo requerido
@@ -111,7 +112,7 @@
           </div>
           <div [hidden]="servicio.valid || servicio.pristine">  
             <span class="text-danger" *ngIf="servicio.errors?.['minlength']"> 
-              Minimo 3 caracteres
+              Mínimo 3 caracteres
             </span>
             <span class="text-danger" *ngIf="servicio.errors?.['required']"> 
               Campo requerido

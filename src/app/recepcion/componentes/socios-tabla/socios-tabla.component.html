@@ -1,6 +1,7 @@
 
 
 <div class="container">
+  <h4 class="h4x">Socios</h4>
     <div class="form-row align-items-center mt-3">
         <div class="col-auto">
           <label class="sr-only" for="buscar">Buscar</label>
@@ -44,8 +45,8 @@
           <th  class="text-center">id</th>
           <th  class="text-center">Nombre Y Apellido</th>
           <th  class="text-center" >Dni</th>
-          <th  class="text-center" >Telefono</th>
-          <th  class="text-center">Direccion</th>
+          <th  class="text-center" >Teléfono</th>
+          <th  class="text-center">Dirección</th>
           <th  class="text-center ">Plan Internet</th>
           <th class="text-center">Acciones</th>
         </tr>
@@ -138,7 +139,7 @@
       </div>
       <div [hidden]="nombre.valid ||nombre.pristine">  
         <span class="text-danger" *ngIf="nombre.errors?.['minlength']"> 
-         Minimo 3 caracteres
+         Mínimo 3 caracteres
         </span>
       </div>
       <div [hidden]="nombre.valid ||nombre.pristine">  
@@ -157,7 +158,7 @@
       </div>
       <div [hidden]="password.valid ||password.pristine">  
         <span class="text-danger" *ngIf="password.errors?.['minlength']"> 
-         Minimo 3 caracteres
+         Mínimo 3 caracteres
         </span>
       </div>
       <div [hidden]="password.valid ||password.pristine">  
@@ -181,11 +182,11 @@
       </div>
       <div [hidden]="dni.valid ||dni.pristine">  
         <span class="text-danger" *ngIf="dni.errors?.['minlength']"> 
-         Minimo 8 caracteres
+         Mínimo 8 caracteres
         </span>
       </div>
       <div class="form-group">
-        <label for="precio">Telefono:</label>
+        <label for="precio">Teléfono:</label>
         <input type="text" class="form-control" id="telefono" name="telefono" required [(ngModel)]="socioCrear.telefono" minlength="10" maxlength="11" pattern="^[0-9]+$" #telefono = 'ngModel'>
       </div>
       <div [hidden]="telefono.valid ||telefono.pristine">  
@@ -200,11 +201,11 @@
       </div>
       <div [hidden]="telefono.valid ||telefono.pristine">  
         <span class="text-danger" *ngIf="telefono.errors?.['minlength']"> 
-         Minimo 10 caracteres
+         Mínimo 10 caracteres
         </span>
       </div>
       <div class="form-group">
-        <label for="precio">Direccion:</label>
+        <label for="precio">Dirección:</label>
         <input type="text" class="form-control" id="direccion" name="direccion" required [(ngModel)]="socioCrear.direccionc" minlength="3" maxlength="50" #direccion= 'ngModel'>
       </div>
       <div [hidden]="direccion.valid ||direccion.pristine">  
@@ -225,7 +226,7 @@
    <!-- Modal -->
    <ng-template #modificarSocioNg>
     <div class="modal-header">
-      <h4 class="modal-title">Modificar nuevo socio</h4>
+      <h4 class="modal-title">Modificar socio</h4>
       <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()"> <!-- (click)="modalRef.hide()" --> 
         <span aria-hidden="true">&times;</span>
       </button>
@@ -244,7 +245,7 @@
           </div>
           <div [hidden]="nombre.valid ||nombre.pristine">  
             <span class="text-danger" *ngIf="nombre.errors?.['minlength']"> 
-             Minimo 3 caracteres
+             Mínimo 3 caracteres
             </span>
           </div>
           <div [hidden]="nombre.valid ||nombre.pristine">  
@@ -263,7 +264,7 @@
           </div>
           <div [hidden]="password.valid ||password.pristine">  
             <span class="text-danger" *ngIf="password.errors?.['minlength']"> 
-             Minimo 3 caracteres
+             Mínimo 3 caracteres
             </span>
           </div>
           <div [hidden]="password.valid ||password.pristine">  
@@ -287,7 +288,7 @@
           </div>
           <div [hidden]="dni.valid ||dni.pristine">  
             <span class="text-danger" *ngIf="dni.errors?.['minlength']"> 
-             Minimo 8 caracteres
+             Mínimo 8 caracteres
             </span>
           </div>
           <div class="form-group">
@@ -306,21 +307,22 @@
           </div>
           <div [hidden]="telefono.valid ||telefono.pristine">  
             <span class="text-danger" *ngIf="telefono.errors?.['minlength']"> 
-             Minimo 10 caracteres
+             Mínimo 10 caracteres
             </span>
           </div>
           <div class="form-group">
-            <label for="precio">Direccion:</label>
+            <label for="precio">Dirección:</label>
             <input type="text" class="form-control" id="direccion" name="direccion" required [(ngModel)]="socioCrear.direccionc" minlength="3" maxlength="30" #direccion= 'ngModel'>
           </div>
           <div [hidden]="direccion.valid ||direccion.pristine">  
             <span class="text-danger" *ngIf="direccion.errors?.['minlength']"> 
-             Minimo 3 caracteres
+             Mínimo 3 caracteres
             </span>
           </div>
         <div *ngIf="getUser() === 2" class="form-group">
           <label for="precio">Servicio:</label>
           <select class="form-select" [(ngModel)]="socioCrear.idServicio" name="idServicio">
+            <option value="1">Sin Asignar</option>
             <option *ngFor="let servicio of planesList2" [value]="servicio.idservicio" >{{ servicio.servicio1 }}</option>
           </select>
         </div>
@@ -355,7 +357,7 @@
 
   <div #facturadescargar class="facturaOculta" style="visibility: hidden;">
     <div class="header">
-      <h2>Factura Cooperativa Electrica de Berrotar&aacute;n</h2>
+      <h2>Factura Cooperativa Eléctrica de Berrotar&aacute;n</h2>
     </div>
     <div class="info">
       <p><strong>Servicio:</strong> Internet</p>
@@ -386,4 +388,6 @@
     <div class="footer">
       <p class="total"><strong>Total:</strong> ${{FacturaDescargarP?.preciototal}}</p>
     </div>
+
+    <img class="logo" src="../../../../assets/logocooperativa.png" alt="cooperativalogo">
   </div>
