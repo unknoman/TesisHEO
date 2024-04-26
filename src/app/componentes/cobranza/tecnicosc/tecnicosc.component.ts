@@ -121,10 +121,10 @@ modificarTecnico(Tecnico : tecnico)
       if (result.isConfirmed) {
         this.tecnicos.borrarTecnico(tecnico.idtecnico).subscribe(info =>{
           if(info == true){
-           this.notificacion.correcto("El tecnico " + tecnico.nombret + " se borró correctamente");
+           this.notificacion.correcto("El técnico " + tecnico.nombret + " se borró correctamente");
            this.buscarMetodo(this.buscarPor, this.buscarBarra);
           } else {
-           this.notificacion.errorm("El tecnico tiene casos asignados en estado pendiente");
+           this.notificacion.errorm("El técnico tiene casos asignados en estado pendiente");
           }
        })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
