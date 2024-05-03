@@ -1,9 +1,16 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { decodedToken } from 'src/app/modelos/decodedToken';
+import { planillaST } from 'src/app/modelos/planillaST';
+import { servicioT } from 'src/app/modelos/servicioT';
 import { tecnico } from 'src/app/modelos/tecnico';
 import { tecnicoUpdateDTO } from 'src/app/modelos/tecnicoUpdateDTO';
 import { TecnicosService } from 'src/app/servicios/cobranza/tecnicos.service';
+import { ServicioTSService } from 'src/app/servicios/servicioTS/servicio-ts.service';
+import { JwtserviceService } from 'src/app/servicios/utilidades/jwtservice.service';
 import { SweetalertutilService } from 'src/app/utilidades/sweetalertutil.service';
 import Swal from 'sweetalert2';
 
@@ -32,9 +39,26 @@ export class TecnicoscComponent {
     ]),
   })
   
-  constructor(private tecnicos:TecnicosService, private modalServices: BsModalService, private notificacion:SweetalertutilService){
+  constructor(private tecnicos:TecnicosService, private modalServices: BsModalService, private notificacion:SweetalertutilService, private serviciot : ServicioTSService, private jwtutilidades:JwtserviceService){
  this.buscarMetodo(this.buscarPor, this.buscarBarra);
   }
+
+  getUser()
+{
+  const tokenKey = localStorage.getItem('key');
+  if(tokenKey)
+  {
+    const objetox: decodedToken = this.jwtutilidades.decodificartoken(tokenKey);  
+    if(objetox.idRol == '2')
+    return 2
+    else if (objetox.idRol == '3')
+    return 3 
+    else
+    return 1
+  }
+  return 1
+}
+
 
   buscarBoton(){
     this.buscarMetodo(this.buscarPor, this.buscarBarra);
@@ -135,4 +159,46 @@ modificarTecnico(Tecnico : tecnico)
 
 
 }
+
+planillaST?: planillaST[];
+
+@ViewChild('planillaDescargar', { static: false }) planillaDescargar!: ElementRef;
+
+setearPlanilla(id:number, tipo : number): Promise<void> {
+  return new Promise<void>((resolve) => {
+    this.serviciot.getPlanillaST(id, tipo).subscribe(info => {
+      this.planillaST = info;
+    })
+    resolve();  // Resuelve la promesa despu�s de setear la factura
+  });
+}
+
+
+
+async descargarPlanilla(id: number, tipo : number) {
+  this.setearPlanilla(id, tipo);
+  await new Promise(resolve => setTimeout(resolve, 1000)); 
+      const element = this.planillaDescargar.nativeElement;
+      console.log(this.planillaST);
+     if (this.planillaDescargar) {
+        this.planillaDescargar.nativeElement.style.visibility = 'visible';
+      } 
+      console.log(this.planillaST);
+      html2canvas(element).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+       const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save('ServicioT.pdf');
+        this.planillaDescargar.nativeElement.style.visibility = 'hidden';
+     setTimeout(() => {
+          URL.revokeObjectURL(imgData);
+        }, 3000);
+     });
+      
+  }
+
+
 }

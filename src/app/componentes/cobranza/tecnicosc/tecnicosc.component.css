@@ -4,3 +4,11 @@
     text-align: center;
     background-color: rgb(0, 0, 0);
    }
+
+   .instalacion{
+    color: chartreuse;
+   }
+
+   .incidente{
+    color: rgb(255, 1, 1);
+   }

@@ -76,7 +76,7 @@ export class PlanesComponent {
       this.planesService.crearPlan(this.planCrear).subscribe(respuesta => {
         if(respuesta == true)
         {
-        this.notificacion.correcto('La operacion fue completada correctamente');
+        this.notificacion.correcto('La operación fue completada correctamente');
          this.getPlanesAll()
          this.modalRef.hide();
         } else {
@@ -111,7 +111,7 @@ export class PlanesComponent {
       this.planesService.actualizarPlan(this.plan).subscribe(respuesta => {
         if(respuesta == true)
         {
-        this.notificacion.correcto('La operacion fue completada correctamente');
+        this.notificacion.correcto('La operación fue completada correctamente');
          this.getPlanesAll()
          this.modalRef.hide();
 
@@ -141,7 +141,7 @@ export class PlanesComponent {
            this.notificacion.correcto("El plan" + plan.servicio1 + "se borró correctamente");
            this.getPlanesAll();
           } else {
-           this.notificacion.errorm("Asegurate de que el plan no tenga clientes asignados");
+           this.notificacion.errorm("Asegúrate de que el plan no tenga clientes asignados");
           }
        })
       } else if (result.dismiss === Swal.DismissReason.cancel) {

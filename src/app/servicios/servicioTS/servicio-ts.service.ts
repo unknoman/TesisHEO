@@ -4,6 +4,7 @@ import { servicioT } from 'src/app/modelos/servicioT';
 import { HttpClient } from '@angular/common/http';
 import { servicioTCrear } from 'src/app/modelos/servicioTCrear';
 import { respuesta } from 'src/app/modelos/respuesta';
+import { planillaST } from 'src/app/modelos/planillaST';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,12 @@ return this.http.delete<boolean>(direccion);
   getCasosST(estado : number){
     let direccion = this.url +'api/ServicioT/listarServicioT/' + '?estado=' + estado;
     return this.http.get<servicioT[]>(direccion);
+   }
+
+
+   getPlanillaST(id : number, tipo : number){
+    let direccion = this.url +'api/ServicioT/ServicioTI' + '?TI=' + id + '&tipo='+tipo;
+    return this.http.get<planillaST[]>(direccion);
    }
 
    getCasosSTR(estado : number)

@@ -1,2 +1,8 @@
-<app-dashboard-cr></app-dashboard-cr>
+<ng-container *ngIf="getUser() == 2">
+    <app-dashboard-cr></app-dashboard-cr>
+    </ng-container>
+    
+    <ng-container *ngIf="getUser() == 3">
+        <app-dashboard-r></app-dashboard-r>
+    </ng-container>
 <app-tecnicosc></app-tecnicosc>

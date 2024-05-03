@@ -126,7 +126,7 @@ export class SociosTablaComponent {
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-        pdf.save('factura.pdf');
+        pdf.save(this.clienteGet.nombre + ' ' +this.clienteGet.apellido +'- Factura.pdf');
         this.facturadescargar.nativeElement.style.visibility = 'hidden';
      setTimeout(() => {
           URL.revokeObjectURL(imgData);

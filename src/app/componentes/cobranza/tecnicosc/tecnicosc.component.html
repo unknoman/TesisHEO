@@ -21,8 +21,10 @@
           
         </div>
       <div  class="col-auto ml-auto mb-3">
-        <button type="submit" class="btn btn-success my-auto" (click)="nuevoTecnico()">Nuevo técnico</button>
-    </div>
+        <ng-container *ngIf="getUser() == 2">
+        <button type="submit" class="btn btn-success my-auto" (click)="nuevoTecnico()" >Nuevo técnico</button>
+      </ng-container>
+      </div>
     <table class="table table-hover">
       <thead class="thead-dark">
         <tr>
@@ -40,9 +42,15 @@
             <td scope="row"  class="text-center">{{tecnico.telefonot}}</td>
             <td scope="row"  class="text-center">{{tecnico.casosnum}}</td>
             <td scope="row" class="text-center">
-                <button type="button" class="btn btn-primary mr-2" [disabled]="tecnico.idtecnico == 0" (click)="modificarTecnicoModal(tecnico)">Modificar tecnico</button>
+              <ng-container *ngIf="getUser() == 2">
+                <button type="button" class="btn btn-primary mr-2" [disabled]="tecnico.idtecnico == 0" (click)="modificarTecnicoModal(tecnico)">Modificar tecnico</button>             
                 <button type="button" class="btn btn-danger mr-2" [disabled]="tecnico.idtecnico == 0" (click)=" borrarTecnico(tecnico)">Eliminar</button>
-              </td>
+                <button type="button" class="btn btn-success mr-2" [disabled]="tecnico.idtecnico == 0" (click)="descargarPlanilla(tecnico.idtecnico, 2)">Descargar casos</button>
+              </ng-container>
+              <ng-container *ngIf="getUser() == 3">
+              <button type="button" class="btn btn-success mr-2" [disabled]="tecnico.idtecnico == 0" (click)="descargarPlanilla(tecnico.idtecnico, 1)">Descargar casos</button>
+              </ng-container>
+            </td>
               
               </tr>
       </tbody>
@@ -184,3 +192,37 @@
   </div>
 </ng-template>
 
+<div class="container" #planillaDescargar class="planilla" style="visibility: hidden;">
+  <ng-container *ngIf="getUser()==2">
+  <h2 class="text-center">Planilla de Servicio Técnico <span class="instalacion">Instalaciones</span></h2>
+</ng-container>
+<ng-container *ngIf="getUser()==3">
+  <h2 class="text-center">Planilla de Servicio Técnico <span class="incidente">Incidentes</span></h2>
+</ng-container>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID Caso</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Número de Teléfono</th>
+        <th scope="col" class="text-center">Finalizado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let planilla of planillaST">
+        <th scope="row">{{planilla.idCaso}}</th>
+        <td>{{planilla.descripcion}}</td>
+        <td>{{planilla.nombreC}}</td>
+        <td>{{planilla.apellidoC}}</td>
+        <td>{{planilla.direccion}}</td>
+        <td>{{planilla.telefono}}</td>
+        <td class="text-center">
+          <input type="checkbox"></td>
+      </tr>
+      <!-- Aquí puedes agregar más filas con datos adicionales -->
+    </tbody>
+  </table>
+</div>
