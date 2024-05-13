@@ -36,7 +36,7 @@ export class TecnicosService {
 
    registrarTecnico(tecnico:tecnico){
     let direccion = this.url +'tecnico/crearTecnico';
-    return this.http.put(direccion, tecnico)
+    return this.http.post(direccion, tecnico)
    }
 
 

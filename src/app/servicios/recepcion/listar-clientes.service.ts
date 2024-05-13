@@ -17,7 +17,7 @@ export class ListarClientesService {
 
   crearCliente(cliente: clientesCrearDTO){
     let direccion = this.url +'Clientes/ClientesCrear';
-    return this.http.put(direccion, cliente);
+    return this.http.post(direccion, cliente);
   }
 
 

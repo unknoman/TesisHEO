@@ -43,6 +43,7 @@
             xAxisLabel="Planes"
             yAxisLabel="Clientes"
             [animations]="false"
+            [yAxisTickFormatting]="yAxisFormat"
             >
 
           </ngx-charts-bar-vertical>
@@ -76,8 +77,10 @@
         [legend]="true"
         [showXAxisLabel]="true"
         [showYAxisLabel]="true"
+        [yAxisTickFormatting]="yAxisFormat"
         xAxisLabel="Tecnico"
         yAxisLabel="Casos Asignados"
+        
         [animations]="false"
         >
 
@@ -121,6 +124,7 @@
       yAxisLabel="Clientes"
       [animations]="false">
  
+ 
       </ngx-charts-pie-chart>
 
       </div>
@@ -159,6 +163,7 @@
    [legend]="true"
    xAxisLabel="Planes"
    yAxisLabel="Clientes"
+   [yAxisTickFormatting]="yAxisFormat"
    [animations]="false"
    >
    

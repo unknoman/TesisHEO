@@ -41,7 +41,7 @@ return this.http.delete<boolean>(direccion);
 
     sendCaso(caso : servicioTCrear){
       let direccion = this.url +'api/ServicioT/registrarCaso';
-      return this.http.put<respuesta>(direccion, caso);
+      return this.http.post<respuesta>(direccion, caso);
     }
 
     updateServicioTecnico(caso : servicioTCrear){

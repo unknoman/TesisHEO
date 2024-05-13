@@ -27,7 +27,7 @@ export class PlanesService {
    crearPlan(plan: planes)
    {
     let direccion = this.url + 'planes/crearPlan'
-    return this.http.put(direccion, plan)
+    return this.http.post(direccion, plan)
    }
 
 

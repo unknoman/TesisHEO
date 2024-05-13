@@ -24,10 +24,24 @@ export class EstadisticascomComponent {
   showChart = true;
   showChartT = true;
   ShowDatePicker = false;
+yAxisLimits: any;
   constructor(private estadisticas : EstadisticasserviceService, private jwtutilidades:JwtserviceService){
       this.getPlanesMayorAdquirido(this.fechaDesdeF, this.fechaHastaF);
       this.getTecnicosEstadistica(this.fechaDesdeF, this.fechaHastaF);
   }
+
+
+  formatYAxisTick(value: number): string {
+    // Redondear el valor al entero más cercano
+    const roundedValue = Math.ceil(value);
+    // Convertir el valor a cadena y devolverlo
+    return roundedValue.toString();
+  }
+
+  yAxisFormat(val : any) {
+    if (val % 1 > 0) return "";
+    return val ;
+ }
 
   getPlanesMayorAdquirido(fechaDesde : string, fechaHasta : string){
     this.estadisticaList = [];
@@ -148,17 +162,8 @@ export class EstadisticascomComponent {
    }
 
 
-  datosBarras = [
-    {
-      "name": "Categoría 1",
-      "value": 120
-    },
-    {
-      "name": "Categoría 2",
-      "value": 200
-    },
-    // ... más datos
-  ];
+
+
 
 
 }

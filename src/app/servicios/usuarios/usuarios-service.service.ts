@@ -39,7 +39,7 @@ export class UsuariosServiceService {
     const hash = crypto.MD5(usuario.password);
     usuario.password = hash.toString();
     let direccion = this.url +'api/Usuario/registrarUsuario';
-   return this.http.put<respuesta>(direccion, usuario);
+   return this.http.post<respuesta>(direccion, usuario);
    }
 
    actualizarUsuario(usuario:usuarioActualizar):Observable<respuesta>{
