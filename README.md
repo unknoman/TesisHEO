@@ -30,3 +30,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Codigo fuente
 FrontEnd Sistema de Gestión de Clientes, Servicios y Servicio Técnico con graficos estadisticos
 
+El proyecto no fue implementado ya que fue el trabajo de tesis
+
